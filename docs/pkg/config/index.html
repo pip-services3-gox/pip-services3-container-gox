@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#375EAB">
+
+  <title>config - Go Documentation Server</title>
+
+<link type="text/css" rel="stylesheet" href="../../lib/godoc/style.css">
+
+<script>window.initFuncs = [];</script>
+<script src="../../lib/godoc/jquery.js" defer></script>
+
+
+
+<script>var goVersion = "go1.13.15";</script>
+<script src="../../lib/godoc/godocs.js" defer></script>
+</head>
+<body>
+
+<div id='lowframe' style="position: fixed; bottom: 0; left: 0; height: 0; width: 100%; border-top: thin solid grey; background-color: white; overflow: auto;">
+...
+</div><!-- #lowframe -->
+
+<div id="topbar" class="wide"><div class="container">
+<div class="top-heading" id="heading-wide"><a href="../index.html">Go Documentation Server</a></div>
+<div class="top-heading" id="heading-narrow"><a href="../index.html">GoDoc</a></div>
+<a href="index.html#" id="menu-button"><span id="menu-button-arrow">&#9661;</span></a>
+<form method="GET" action="http://localhost:6060/search">
+<div id="menu">
+
+<span class="search-box"><input type="search" id="search" name="q" placeholder="Search" aria-label="Search" required><button type="submit"><span><!-- magnifying glass: --><svg width="24" height="24" viewBox="0 0 24 24"><title>submit search</title><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/><path d="M0 0h24v24H0z" fill="none"/></svg></span></button></span>
+</div>
+</form>
+
+</div></div>
+
+
+
+<div id="page" class="wide">
+<div class="container">
+
+
+  <h1>
+    Package config
+    <span class="text-muted"></span>
+  </h1>
+
+
+
+
+
+
+
+<div id="nav"></div>
+
+
+<!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+<!--
+	Note: Static (i.e., not template-generated) href and id
+	attributes start with "pkg-" to make it impossible for
+	them to conflict with generated attributes (some of which
+	correspond to Go identifiers).
+-->
+
+	<script>
+	document.ANALYSIS_DATA = null;
+	document.CALLGRAPH = null;
+	</script>
+
+	
+		
+		<div id="short-nav">
+			<dl>
+			<dd><code>import "config"</code></dd>
+			</dl>
+			<dl>
+			<dd><a href="index.html#pkg-overview" class="overviewLink">Overview</a></dd>
+			<dd><a href="index.html#pkg-index" class="indexLink">Index</a></dd>
+			
+			
+			</dl>
+		</div>
+		<!-- The package's Name is printed as title by the top-level template -->
+		<div id="pkg-overview" class="toggleVisible">
+			<div class="collapsed">
+				<h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
+			</div>
+			<div class="expanded">
+				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
+				
+				
+			</div>
+		</div>
+
+		<div id="pkg-index" class="toggleVisible">
+		<div class="collapsed">
+			<h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
+		</div>
+		<div class="expanded">
+			<h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
+
+		<!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
+			<div id="manual-nav">
+			<dl>
+			
+			
+				<dd><a href="index.html#pkg-variables">Variables</a></dd>
+			
+			
+			
+				
+				<dd><a href="index.html#ComponentConfig">type ComponentConfig</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#NewComponentConfigFromDescriptor">func NewComponentConfigFromDescriptor(descriptor *refer.Descriptor, config *config.ConfigParams) *ComponentConfig</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#NewComponentConfigFromType">func NewComponentConfigFromType(typ *reflect.TypeDescriptor, config *config.ConfigParams) *ComponentConfig</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ReadComponentConfigFromConfig">func ReadComponentConfigFromConfig(config *config.ConfigParams) (result *ComponentConfig, err error)</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#ContainerConfig">type ContainerConfig</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#NewContainerConfig">func NewContainerConfig(components ...*ComponentConfig) ContainerConfig</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#NewContainerConfigFromValue">func NewContainerConfigFromValue(value interface{}) ContainerConfig</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#ReadContainerConfigFromConfig">func ReadContainerConfigFromConfig(config *config.ConfigParams) (ContainerConfig, error)</a></dd>
+				
+				
+			
+				
+				<dd><a href="index.html#TContainerConfigReader">type TContainerConfigReader</a></dd>
+				
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#TContainerConfigReader.ReadFromFile">func (c *TContainerConfigReader) ReadFromFile(correlationId string, path string, parameters *config.ConfigParams) (ContainerConfig, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#TContainerConfigReader.ReadFromJsonFile">func (c *TContainerConfigReader) ReadFromJsonFile(correlationId string, path string, parameters *config.ConfigParams) (ContainerConfig, error)</a></dd>
+				
+					
+					<dd>&nbsp; &nbsp; <a href="index.html#TContainerConfigReader.ReadFromYamlFile">func (c *TContainerConfigReader) ReadFromYamlFile(correlationId string, path string, parameters *config.ConfigParams) (ContainerConfig, error)</a></dd>
+				
+			
+			
+			</dl>
+			</div><!-- #manual-nav -->
+
+		
+
+		
+			<h3>Package files</h3>
+			<p>
+			<span style="font-size:90%">
+			
+				<a href="http://localhost:6060/src/config/ComponentConfig.go">ComponentConfig.go</a>
+			
+				<a href="http://localhost:6060/src/config/ContainerConfig.go">ContainerConfig.go</a>
+			
+				<a href="http://localhost:6060/src/config/ContainerConfigReader.go">ContainerConfigReader.go</a>
+			
+				<a href="http://localhost:6060/src/config/doc.go">doc.go</a>
+			
+			</span>
+			</p>
+		
+		</div><!-- .expanded -->
+		</div><!-- #pkg-index -->
+
+		
+
+		
+		
+			<h2 id="pkg-variables">Variables</h2>
+			
+				
+				<pre>var <span id="ContainerConfigReader">ContainerConfigReader</span> = &amp;<a href="index.html#TContainerConfigReader">TContainerConfigReader</a>{}</pre>
+			
+		
+		
+		
+			
+			
+			<h2 id="ComponentConfig">type <a href="http://localhost:6060/src/config/ComponentConfig.go?s=435:565#L5">ComponentConfig</a>
+				<a class="permalink" href="index.html#ComponentConfig">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+Configuration of a component inside a container.
+</p>
+<p>
+The configuration includes type information or descriptor, and component configuration parameters.
+</p>
+
+			<pre>type ComponentConfig struct {
+<span id="ComponentConfig.Descriptor"></span>    Descriptor *<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/refer/">refer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/refer/#Descriptor">Descriptor</a>
+<span id="ComponentConfig.Type"></span>    Type       *<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/reflect/">reflect</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/reflect/#TypeDescriptor">TypeDescriptor</a>
+<span id="ComponentConfig.Config"></span>    Config     *<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/config/">config</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/config/#ConfigParams">ConfigParams</a>
+}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="NewComponentConfigFromDescriptor">func <a href="http://localhost:6060/src/config/ComponentConfig.go?s=816:930#L18">NewComponentConfigFromDescriptor</a>
+					<a class="permalink" href="index.html#NewComponentConfigFromDescriptor">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func NewComponentConfigFromDescriptor(descriptor *<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/refer/">refer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/refer/#Descriptor">Descriptor</a>,
+    config *<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/config/">config</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/config/#ConfigParams">ConfigParams</a>) *<a href="index.html#ComponentConfig">ComponentConfig</a></pre>
+				<p>
+Creates a new instance of the component configuration.
+Parameters:
+</p>
+<pre>- descriptor *refer.Descriptor
+a components descriptor (locator).
+- config *config.ConfigParams
+component configuration parameters.
+</pre>
+<p>
+Returns *ComponentConfig
+</p>
+
+				
+				
+			
+				
+				<h3 id="NewComponentConfigFromType">func <a href="http://localhost:6060/src/config/ComponentConfig.go?s=1256:1363#L33">NewComponentConfigFromType</a>
+					<a class="permalink" href="index.html#NewComponentConfigFromType">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func NewComponentConfigFromType(typ *<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/reflect/">reflect</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/reflect/#TypeDescriptor">TypeDescriptor</a>,
+    config *<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/config/">config</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/config/#ConfigParams">ConfigParams</a>) *<a href="index.html#ComponentConfig">ComponentConfig</a></pre>
+				<p>
+Creates a new instance of the component configuration.
+Parameters:
+</p>
+<pre>- typ *reflect.TypeDescriptor
+a components type descriptor.
+- config *config.ConfigParams
+component configuration parameters.
+</pre>
+<p>
+Returns *ComponentConfig
+</p>
+
+				
+				
+			
+				
+				<h3 id="ReadComponentConfigFromConfig">func <a href="http://localhost:6060/src/config/ComponentConfig.go?s=1764:1864#L47">ReadComponentConfigFromConfig</a>
+					<a class="permalink" href="index.html#ReadComponentConfigFromConfig">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func ReadComponentConfigFromConfig(config *<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/config/">config</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/config/#ConfigParams">ConfigParams</a>) (result *<a href="index.html#ComponentConfig">ComponentConfig</a>, err <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+Creates a new instance of ComponentConfig based on section from container configuration.
+Parameters:
+</p>
+<pre>- config *config.ConfigParams
+component parameters from container configuration
+</pre>
+<p>
+Returns *ComponentConfig, error
+a newly created ComponentConfig and ConfigError when neither component descriptor or type is found.
+</p>
+
+				
+				
+			
+
+			
+		
+			
+			
+			<h2 id="ContainerConfig">type <a href="http://localhost:6060/src/config/ContainerConfig.go?s=168:207#L1">ContainerConfig</a>
+				<a class="permalink" href="index.html#ContainerConfig">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+Container configuration defined as a list of component configurations.
+</p>
+
+			<pre>type ContainerConfig []*<a href="index.html#ComponentConfig">ComponentConfig</a></pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+				
+				<h3 id="NewContainerConfig">func <a href="http://localhost:6060/src/config/ContainerConfig.go?s=380:451#L7">NewContainerConfig</a>
+					<a class="permalink" href="index.html#NewContainerConfig">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func NewContainerConfig(components ...*<a href="index.html#ComponentConfig">ComponentConfig</a>) <a href="index.html#ContainerConfig">ContainerConfig</a></pre>
+				<p>
+Creates a new instance of container configuration.
+Parameters:
+</p>
+<pre>- components *ComponentConfig
+ a list of component configurations.
+</pre>
+<p>
+Returns ContainerConfig
+</p>
+
+				
+				
+			
+				
+				<h3 id="NewContainerConfigFromValue">func <a href="http://localhost:6060/src/config/ContainerConfig.go?s=850:917#L19">NewContainerConfigFromValue</a>
+					<a class="permalink" href="index.html#NewContainerConfigFromValue">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func NewContainerConfigFromValue(value interface{}) <a href="index.html#ContainerConfig">ContainerConfig</a></pre>
+				<p>
+Creates a new ContainerConfig object filled with key-value pairs from specified object. The value is converted into ConfigParams object which is used to create the object.
+see
+fromConfig
+Parameters:
+</p>
+<pre>	 - value interface{}
+  an object with key-value pairs used to initialize a new ContainerConfig.
+</pre>
+<p>
+Returns ContainerConfig
+a new ContainerConfig object.
+</p>
+
+				
+				
+			
+				
+				<h3 id="ReadContainerConfigFromConfig">func <a href="http://localhost:6060/src/config/ContainerConfig.go?s=1331:1419#L30">ReadContainerConfigFromConfig</a>
+					<a class="permalink" href="index.html#ReadContainerConfigFromConfig">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func ReadContainerConfigFromConfig(config *<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/config/">config</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/config/#ConfigParams">ConfigParams</a>) (<a href="index.html#ContainerConfig">ContainerConfig</a>, <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+Creates a new ContainerConfig object based on configuration parameters. Each section in the configuration parameters is converted into a component configuration.
+Parameters:
+</p>
+<pre>- config *config.ConfigParams
+Returns ContainerConfig, error
+</pre>
+<p>
+a new ContainerConfig object and error
+</p>
+
+				
+				
+			
+
+			
+		
+			
+			
+			<h2 id="TContainerConfigReader">type <a href="http://localhost:6060/src/config/ContainerConfigReader.go?s=324:360#L4">TContainerConfigReader</a>
+				<a class="permalink" href="index.html#TContainerConfigReader">&#xb6;</a>
+				
+				
+			</h2>
+			<p>
+Helper class that reads container configuration from JSON or YAML file.
+</p>
+
+			<pre>type TContainerConfigReader struct{}
+</pre>
+
+			
+
+			
+
+			
+			
+			
+
+			
+
+			
+				
+				<h3 id="TContainerConfigReader.ReadFromFile">func (*TContainerConfigReader) <a href="http://localhost:6060/src/config/ContainerConfigReader.go?s=885:1024#L18">ReadFromFile</a>
+					<a class="permalink" href="index.html#TContainerConfigReader.ReadFromFile">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#TContainerConfigReader">TContainerConfigReader</a>) ReadFromFile(correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>,
+    path <a href="http://localhost:6060/pkg/builtin/#string">string</a>, parameters *<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/config/">config</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/config/#ConfigParams">ConfigParams</a>) (<a href="index.html#ContainerConfig">ContainerConfig</a>, <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+Reads container configuration from JSON or YAML file. The type of the file is determined by file extension.
+Parameters:
+</p>
+<pre>- correlationId string
+transaction id to trace execution through call chain.
+- path string
+a path to component configuration file.
+- parameters *config.ConfigParams
+values to parameters the configuration or null to skip parameterization.
+</pre>
+<p>
+Returns ContainerConfig, error
+the read container configuration and error
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="TContainerConfigReader.ReadFromJsonFile">func (*TContainerConfigReader) <a href="http://localhost:6060/src/config/ContainerConfigReader.go?s=1824:1967#L47">ReadFromJsonFile</a>
+					<a class="permalink" href="index.html#TContainerConfigReader.ReadFromJsonFile">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#TContainerConfigReader">TContainerConfigReader</a>) ReadFromJsonFile(correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>,
+    path <a href="http://localhost:6060/pkg/builtin/#string">string</a>, parameters *<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/config/">config</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/config/#ConfigParams">ConfigParams</a>) (<a href="index.html#ContainerConfig">ContainerConfig</a>, <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+Reads container configuration from JSON file.
+Parameters:
+</p>
+<pre>- correlationId string
+transaction id to trace execution through call chain.
+- path string
+a path to component configuration file.
+- parameters *config.ConfigParams
+values to parameters the configuration or null to skip parameterization.
+</pre>
+<p>
+Returns ContainerConfig, error
+the read container configuration and error
+</p>
+
+				
+				
+				
+			
+				
+				<h3 id="TContainerConfigReader.ReadFromYamlFile">func (*TContainerConfigReader) <a href="http://localhost:6060/src/config/ContainerConfigReader.go?s=2535:2678#L66">ReadFromYamlFile</a>
+					<a class="permalink" href="index.html#TContainerConfigReader.ReadFromYamlFile">&#xb6;</a>
+					
+					
+				</h3>
+				<pre>func (c *<a href="index.html#TContainerConfigReader">TContainerConfigReader</a>) ReadFromYamlFile(correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>,
+    path <a href="http://localhost:6060/pkg/builtin/#string">string</a>, parameters *<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/config/">config</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/config/#ConfigParams">ConfigParams</a>) (<a href="index.html#ContainerConfig">ContainerConfig</a>, <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<p>
+Reads container configuration from YAML file.
+Parameters:
+</p>
+<pre>- correlationId string
+transaction id to trace execution through call chain.
+- path string
+a path to component configuration file.
+- parameters *config.ConfigParams
+values to parameters the configuration or null to skip parameterization.
+</pre>
+<p>
+Returns ContainerConfig, error
+the read container configuration and error
+</p>
+
+				
+				
+				
+			
+		
+	
+
+	
+
+
+
+
+
+
+
+<div id="footer">
+Build version go1.13.15.<br>
+Except as <a href="https://developers.google.com/site-policies#restrictions">noted</a>,
+the content of this page is licensed under the
+Creative Commons Attribution 3.0 License,
+and code is licensed under a <a href="http://localhost:6060/LICENSE">BSD license</a>.<br>
+<a href="http://localhost:6060/doc/tos.html">Terms of Service</a> |
+<a href="http://www.google.com/intl/en/policies/privacy/">Privacy Policy</a>
+</div>
+
+</div><!-- .container -->
+</div><!-- #page -->
+</body>
+</html>
