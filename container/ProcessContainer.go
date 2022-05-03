@@ -32,8 +32,8 @@ import (
 type ProcessContainer struct {
 	Container
 	configPath            string
-	feedbackChan          crun.ContextFeedbackChan
-	feedbackWithErrorChan crun.ContextFeedbackChanWithError
+	feedbackChan          crun.ContextShutdownChan
+	feedbackWithErrorChan crun.ContextShutdownWithErrorChan
 }
 
 // NewEmptyProcessContainer creates a new empty instance of the container.
@@ -42,8 +42,8 @@ func NewEmptyProcessContainer() *ProcessContainer {
 	c := &ProcessContainer{
 		Container:             *NewEmptyContainer(),
 		configPath:            "./config/config.yml",
-		feedbackChan:          make(crun.ContextFeedbackChan),
-		feedbackWithErrorChan: make(crun.ContextFeedbackChanWithError),
+		feedbackChan:          make(crun.ContextShutdownChan),
+		feedbackWithErrorChan: make(crun.ContextShutdownWithErrorChan),
 	}
 	c.SetLogger(log.NewConsoleLogger())
 	return c
@@ -58,8 +58,8 @@ func NewProcessContainer(name string, description string) *ProcessContainer {
 	c := &ProcessContainer{
 		Container:             *NewContainer(name, description),
 		configPath:            "./config/config.yml",
-		feedbackChan:          make(crun.ContextFeedbackChan),
-		feedbackWithErrorChan: make(crun.ContextFeedbackChanWithError),
+		feedbackChan:          make(crun.ContextShutdownChan),
+		feedbackWithErrorChan: make(crun.ContextShutdownWithErrorChan),
 	}
 	c.SetLogger(log.NewConsoleLogger())
 	return c
@@ -78,8 +78,8 @@ func InheritProcessContainer(name string, description string,
 	c := &ProcessContainer{
 		Container:             *InheritContainer(name, description, referenceable),
 		configPath:            "./config/config.yml",
-		feedbackChan:          make(crun.ContextFeedbackChan),
-		feedbackWithErrorChan: make(crun.ContextFeedbackChanWithError),
+		feedbackChan:          make(crun.ContextShutdownChan),
+		feedbackWithErrorChan: make(crun.ContextShutdownWithErrorChan),
 	}
 	c.SetLogger(log.NewConsoleLogger())
 	return c
@@ -172,8 +172,8 @@ func (c *ProcessContainer) Run(ctx context.Context, args []string) {
 
 	ctx, cancel := context.WithCancel(ctx)
 
-	ctx, _ = crun.NewCancelContext(ctx, c.feedbackChan)
-	ctx, _ = crun.NewCancelContextWithError(ctx, c.feedbackWithErrorChan)
+	ctx, _ = crun.AddShutdownChanToContext(ctx, c.feedbackChan)
+	ctx, _ = crun.AddErrShutdownChanToContext(ctx, c.feedbackWithErrorChan)
 
 	correlationId := c.Info().Name
 	path := c.getConfigPath(args)
