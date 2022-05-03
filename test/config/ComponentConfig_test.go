@@ -3,9 +3,9 @@ package test_config
 import (
 	"testing"
 
-	conf "github.com/pip-services3-go/pip-services3-commons-go/config"
-	"github.com/pip-services3-go/pip-services3-commons-go/refer"
-	"github.com/pip-services3-go/pip-services3-commons-go/reflect"
+	conf "github.com/pip-services3-gox/pip-services3-commons-gox/config"
+	"github.com/pip-services3-gox/pip-services3-commons-gox/refer"
+	"github.com/pip-services3-gox/pip-services3-commons-gox/reflect"
 	cconf "github.com/pip-services3-gox/pip-services3-container-gox/config"
 
 	"github.com/stretchr/testify/assert"

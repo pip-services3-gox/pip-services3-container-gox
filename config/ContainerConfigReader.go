@@ -1,31 +1,27 @@
 package config
 
 import (
+	"context"
 	"path/filepath"
 
-	"github.com/pip-services3-go/pip-services3-commons-go/config"
-	"github.com/pip-services3-go/pip-services3-commons-go/errors"
-	cconfig "github.com/pip-services3-go/pip-services3-components-go/config"
+	"github.com/pip-services3-gox/pip-services3-commons-gox/config"
+	"github.com/pip-services3-gox/pip-services3-commons-gox/errors"
+	cconfig "github.com/pip-services3-gox/pip-services3-components-gox/config"
 )
 
-/*
-Helper class that reads container configuration from JSON or YAML file.
-*/
-type TContainerConfigReader struct{}
+// ContainerConfigReader Helper class that reads container configuration from JSON or YAML file.
+var ContainerConfigReader = &_TContainerConfigReader{}
 
-var ContainerConfigReader = &TContainerConfigReader{}
+type _TContainerConfigReader struct{}
 
-// Reads container configuration from JSON or YAML file. The type of the file is determined by file extension.
-// Parameters:
-//  - correlationId string
-//  transaction id to trace execution through call chain.
-//  - path string
-//  a path to component configuration file.
-//  - parameters *config.ConfigParams
-//  values to parameters the configuration or null to skip parameterization.
-// Returns ContainerConfig, error
-// the read container configuration and error
-func (c *TContainerConfigReader) ReadFromFile(correlationId string,
+// ReadFromFile reads container configuration from JSON or YAML file.
+// The type of the file is determined by file extension.
+//	Parameters:
+//		- correlationId string transaction id to trace execution through call chain.
+//		- path string a path to component configuration file.
+//		- parameters *config.ConfigParams values to parameters the configuration or null to skip parameterization.
+//	Returns: ContainerConfig, error the read container configuration and error
+func (c *_TContainerConfigReader) ReadFromFile(correlationId string,
 	path string, parameters *config.ConfigParams) (ContainerConfig, error) {
 	if path == "" {
 		return nil, errors.NewConfigError(correlationId, "NO_PATH", "Missing config file path")
@@ -44,38 +40,30 @@ func (c *TContainerConfigReader) ReadFromFile(correlationId string,
 	return c.ReadFromJsonFile(correlationId, path, parameters)
 }
 
-// Reads container configuration from JSON file.
-// Parameters:
-//  - correlationId string
-//  transaction id to trace execution through call chain.
-//  - path string
-//  a path to component configuration file.
-//  - parameters *config.ConfigParams
-//  values to parameters the configuration or null to skip parameterization.
-// Returns ContainerConfig, error
-// the read container configuration and error
-func (c *TContainerConfigReader) ReadFromJsonFile(correlationId string,
+// ReadFromJsonFile reads container configuration from JSON file.
+//	Parameters:
+//		- correlationId string transaction id to trace execution through call chain.
+//		- path string a path to component configuration file.
+//		- parameters *config.ConfigParams values to parameters the configuration or null to skip parameterization.
+//	Returns: ContainerConfig, error the read container configuration and error
+func (c *_TContainerConfigReader) ReadFromJsonFile(correlationId string,
 	path string, parameters *config.ConfigParams) (ContainerConfig, error) {
-	config, err := cconfig.ReadJsonConfig(correlationId, path, parameters)
+	config, err := cconfig.ReadJsonConfig(context.Background(), correlationId, path, parameters)
 	if err != nil {
 		return nil, err
 	}
 	return ReadContainerConfigFromConfig(config)
 }
 
-// Reads container configuration from YAML file.
-// Parameters:
-//  - correlationId string
-//  transaction id to trace execution through call chain.
-//  - path string
-//  a path to component configuration file.
-//  - parameters *config.ConfigParams
-//  values to parameters the configuration or null to skip parameterization.
-// Returns ContainerConfig, error
-// the read container configuration and error
-func (c *TContainerConfigReader) ReadFromYamlFile(correlationId string,
+// ReadFromYamlFile reads container configuration from YAML file.
+//	Parameters:
+//		- correlationId string transaction id to trace execution through call chain.
+//		- path string a path to component configuration file.
+//		- parameters *config.ConfigParams values to parameters the configuration or null to skip parameterization.
+//	Returns: ContainerConfig, error the read container configuration and error
+func (c *_TContainerConfigReader) ReadFromYamlFile(correlationId string,
 	path string, parameters *config.ConfigParams) (ContainerConfig, error) {
-	config, err := cconfig.ReadYamlConfig(correlationId, path, parameters)
+	config, err := cconfig.ReadYamlConfig(context.Background(), correlationId, path, parameters)
 	if err != nil {
 		return nil, err
 	}

@@ -1,10 +1,11 @@
 package examples
 
 import (
-	"github.com/pip-services3-go/pip-services3-commons-go/config"
-	"github.com/pip-services3-go/pip-services3-commons-go/refer"
-	"github.com/pip-services3-go/pip-services3-commons-go/run"
-	"github.com/pip-services3-go/pip-services3-components-go/log"
+	"context"
+	"github.com/pip-services3-gox/pip-services3-commons-gox/config"
+	"github.com/pip-services3-gox/pip-services3-commons-gox/refer"
+	"github.com/pip-services3-gox/pip-services3-commons-gox/run"
+	"github.com/pip-services3-gox/pip-services3-components-gox/log"
 )
 
 type DummyController struct {
@@ -21,7 +22,7 @@ func NewDummyController() *DummyController {
 		counter: 0,
 	}
 
-	c.timer = run.NewFixedRateTimerFromTask(c, 1000, 1000)
+	c.timer = run.NewFixedRateTimerFromTask(c, 1000, 1000, 5)
 
 	return c
 }
@@ -54,19 +55,19 @@ func (c *DummyController) IsOpen() bool {
 	return c.timer.IsStarted()
 }
 
-func (c *DummyController) Open(correlationId string) error {
-	c.timer.Start()
-	c.logger.Trace(correlationId, "Dummy controller opened")
+func (c *DummyController) Open(ctx context.Context, correlationId string) error {
+	c.timer.Start(ctx)
+	c.logger.Trace(ctx, correlationId, "Dummy controller opened")
 	return nil
 }
 
-func (c *DummyController) Close(correlationId string) error {
-	c.timer.Stop()
-	c.logger.Trace(correlationId, "Dummy controller closed")
+func (c *DummyController) Close(ctx context.Context, correlationId string) error {
+	c.timer.Stop(ctx)
+	c.logger.Trace(ctx, correlationId, "Dummy controller closed")
 	return nil
 }
 
-func (c *DummyController) Notify(correlationId string, args *run.Parameters) {
-	c.logger.Info(correlationId, "%d - %s", c.counter, c.message)
+func (c *DummyController) Notify(ctx context.Context, correlationId string, args *run.Parameters) {
+	c.logger.Info(ctx, correlationId, "%d - %s", c.counter, c.message)
 	c.counter++
 }

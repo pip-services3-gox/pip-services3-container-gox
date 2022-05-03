@@ -1,9 +1,9 @@
 package refer
 
 import (
-	"github.com/pip-services3-go/pip-services3-commons-go/refer"
-	crefer "github.com/pip-services3-go/pip-services3-commons-go/refer"
-	"github.com/pip-services3-go/pip-services3-components-go/build"
+	"github.com/pip-services3-gox/pip-services3-commons-gox/refer"
+	crefer "github.com/pip-services3-gox/pip-services3-commons-gox/refer"
+	"github.com/pip-services3-gox/pip-services3-components-gox/build"
 )
 
 /*

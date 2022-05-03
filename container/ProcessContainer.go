@@ -1,40 +1,39 @@
 package container
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"os/signal"
 	"strings"
 	"time"
 
-	cconfig "github.com/pip-services3-go/pip-services3-commons-go/config"
-	crefer "github.com/pip-services3-go/pip-services3-commons-go/refer"
-	"github.com/pip-services3-go/pip-services3-components-go/log"
+	cconfig "github.com/pip-services3-gox/pip-services3-commons-gox/config"
+	crefer "github.com/pip-services3-gox/pip-services3-commons-gox/refer"
+	"github.com/pip-services3-gox/pip-services3-components-gox/log"
 )
 
-/*
-Inversion of control (IoC) container that runs as a system process. It processes command line arguments and handles unhandled exceptions and Ctrl-C signal to gracefully shutdown the container.
-
-Command line arguments
-  --config / -c path to JSON or YAML file with container configuration (default: "./config/config.yml")
-  --param / --params / -p value(s) to parameterize the container configuration
-  --help / -h prints the container usage help
-see
-Container
-
-Example
-  container = NewEmptyProcessContainer();
-  container.Container.AddFactory(NewMyComponentFactory());
-
-  container.Run(process.args);
-*/
+// ProcessContainer inversion of control (IoC) container that runs as a system process.
+// It processes command line arguments and handles unhandled exceptions and Ctrl-C signal
+// to gracefully shutdown the container.
+//
+//	Command line arguments:
+//		--config / -c path to JSON or YAML file with container configuration (default: "./config/config.yml")
+//		--param / --params / -p value(s) to parameterize the container configuration
+//		--help / -h prints the container usage help
+//	see Container
+//
+//	Example:
+//		container = NewEmptyProcessContainer();
+//		container.Container.AddFactory(NewMyComponentFactory());
+//		container.Run(context.Background(), process.args);
 type ProcessContainer struct {
 	Container
 	configPath string
 }
 
-// Creates a new empty instance of the container.
-// Returns ProcessContainer
+// NewEmptyProcessContainer creates a new empty instance of the container.
+//	Returns: ProcessContainer
 func NewEmptyProcessContainer() *ProcessContainer {
 	c := &ProcessContainer{
 		Container:  *NewEmptyContainer(),
@@ -44,13 +43,11 @@ func NewEmptyProcessContainer() *ProcessContainer {
 	return c
 }
 
-// Creates a new instance of the container.
-// Parameters:
-//   - name string
-//   a container name (accessible via ContextInfo)
-//   - description string
-//   a container description (accessible via ContextInfo)
-// Returns ProcessContainer
+// NewProcessContainer creates a new instance of the container.
+//	Parameters:
+//		- name string a container name (accessible via ContextInfo)
+//		- description string a container description (accessible via ContextInfo)
+//	Returns: ProcessContainer
 func NewProcessContainer(name string, description string) *ProcessContainer {
 	c := &ProcessContainer{
 		Container:  *NewContainer(name, description),
@@ -60,17 +57,16 @@ func NewProcessContainer(name string, description string) *ProcessContainer {
 	return c
 }
 
-// Creates a new instance of the container inherit from reference.
-// Parameters:
-//   - name string
-//   a container name (accessible via ContextInfo)
-//   - description string
-//   a container description (accessible via ContextInfo)
-//   - referenceable crefer.IReferenceable
-//   - referenceble object for inherit
-// Returns *Container
+// InheritProcessContainer creates a new instance of the container inherit from reference.
+//	Parameters:
+//		- name string a container name (accessible via ContextInfo)
+//		- description string a container description (accessible via ContextInfo)
+//		- referenceable crefer.IReferenceable
+//		- referenceble object for inherit
+//	Returns: *Container
 func InheritProcessContainer(name string, description string,
 	referenceable crefer.IReferenceable) *ProcessContainer {
+
 	c := &ProcessContainer{
 		Container:  *InheritContainer(name, description, referenceable),
 		configPath: "./config/config.yml",
@@ -79,7 +75,7 @@ func InheritProcessContainer(name string, description string,
 	return c
 }
 
-// Set path for configuration file
+// SetConfigPath set path for configuration file
 func (c *ProcessContainer) SetConfigPath(configPath string) {
 	c.configPath = configPath
 }
@@ -150,16 +146,16 @@ func (c *ProcessContainer) printHelp() {
 	fmt.Println("run [-h] [-c <config file>] [-p <param>=<value>]*")
 }
 
-func (c *ProcessContainer) captureErrors(correlationId string) {
+func (c *ProcessContainer) captureErrors(ctx context.Context, correlationId string) {
 	if r := recover(); r != nil {
 		err, _ := r.(error)
-		c.Logger().Fatal(correlationId, err, "Process is terminated")
+		c.Logger().Fatal(ctx, correlationId, err, "Process is terminated")
 		os.Exit(1)
 	}
 }
 
-func (c *ProcessContainer) captureExit(correlationId string) {
-	c.Logger().Info(correlationId, "Press Control-C to stop the microservice...")
+func (c *ProcessContainer) captureExit(ctx context.Context, correlationId string) {
+	c.Logger().Info(ctx, correlationId, "Press Control-C to stop the microservice...")
 
 	ch := make(chan os.Signal)
 	signal.Notify(ch, os.Interrupt)
@@ -167,19 +163,21 @@ func (c *ProcessContainer) captureExit(correlationId string) {
 	go func() {
 		select {
 		case <-ch:
-			c.Close(correlationId)
-			c.Logger().Info(correlationId, "Goodbye!")
+			_ = c.Close(ctx, correlationId)
+			c.Logger().Info(ctx, correlationId, "Goodbye!")
 			os.Exit(0)
 		}
 	}()
 }
 
-// Runs the container by instantiating and running components inside the container.
-// It reads the container configuration, creates, configures, references and opens components. On process exit it closes, unreferences and destroys components to gracefully shutdown.
-// Parameters:
-//   - args []string
-//   command line arguments
-func (c *ProcessContainer) Run(args []string) {
+// Run the container by instantiating and running components inside the container.
+// It reads the container configuration, creates, configures, references
+// and opens components. On process exit it closes, unreferences and destroys
+// components to gracefully shutdown.
+//	Parameters:
+//		- ctx context.Context
+//		- args []string command line arguments
+func (c *ProcessContainer) Run(ctx context.Context, args []string) {
 	if c.showHelp(args) {
 		c.printHelp()
 		os.Exit(0)
@@ -192,17 +190,17 @@ func (c *ProcessContainer) Run(args []string) {
 
 	err := c.ReadConfigFromFile(correlationId, path, parameters)
 	if err != nil {
-		c.Logger().Fatal(correlationId, err, "Process is terminated")
+		c.Logger().Fatal(ctx, correlationId, err, "Process is terminated")
 		os.Exit(1)
 		return
 	}
 
-	defer c.captureErrors(correlationId)
-	c.captureExit(correlationId)
+	defer c.captureErrors(ctx, correlationId)
+	c.captureExit(ctx, correlationId)
 
-	err = c.Open(correlationId)
+	err = c.Open(ctx, correlationId)
 	if err != nil {
-		c.Logger().Fatal(correlationId, err, "Process is terminated")
+		c.Logger().Fatal(ctx, correlationId, err, "Process is terminated")
 		os.Exit(1)
 		return
 	}

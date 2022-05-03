@@ -1,25 +1,24 @@
 package refer
 
 import (
-	crefer "github.com/pip-services3-go/pip-services3-commons-go/refer"
+	"context"
+	crefer "github.com/pip-services3-gox/pip-services3-commons-gox/refer"
 )
 
-/*
-References decorator that automatically sets references to newly added components that implement IReferenceable
-interface and unsets references from removed components that implement IUnreferenceable interface.
-*/
+// LinkReferencesDecorator references decorator that automatically sets references
+// to newly added components that implement IReferenceable
+// interface and unsets references from removed components
+// that implement IUnreferenceable interface.
 type LinkReferencesDecorator struct {
 	ReferencesDecorator
 	opened bool
 }
 
-// Creates a new instance of the decorator.
-// Parameters:
-//   - nextReferences crefer.IReferences
-//   the next references or decorator in the chain.
-//   - topReferences crefer.IReferences
-//   the decorator at the top of the chain.
-// Returns *LinkReferencesDecorator
+// NewLinkReferencesDecorator creates a new instance of the decorator.
+//	Parameters:
+//		- nextReferences crefer.IReferences the next references or decorator in the chain.
+//		- topReferences crefer.IReferences the decorator at the top of the chain.
+//	Returns: *LinkReferencesDecorator
 func NewLinkReferencesDecorator(nextReferences crefer.IReferences,
 	topReferences crefer.IReferences) *LinkReferencesDecorator {
 	return &LinkReferencesDecorator{
@@ -27,19 +26,18 @@ func NewLinkReferencesDecorator(nextReferences crefer.IReferences,
 	}
 }
 
-// Checks if the component is opened.
-// Returns bool
-// true if the component has been opened and false otherwise.
+// IsOpen checks if the component is opened.
+//	Returns: bool true if the component has been opened and false otherwise.
 func (c *LinkReferencesDecorator) IsOpen() bool {
 	return c.opened
 }
 
-// Opens the component.
-// Parameters:
-//   - correlationId string
-//   transaction id to trace execution through call chain.
-// Returns error
-func (c *LinkReferencesDecorator) Open(correlationId string) error {
+// Open the component.
+//	Parameters:
+//		- ctx context.Context
+//		- correlationId string transaction id to trace execution through call chain.
+//	Returns: error
+func (c *LinkReferencesDecorator) Open(ctx context.Context, correlationId string) error {
 	if !c.opened {
 		c.opened = true
 		components := c.GetAll()
@@ -48,12 +46,12 @@ func (c *LinkReferencesDecorator) Open(correlationId string) error {
 	return nil
 }
 
-// Closes component and frees used resources.
-// Parameters:
-//   - correlationId string
-//   transaction id to trace execution through call chain.
-// Returns error
-func (c *LinkReferencesDecorator) Close(correlationId string) error {
+// Close closes component and frees used resources.
+//	Parameters:
+//		- ctx context.Context
+//		- correlationId string transaction id to trace execution through call chain.
+//	Returns: error
+func (c *LinkReferencesDecorator) Close(ctx context.Context, correlationId string) error {
 	if c.opened {
 		c.opened = false
 		components := c.GetAll()
@@ -62,13 +60,11 @@ func (c *LinkReferencesDecorator) Close(correlationId string) error {
 	return nil
 }
 
-// Puts a new reference into this reference map.
-// Parameters:
-//   - locator intrface{}
-//   a locator to find the reference by.
-//   - component interface{}
-//   a component reference to be added.
-func (c *LinkReferencesDecorator) Put(locator interface{}, component interface{}) {
+// Put a new reference into this reference map.
+//	Parameters:
+//		- locator any a locator to find the reference by.
+//		- component any a component reference to be added.
+func (c *LinkReferencesDecorator) Put(locator any, component any) {
 	c.ReferencesDecorator.Put(locator, component)
 
 	if c.opened {
@@ -76,16 +72,13 @@ func (c *LinkReferencesDecorator) Put(locator interface{}, component interface{}
 	}
 }
 
-// Removes a previously added reference that matches specified locator. If many references match the locator, it removes only the first one.
+// Remove a previously added reference that matches specified locator.
+// If many references match the locator, it removes only the first one.
 // When all references shall be removed, use removeAll method instead.
-// see
-// removeAll
-// Parameters:
-//   - locator interface
-//   a locator to remove reference
-// Returns interface{}
-// the removed component reference.
-func (c *LinkReferencesDecorator) Remove(locator interface{}) interface{} {
+//	see RemoveAll
+//	Parameters: locator interface a locator to remove reference
+//	Returns: any the removed component reference.
+func (c *LinkReferencesDecorator) Remove(locator any) any {
 	component := c.ReferencesDecorator.Remove(locator)
 
 	if c.opened {
@@ -95,13 +88,10 @@ func (c *LinkReferencesDecorator) Remove(locator interface{}) interface{} {
 	return component
 }
 
-// Removes all component references that match the specified locator.
-// Parameters:
-//   - locator interface{}
-//   the locator to remove references by.
-// Returns []interface{}
-// a list, containing all removed references.
-func (c *LinkReferencesDecorator) RemoveAll(locator interface{}) []interface{} {
+// RemoveAll removes all component references that match the specified locator.
+//	Parameters: locator any the locator to remove references by.
+//	Returns: []any a list, containing all removed references.
+func (c *LinkReferencesDecorator) RemoveAll(locator any) []any {
 	components := c.NextReferences.RemoveAll(locator)
 
 	if c.opened {

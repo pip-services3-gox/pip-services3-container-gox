@@ -1,8 +1,8 @@
 package examples
 
 import (
-	"github.com/pip-services3-go/pip-services3-commons-go/refer"
-	"github.com/pip-services3-go/pip-services3-components-go/build"
+	"github.com/pip-services3-gox/pip-services3-commons-gox/refer"
+	"github.com/pip-services3-gox/pip-services3-components-gox/build"
 )
 
 var ControllerDescriptor = refer.NewDescriptor("pip-services-dummies", "controller", "default", "*", "1.0")
