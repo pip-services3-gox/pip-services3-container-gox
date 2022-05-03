@@ -41,7 +41,7 @@ func (c *LinkReferencesDecorator) Open(ctx context.Context, correlationId string
 	if !c.opened {
 		c.opened = true
 		components := c.GetAll()
-		crefer.Referencer.SetReferences(c.ReferencesDecorator.TopReferences, components)
+		crefer.Referencer.SetReferences(ctx, c.ReferencesDecorator.TopReferences, components)
 	}
 	return nil
 }
@@ -55,20 +55,21 @@ func (c *LinkReferencesDecorator) Close(ctx context.Context, correlationId strin
 	if c.opened {
 		c.opened = false
 		components := c.GetAll()
-		crefer.Referencer.UnsetReferences(components)
+		crefer.Referencer.UnsetReferences(ctx, components)
 	}
 	return nil
 }
 
 // Put a new reference into this reference map.
 //	Parameters:
+//		- ctx context.Context
 //		- locator any a locator to find the reference by.
 //		- component any a component reference to be added.
-func (c *LinkReferencesDecorator) Put(locator any, component any) {
-	c.ReferencesDecorator.Put(locator, component)
+func (c *LinkReferencesDecorator) Put(ctx context.Context, locator any, component any) {
+	c.ReferencesDecorator.Put(ctx, locator, component)
 
 	if c.opened {
-		crefer.Referencer.SetReferencesForOne(c.ReferencesDecorator.TopReferences, component)
+		crefer.Referencer.SetReferencesForOne(ctx, c.ReferencesDecorator.TopReferences, component)
 	}
 }
 
@@ -76,26 +77,30 @@ func (c *LinkReferencesDecorator) Put(locator any, component any) {
 // If many references match the locator, it removes only the first one.
 // When all references shall be removed, use removeAll method instead.
 //	see RemoveAll
-//	Parameters: locator interface a locator to remove reference
+//	Parameters:
+//		- ctx context.Context
+//		- locator interface a locator to remove reference
 //	Returns: any the removed component reference.
-func (c *LinkReferencesDecorator) Remove(locator any) any {
-	component := c.ReferencesDecorator.Remove(locator)
+func (c *LinkReferencesDecorator) Remove(ctx context.Context, locator any) any {
+	component := c.ReferencesDecorator.Remove(ctx, locator)
 
 	if c.opened {
-		crefer.Referencer.UnsetReferencesForOne(component)
+		crefer.Referencer.UnsetReferencesForOne(ctx, component)
 	}
 
 	return component
 }
 
 // RemoveAll removes all component references that match the specified locator.
-//	Parameters: locator any the locator to remove references by.
+//	Parameters:
+//		- ctx context.Context
+//		- locator interface a locator to remove reference
 //	Returns: []any a list, containing all removed references.
-func (c *LinkReferencesDecorator) RemoveAll(locator any) []any {
-	components := c.NextReferences.RemoveAll(locator)
+func (c *LinkReferencesDecorator) RemoveAll(ctx context.Context, locator any) []any {
+	components := c.NextReferences.RemoveAll(ctx, locator)
 
 	if c.opened {
-		crefer.Referencer.UnsetReferences(components)
+		crefer.Referencer.UnsetReferences(ctx, components)
 	}
 
 	return components

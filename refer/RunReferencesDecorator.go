@@ -65,13 +65,14 @@ func (c *RunReferencesDecorator) Close(ctx context.Context, correlationId string
 
 // Put a new reference into this reference map.
 //	Parameters:
+//		- ctx context.Context
 //		- locator any a locator to find the reference by.
 //		- component any a component reference to be added.
-func (c *RunReferencesDecorator) Put(locator any, component any) {
-	c.ReferencesDecorator.Put(locator, component)
+func (c *RunReferencesDecorator) Put(ctx context.Context, locator any, component any) {
+	c.ReferencesDecorator.Put(ctx, locator, component)
 
 	if c.opened {
-		run.Opener.OpenOne(context.Background(), "", component)
+		_ = run.Opener.OpenOne(ctx, "", component)
 	}
 }
 
@@ -79,26 +80,30 @@ func (c *RunReferencesDecorator) Put(locator any, component any) {
 // If many references match the locator, it removes only the first one.
 // When all references shall be removed, use removeAll method instead.
 //	see RemoveAll
-//	Parameters: locator any a locator to remove reference
+//	Parameters:
+//		- ctx context.Context
+//		- locator any the locator to remove references by.
 //	Returns: any the removed component reference.
-func (c *RunReferencesDecorator) Remove(locator any) any {
-	component := c.ReferencesDecorator.Remove(locator)
+func (c *RunReferencesDecorator) Remove(ctx context.Context, locator any) any {
+	component := c.ReferencesDecorator.Remove(ctx, locator)
 
 	if c.opened {
-		run.Closer.CloseOne(context.Background(), "", component)
+		_ = run.Closer.CloseOne(ctx, "", component)
 	}
 
 	return component
 }
 
 // RemoveAll all component references that match the specified locator.
-//	Parameters: locator any the locator to remove references by.
+//	Parameters:
+//		- ctx context.Context
+//		- locator any the locator to remove references by.
 //	Returns: []any a list, containing all removed references.
-func (c *RunReferencesDecorator) RemoveAll(locator any) []any {
-	components := c.NextReferences.RemoveAll(locator)
+func (c *RunReferencesDecorator) RemoveAll(ctx context.Context, locator any) []any {
+	components := c.NextReferences.RemoveAll(ctx, locator)
 
 	if c.opened {
-		run.Closer.Close(context.Background(), "", components)
+		_ = run.Closer.Close(ctx, "", components)
 	}
 
 	return components

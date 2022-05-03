@@ -32,7 +32,9 @@ func NewDefaultContainerFactory() *cbuild.CompositeFactory {
 }
 
 // NewDefaultContainerFactoryFromFactories create a new instance of the factory and sets nested factories.
-//	Parameters: factories ...cbuild.IFactory a list of nested factories
+//	Parameters:
+//		- ctx context.Context
+//		- factories ...cbuild.IFactory a list of nested factories
 //	Returns: *cbuild.CompositeFactory
 func NewDefaultContainerFactoryFromFactories(factories ...cbuild.IFactory) *cbuild.CompositeFactory {
 	c := NewDefaultContainerFactory()

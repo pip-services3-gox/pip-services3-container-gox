@@ -17,11 +17,12 @@ type _TContainerConfigReader struct{}
 // ReadFromFile reads container configuration from JSON or YAML file.
 // The type of the file is determined by file extension.
 //	Parameters:
+//		- ctx context.Context.
 //		- correlationId string transaction id to trace execution through call chain.
 //		- path string a path to component configuration file.
 //		- parameters *config.ConfigParams values to parameters the configuration or null to skip parameterization.
 //	Returns: ContainerConfig, error the read container configuration and error
-func (c *_TContainerConfigReader) ReadFromFile(correlationId string,
+func (c *_TContainerConfigReader) ReadFromFile(ctx context.Context, correlationId string,
 	path string, parameters *config.ConfigParams) (ContainerConfig, error) {
 	if path == "" {
 		return nil, errors.NewConfigError(correlationId, "NO_PATH", "Missing config file path")
@@ -30,25 +31,27 @@ func (c *_TContainerConfigReader) ReadFromFile(correlationId string,
 	ext := filepath.Ext(path)
 
 	if ext == ".json" {
-		return c.ReadFromJsonFile(correlationId, path, parameters)
+		return c.ReadFromJsonFile(ctx, correlationId, path, parameters)
 	}
 
 	if ext == ".yaml" || ext == ".yml" {
-		return c.ReadFromYamlFile(correlationId, path, parameters)
+		return c.ReadFromYamlFile(ctx, correlationId, path, parameters)
 	}
 
-	return c.ReadFromJsonFile(correlationId, path, parameters)
+	return c.ReadFromJsonFile(ctx, correlationId, path, parameters)
 }
 
 // ReadFromJsonFile reads container configuration from JSON file.
 //	Parameters:
+//		- ctx context.Context.
 //		- correlationId string transaction id to trace execution through call chain.
 //		- path string a path to component configuration file.
 //		- parameters *config.ConfigParams values to parameters the configuration or null to skip parameterization.
 //	Returns: ContainerConfig, error the read container configuration and error
-func (c *_TContainerConfigReader) ReadFromJsonFile(correlationId string,
+func (c *_TContainerConfigReader) ReadFromJsonFile(ctx context.Context, correlationId string,
 	path string, parameters *config.ConfigParams) (ContainerConfig, error) {
-	config, err := cconfig.ReadJsonConfig(context.Background(), correlationId, path, parameters)
+
+	config, err := cconfig.ReadJsonConfig(ctx, correlationId, path, parameters)
 	if err != nil {
 		return nil, err
 	}
@@ -57,13 +60,15 @@ func (c *_TContainerConfigReader) ReadFromJsonFile(correlationId string,
 
 // ReadFromYamlFile reads container configuration from YAML file.
 //	Parameters:
+//		- ctx context.Context.
 //		- correlationId string transaction id to trace execution through call chain.
 //		- path string a path to component configuration file.
 //		- parameters *config.ConfigParams values to parameters the configuration or null to skip parameterization.
 //	Returns: ContainerConfig, error the read container configuration and error
-func (c *_TContainerConfigReader) ReadFromYamlFile(correlationId string,
+func (c *_TContainerConfigReader) ReadFromYamlFile(ctx context.Context, correlationId string,
 	path string, parameters *config.ConfigParams) (ContainerConfig, error) {
-	config, err := cconfig.ReadYamlConfig(context.Background(), correlationId, path, parameters)
+
+	config, err := cconfig.ReadYamlConfig(ctx, correlationId, path, parameters)
 	if err != nil {
 		return nil, err
 	}

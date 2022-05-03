@@ -2,7 +2,9 @@ package examples
 
 import (
 	"context"
+	"errors"
 	"github.com/pip-services3-gox/pip-services3-commons-gox/config"
+	cconv "github.com/pip-services3-gox/pip-services3-commons-gox/convert"
 	"github.com/pip-services3-gox/pip-services3-commons-gox/refer"
 	"github.com/pip-services3-gox/pip-services3-commons-gox/run"
 	"github.com/pip-services3-gox/pip-services3-components-gox/log"
@@ -43,12 +45,12 @@ func (c *DummyController) SetCounter(value int) {
 	c.counter = value
 }
 
-func (c *DummyController) Configure(config *config.ConfigParams) {
+func (c *DummyController) Configure(ctx context.Context, config *config.ConfigParams) {
 	c.message = config.GetAsStringWithDefault("message", c.message)
 }
 
-func (c *DummyController) SetReferences(references refer.IReferences) {
-	c.logger.SetReferences(references)
+func (c *DummyController) SetReferences(ctx context.Context, references refer.IReferences) {
+	c.logger.SetReferences(ctx, references)
 }
 
 func (c *DummyController) IsOpen() bool {
@@ -68,6 +70,17 @@ func (c *DummyController) Close(ctx context.Context, correlationId string) error
 }
 
 func (c *DummyController) Notify(ctx context.Context, correlationId string, args *run.Parameters) {
+	defer func() {
+		if r := recover(); r != nil {
+			err, ok := r.(error)
+			if !ok {
+				msg := cconv.StringConverter.ToString(r)
+				err = errors.New(msg)
+			}
+			run.CancelContextFeedbackWithError(ctx, err)
+		}
+	}()
 	c.logger.Info(ctx, correlationId, "%d - %s", c.counter, c.message)
 	c.counter++
+	panic("test panic")
 }

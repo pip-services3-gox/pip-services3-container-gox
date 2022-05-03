@@ -1,6 +1,9 @@
 package refer
 
-import crefer "github.com/pip-services3-gox/pip-services3-commons-gox/refer"
+import (
+	"context"
+	crefer "github.com/pip-services3-gox/pip-services3-commons-gox/refer"
+)
 
 // ReferencesDecorator chainable decorator for IReferences that allows
 // to inject additional capabilities such as
@@ -35,27 +38,32 @@ func NewReferencesDecorator(nextReferences crefer.IReferences,
 
 // Put a new reference into this reference map.
 //	Parameters:
+//		- ctx context.Context
 //		- locator any a locator to find the reference by.
 //		- component any a component reference to be added.
-func (c *ReferencesDecorator) Put(locator any, component any) {
-	c.NextReferences.Put(locator, component)
+func (c *ReferencesDecorator) Put(ctx context.Context, locator any, component any) {
+	c.NextReferences.Put(ctx, locator, component)
 }
 
 // Remove a previously added reference that matches specified locator.
 // If many references match the locator, it removes only the first one.
 // When all references shall be removed, use removeAll method instead.
 // see RemoveAll
-//	Parameters: locator  any a locator to remove reference
+//	Parameters:
+//		- ctx context.Context
+//		- locator any a locator to remove reference
 //	Returns: any the removed component reference.
-func (c *ReferencesDecorator) Remove(locator any) any {
-	return c.NextReferences.Remove(locator)
+func (c *ReferencesDecorator) Remove(ctx context.Context, locator any) any {
+	return c.NextReferences.Remove(ctx, locator)
 }
 
 // RemoveAll all component references that match the specified locator.
-//	Parameters: locator any the locator to remove references by.
+//	Parameters:
+//		- ctx context.Context
+//		- locator any a locator to remove reference
 //	Returns: []any a list, containing all removed references.
-func (c *ReferencesDecorator) RemoveAll(locator any) []any {
-	return c.NextReferences.RemoveAll(locator)
+func (c *ReferencesDecorator) RemoveAll(ctx context.Context, locator any) []any {
+	return c.NextReferences.RemoveAll(ctx, locator)
 }
 
 // GetAllLocators locators for all registered component references in this reference map.
@@ -65,14 +73,14 @@ func (c *ReferencesDecorator) GetAllLocators() []any {
 }
 
 // GetAll all component references registered in this reference map.
-//	Returns []any a list with component references.
+//	Returns: []any a list with component references.
 func (c *ReferencesDecorator) GetAll() []any {
 	return c.NextReferences.GetAll()
 }
 
 // GetOneOptional gets an optional component reference that matches specified locator.
 //	Parameters:
-//   - locator any the locator to find references by.
+//		- locator any a locator to remove reference
 //	Returns: any a matching component reference or null if nothing was found.
 func (c *ReferencesDecorator) GetOneOptional(locator any) any {
 	var component any
@@ -90,7 +98,8 @@ func (c *ReferencesDecorator) GetOneOptional(locator any) any {
 }
 
 // GetOneRequired a required component reference that matches specified locator.
-//	Parameters: locator any the locator to find a reference by.
+//	Parameters:
+//		- locator any a locator to remove reference
 //	Returns: any, error a matching component reference, a ReferenceError when no references found.
 func (c *ReferencesDecorator) GetOneRequired(locator any) (any, error) {
 	components, err := c.Find(locator, true)
@@ -101,10 +110,11 @@ func (c *ReferencesDecorator) GetOneRequired(locator any) (any, error) {
 }
 
 // GetOptional all component references that match specified locator.
-//	Parameters: locator any the locator to find references by.
+//	Parameters:
+//		- locator any a locator to remove reference
 //	Returns: []any a list with matching component references or empty list if nothing was found.
 func (c *ReferencesDecorator) GetOptional(locator any) []any {
-	components := []any{}
+	components := make([]any, 0)
 
 	defer func() {
 		recover()
@@ -117,7 +127,8 @@ func (c *ReferencesDecorator) GetOptional(locator any) []any {
 
 // GetRequired all component references that match specified locator.
 // At least one component reference must be present. If it doesn't the method throws an error.
-//	Parameters: locator any the locator to find references by.
+//	Parameters:
+//		- locator any a locator to remove reference
 //	Returns []any a list with matching component references and
 //		error a ReferenceError when no references found.
 func (c *ReferencesDecorator) GetRequired(locator any) ([]any, error) {

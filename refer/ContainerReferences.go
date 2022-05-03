@@ -1,6 +1,7 @@
 package refer
 
 import (
+	"context"
 	"fmt"
 
 	cconfig "github.com/pip-services3-gox/pip-services3-commons-gox/config"
@@ -25,10 +26,12 @@ func NewContainerReferences() *ContainerReferences {
 }
 
 // PutFromConfig puts components into the references from container configuration.
-//	Parameters: config config.ContainerConfig a container
-//		configuration with information of components to be added.
+//	Parameters:
+//		- ctx context.Context
+//		- config config.ContainerConfig a container
+//			configuration with information of components to be added.
 //	Returns: error CreateError when one of component cannot be created.
-func (c *ContainerReferences) PutFromConfig(config config.ContainerConfig) error {
+func (c *ContainerReferences) PutFromConfig(ctx context.Context, config config.ContainerConfig) error {
 	var err error
 	var locator any
 	var component any
@@ -66,17 +69,17 @@ func (c *ContainerReferences) PutFromConfig(config config.ContainerConfig) error
 		fmt.Printf("Created component %v\n", locator)
 
 		// Add component to the list
-		c.ManagedReferences.References.Put(locator, component)
+		c.ManagedReferences.References.Put(ctx, locator, component)
 
 		// Configure component
 		if configurable, ok := component.(cconfig.IConfigurable); ok {
-			configurable.Configure(componentConfig.Config)
+			configurable.Configure(ctx, componentConfig.Config)
 		}
 
 		// Set references to factories
 		if _, ok := component.(build.IFactory); ok {
 			if referenceable, ok := component.(refer.IReferenceable); ok {
-				referenceable.SetReferences(c)
+				referenceable.SetReferences(ctx, c)
 			}
 		}
 	}

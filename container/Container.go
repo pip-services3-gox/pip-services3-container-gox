@@ -2,8 +2,9 @@ package container
 
 import (
 	"context"
+	"errors"
 	cconfig "github.com/pip-services3-gox/pip-services3-commons-gox/config"
-	"github.com/pip-services3-gox/pip-services3-commons-gox/errors"
+	cerr "github.com/pip-services3-gox/pip-services3-commons-gox/errors"
 	crefer "github.com/pip-services3-gox/pip-services3-commons-gox/refer"
 	cbuild "github.com/pip-services3-gox/pip-services3-components-gox/build"
 	"github.com/pip-services3-gox/pip-services3-components-gox/info"
@@ -122,26 +123,29 @@ func InheritContainer(name string, description string,
 }
 
 // Configure component by passing configuration parameters.
-//	Parameters: config  *cconfig.ConfigParams configuration parameters to be set.
-func (c *Container) Configure(conf *cconfig.ConfigParams) {
+//	Parameters:
+//		- ctx context.Context
+//		- config *cconfig.ConfigParams configuration parameters to be set.
+func (c *Container) Configure(ctx context.Context, conf *cconfig.ConfigParams) {
 	c.config, _ = config.ReadContainerConfigFromConfig(conf)
 }
 
 // ReadConfigFromFile container configuration from JSON or YAML file and parameterizes it with given values.
 //	Parameters:
+//		- ctx context.Context
 //		- correlationId string transaction id to trace execution through call chain.
 //		- path string a path to configuration file
 //		- parameters *cconfig.ConfigParams values to parameters the configuration or null to skip parameterization.
-func (c *Container) ReadConfigFromFile(correlationId string,
+func (c *Container) ReadConfigFromFile(ctx context.Context, correlationId string,
 	path string, parameters *cconfig.ConfigParams) error {
 
 	var err error
-	c.config, err = config.ContainerConfigReader.ReadFromFile(correlationId, path, parameters)
+	c.config, err = config.ContainerConfigReader.ReadFromFile(ctx, correlationId, path, parameters)
 	//c.logger.Trace(correlationId, config.String())
 	return err
 }
 
-func (c *Container) initReferences(references crefer.IReferences) {
+func (c *Container) initReferences(ctx context.Context, references crefer.IReferences) {
 	if existingInfo, ok := references.GetOneOptional(
 		crefer.NewDescriptor(
 			"pip-services",
@@ -150,6 +154,7 @@ func (c *Container) initReferences(references crefer.IReferences) {
 		),
 	).(*info.ContextInfo); !ok {
 		references.Put(
+			ctx,
 			crefer.NewDescriptor(
 				"pip-services",
 				"context-info",
@@ -163,6 +168,7 @@ func (c *Container) initReferences(references crefer.IReferences) {
 	}
 
 	references.Put(
+		ctx,
 		crefer.NewDescriptor(
 			"pip-services",
 			"factory",
@@ -186,7 +192,8 @@ func (c *Container) Info() *info.ContextInfo {
 
 // AddFactory a factory to the container.
 // The factory is used to create components added to the container by their locators (descriptors).
-//	Parameters: factory IFactory a component factory to be added.
+//	Parameters:
+//		- factory IFactory a component factory to be added.
 func (c *Container) AddFactory(factory cbuild.IFactory) {
 	c.factories.Add(factory)
 }
@@ -206,16 +213,21 @@ func (c *Container) Open(ctx context.Context, correlationId string) error {
 	var err error
 
 	if c.references != nil {
-		return errors.NewInvalidStateError(
+		return cerr.NewInvalidStateError(
 			correlationId, "ALREADY_OPENED", "Container was already opened",
 		)
 	}
 
 	defer func() {
 		if r := recover(); r != nil {
-			err, _ = r.(error)
-			c.logger.Error(ctx, correlationId, err, "Failed to start container")
-			_ = c.Close(ctx, correlationId)
+			recoverErr, ok := r.(error)
+			if !ok {
+				msg, _ := r.(string)
+				recoverErr = errors.New(msg)
+			}
+			err = recoverErr
+			c.logger.Error(ctx, correlationId, recoverErr, "Failed to start container")
+			panic(err)
 		}
 	}()
 
@@ -223,14 +235,14 @@ func (c *Container) Open(ctx context.Context, correlationId string) error {
 
 	// Create references with configured components
 	c.references = refer.NewContainerReferences()
-	c.initReferences(c.references)
-	err = c.references.PutFromConfig(c.config)
+	c.initReferences(ctx, c.references)
+	err = c.references.PutFromConfig(ctx, c.config)
 	if err != nil {
 		return err
 	}
 
 	if c.referenceable != nil {
-		c.referenceable.SetReferences(c.references)
+		c.referenceable.SetReferences(ctx, c.references)
 	}
 
 	// Get custom description if available
@@ -241,7 +253,7 @@ func (c *Container) Open(ctx context.Context, correlationId string) error {
 	}
 
 	// Get reference to logger
-	c.logger = log.NewCompositeLoggerFromReferences(c.references)
+	c.logger = log.NewCompositeLoggerFromReferences(ctx, c.references)
 
 	// Open references
 	err = c.references.Open(ctx, correlationId)
@@ -270,8 +282,14 @@ func (c *Container) Close(ctx context.Context, correlationId string) error {
 
 	defer func() {
 		if r := recover(); r != nil {
-			err, _ = r.(error)
-			c.logger.Error(ctx, correlationId, err, "Failed to stop container")
+			recoverErr, ok := r.(error)
+			if !ok {
+				msg, _ := r.(string)
+				recoverErr = errors.New(msg)
+			}
+			err = recoverErr
+			c.logger.Error(ctx, correlationId, recoverErr, "Failed to stop container")
+			panic(err)
 		}
 	}()
 
@@ -279,7 +297,7 @@ func (c *Container) Close(ctx context.Context, correlationId string) error {
 
 	// Unset references for child container
 	if c.unreferenceable != nil {
-		c.unreferenceable.UnsetReferences()
+		c.unreferenceable.UnsetReferences(ctx)
 	}
 
 	// Close and dereference components

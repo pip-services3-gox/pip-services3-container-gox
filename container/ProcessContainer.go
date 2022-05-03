@@ -2,15 +2,17 @@ package container
 
 import (
 	"context"
+	"errors"
 	"fmt"
+	cconfig "github.com/pip-services3-gox/pip-services3-commons-gox/config"
+	cconv "github.com/pip-services3-gox/pip-services3-commons-gox/convert"
+	crefer "github.com/pip-services3-gox/pip-services3-commons-gox/refer"
+	crun "github.com/pip-services3-gox/pip-services3-commons-gox/run"
+	"github.com/pip-services3-gox/pip-services3-components-gox/log"
 	"os"
 	"os/signal"
 	"strings"
-	"time"
-
-	cconfig "github.com/pip-services3-gox/pip-services3-commons-gox/config"
-	crefer "github.com/pip-services3-gox/pip-services3-commons-gox/refer"
-	"github.com/pip-services3-gox/pip-services3-components-gox/log"
+	"syscall"
 )
 
 // ProcessContainer inversion of control (IoC) container that runs as a system process.
@@ -29,15 +31,19 @@ import (
 //		container.Run(context.Background(), process.args);
 type ProcessContainer struct {
 	Container
-	configPath string
+	configPath            string
+	feedbackChan          crun.ContextFeedbackChan
+	feedbackWithErrorChan crun.ContextFeedbackChanWithError
 }
 
 // NewEmptyProcessContainer creates a new empty instance of the container.
 //	Returns: ProcessContainer
 func NewEmptyProcessContainer() *ProcessContainer {
 	c := &ProcessContainer{
-		Container:  *NewEmptyContainer(),
-		configPath: "./config/config.yml",
+		Container:             *NewEmptyContainer(),
+		configPath:            "./config/config.yml",
+		feedbackChan:          make(crun.ContextFeedbackChan),
+		feedbackWithErrorChan: make(crun.ContextFeedbackChanWithError),
 	}
 	c.SetLogger(log.NewConsoleLogger())
 	return c
@@ -50,8 +56,10 @@ func NewEmptyProcessContainer() *ProcessContainer {
 //	Returns: ProcessContainer
 func NewProcessContainer(name string, description string) *ProcessContainer {
 	c := &ProcessContainer{
-		Container:  *NewContainer(name, description),
-		configPath: "./config/config.yml",
+		Container:             *NewContainer(name, description),
+		configPath:            "./config/config.yml",
+		feedbackChan:          make(crun.ContextFeedbackChan),
+		feedbackWithErrorChan: make(crun.ContextFeedbackChanWithError),
 	}
 	c.SetLogger(log.NewConsoleLogger())
 	return c
@@ -68,8 +76,10 @@ func InheritProcessContainer(name string, description string,
 	referenceable crefer.IReferenceable) *ProcessContainer {
 
 	c := &ProcessContainer{
-		Container:  *InheritContainer(name, description, referenceable),
-		configPath: "./config/config.yml",
+		Container:             *InheritContainer(name, description, referenceable),
+		configPath:            "./config/config.yml",
+		feedbackChan:          make(crun.ContextFeedbackChan),
+		feedbackWithErrorChan: make(crun.ContextFeedbackChanWithError),
 	}
 	c.SetLogger(log.NewConsoleLogger())
 	return c
@@ -146,30 +156,6 @@ func (c *ProcessContainer) printHelp() {
 	fmt.Println("run [-h] [-c <config file>] [-p <param>=<value>]*")
 }
 
-func (c *ProcessContainer) captureErrors(ctx context.Context, correlationId string) {
-	if r := recover(); r != nil {
-		err, _ := r.(error)
-		c.Logger().Fatal(ctx, correlationId, err, "Process is terminated")
-		os.Exit(1)
-	}
-}
-
-func (c *ProcessContainer) captureExit(ctx context.Context, correlationId string) {
-	c.Logger().Info(ctx, correlationId, "Press Control-C to stop the microservice...")
-
-	ch := make(chan os.Signal)
-	signal.Notify(ch, os.Interrupt)
-
-	go func() {
-		select {
-		case <-ch:
-			_ = c.Close(ctx, correlationId)
-			c.Logger().Info(ctx, correlationId, "Goodbye!")
-			os.Exit(0)
-		}
-	}()
-}
-
 // Run the container by instantiating and running components inside the container.
 // It reads the container configuration, creates, configures, references
 // and opens components. On process exit it closes, unreferences and destroys
@@ -184,28 +170,70 @@ func (c *ProcessContainer) Run(ctx context.Context, args []string) {
 		return
 	}
 
+	ctx, cancel := context.WithCancel(ctx)
+
+	ctx, _ = crun.NewCancelContext(ctx, c.feedbackChan)
+	ctx, _ = crun.NewCancelContextWithError(ctx, c.feedbackWithErrorChan)
+
 	correlationId := c.Info().Name
 	path := c.getConfigPath(args)
 	parameters := c.getParameters(args)
 
-	err := c.ReadConfigFromFile(correlationId, path, parameters)
+	defer func() {
+		if r := recover(); r != nil {
+			err, ok := r.(error)
+			if !ok {
+				msg := cconv.StringConverter.ToString(r)
+				err = errors.New(msg)
+			}
+			_ = c.Close(ctx, correlationId)
+			cancel()
+			c.Logger().Fatal(ctx, correlationId, err, "Process is terminated")
+			os.Exit(1)
+		}
+	}()
+
+	err := c.ReadConfigFromFile(ctx, correlationId, path, parameters)
 	if err != nil {
 		c.Logger().Fatal(ctx, correlationId, err, "Process is terminated")
 		os.Exit(1)
 		return
 	}
 
-	defer c.captureErrors(ctx, correlationId)
-	c.captureExit(ctx, correlationId)
+	c.Logger().Info(ctx, correlationId, "Press Control-C to stop the microservice...")
 
 	err = c.Open(ctx, correlationId)
 	if err != nil {
+		_ = c.Close(ctx, correlationId)
+		cancel()
 		c.Logger().Fatal(ctx, correlationId, err, "Process is terminated")
 		os.Exit(1)
 		return
 	}
 
-	for {
-		time.Sleep(100)
+	ch := make(chan os.Signal)
+	signal.Notify(ch, os.Interrupt, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT, syscall.SIGHUP, syscall.SIGABRT)
+
+	select {
+	case err := <-c.feedbackWithErrorChan:
+		msg := cconv.StringConverter.ToString(err)
+		err = errors.New(msg)
+		_ = c.Close(ctx, correlationId)
+		cancel()
+		c.Logger().Fatal(ctx, correlationId, err, "Process is terminated")
+		os.Exit(1)
+		break
+	case <-c.feedbackChan:
+		_ = c.Close(ctx, correlationId)
+		cancel()
+		c.Logger().Info(ctx, correlationId, "Goodbye!")
+		os.Exit(0)
+		break
+	case <-ch:
+		_ = c.Close(ctx, correlationId)
+		cancel()
+		c.Logger().Info(ctx, correlationId, "Goodbye!")
+		os.Exit(0)
+		break
 	}
 }

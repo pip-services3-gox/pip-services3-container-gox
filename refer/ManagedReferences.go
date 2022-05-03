@@ -20,15 +20,17 @@ type ManagedReferences struct {
 }
 
 // NewManagedReferences creates a new instance of the references
-//	Parameters: tuples []any tuples where odd values are component locators
-//		(descriptors) and even values are component references
+//	Parameters:
+//		- ctx context.Context
+//		- tuples []any tuples where odd values are component locators
+//			(descriptors) and even values are component references
 //	Returns: *ManagedReferences
-func NewManagedReferences(tuples []any) *ManagedReferences {
+func NewManagedReferences(ctx context.Context, tuples []any) *ManagedReferences {
 	c := &ManagedReferences{
 		ReferencesDecorator: *NewReferencesDecorator(nil, nil),
 	}
 
-	c.References = crefer.NewReferences(tuples)
+	c.References = crefer.NewReferences(ctx, tuples)
 	c.Builder = NewBuildReferencesDecorator(c.References, c)
 	c.Linker = NewLinkReferencesDecorator(c.Builder, c)
 	c.Runner = NewRunReferencesDecorator(c.Linker, c)
@@ -41,16 +43,18 @@ func NewManagedReferences(tuples []any) *ManagedReferences {
 // NewEmptyManagedReferences creates a new instance of the references
 //	Returns: *ManagedReferences
 func NewEmptyManagedReferences() *ManagedReferences {
-	return NewManagedReferences([]any{})
+	return NewManagedReferences(context.Background(), []any{})
 }
 
 // NewManagedReferencesFromTuples creates a new ManagedReferences object
 // filled with provided key-value pairs called tuples. Tuples parameters contain a
 // sequence of locator1, component1, locator2, component2, ... pairs.
-//	Parameters: tuples ...any the tuples to fill a new ManagedReferences object.
+//	Parameters:
+//		- ctx context.Context
+//		- tuples ...any the tuples to fill a new ManagedReferences object.
 //	Returns: *ManagedReferences a new ManagedReferences object.
-func NewManagedReferencesFromTuples(tuples ...any) *ManagedReferences {
-	return NewManagedReferences(tuples)
+func NewManagedReferencesFromTuples(ctx context.Context, tuples ...any) *ManagedReferences {
+	return NewManagedReferences(ctx, tuples)
 }
 
 // IsOpen checks if the component is opened.
