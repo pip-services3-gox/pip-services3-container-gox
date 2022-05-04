@@ -14,7 +14,7 @@
 
 
 
-<script>var goVersion = "go1.13.15";</script>
+<script>var goVersion = "go1.18.1";</script>
 <script src="../../lib/godoc/godocs.js" defer></script>
 </head>
 <body>
@@ -146,16 +146,17 @@
 		
 			
 			
-			<h2 id="NewDefaultContainerFactory">func <a href="http://localhost:6060/src/build/DefaultContainerFactory.go?s=826:884#L10">NewDefaultContainerFactory</a>
+			<h2 id="NewDefaultContainerFactory">func <a href="http://localhost:6060/src/build/DefaultContainerFactory.go?s=869:927#L8">NewDefaultContainerFactory</a>
 				<a class="permalink" href="index.html#NewDefaultContainerFactory">&#xb6;</a>
 				
 				
 			</h2>
-			<pre>func NewDefaultContainerFactory() *<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-components-go/build/">cbuild</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-components-go/build/#CompositeFactory">CompositeFactory</a></pre>
+			<pre>func NewDefaultContainerFactory() *<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/build/">cbuild</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/build/#CompositeFactory">CompositeFactory</a></pre>
 			<p>
-Create a new instance of the factory and sets nested factories.
-Returns *DefaultContainerFactory
+NewDefaultContainerFactory create a new instance of the factory and sets nested factories.
 </p>
+<pre>Returns: *DefaultContainerFactory
+</pre>
 
 			
 			
@@ -163,22 +164,20 @@ Returns *DefaultContainerFactory
 		
 			
 			
-			<h2 id="NewDefaultContainerFactoryFromFactories">func <a href="http://localhost:6060/src/build/DefaultContainerFactory.go?s=1492:1591#L31">NewDefaultContainerFactoryFromFactories</a>
+			<h2 id="NewDefaultContainerFactoryFromFactories">func <a href="http://localhost:6060/src/build/DefaultContainerFactory.go?s=1598:1697#L29">NewDefaultContainerFactoryFromFactories</a>
 				<a class="permalink" href="index.html#NewDefaultContainerFactoryFromFactories">&#xb6;</a>
 				
 				
 			</h2>
-			<pre>func NewDefaultContainerFactoryFromFactories(factories ...<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-components-go/build/">cbuild</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-components-go/build/#IFactory">IFactory</a>) *<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-components-go/build/">cbuild</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-components-go/build/#CompositeFactory">CompositeFactory</a></pre>
+			<pre>func NewDefaultContainerFactoryFromFactories(factories ...<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/build/">cbuild</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/build/#IFactory">IFactory</a>) *<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/build/">cbuild</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/build/#CompositeFactory">CompositeFactory</a></pre>
 			<p>
-Create a new instance of the factory and sets nested factories.
-Parameters:
+NewDefaultContainerFactoryFromFactories create a new instance of the factory and sets nested factories.
 </p>
-<pre>- factories ...cbuild.IFactory
-a list of nested factories
+<pre>Parameters:
+	- ctx context.Context
+	- factories ...cbuild.IFactory a list of nested factories
+Returns: *cbuild.CompositeFactory
 </pre>
-<p>
-Returns *cbuild.CompositeFactory
-</p>
 
 			
 			
@@ -196,13 +195,13 @@ Returns *cbuild.CompositeFactory
 
 
 <div id="footer">
-Build version go1.13.15.<br>
+Build version go1.18.1.<br>
 Except as <a href="https://developers.google.com/site-policies#restrictions">noted</a>,
 the content of this page is licensed under the
 Creative Commons Attribution 3.0 License,
 and code is licensed under a <a href="http://localhost:6060/LICENSE">BSD license</a>.<br>
-<a href="http://localhost:6060/doc/tos.html">Terms of Service</a> |
-<a href="http://www.google.com/intl/en/policies/privacy/">Privacy Policy</a>
+<a href="https://golang.org/doc/tos.html">Terms of Service</a> |
+<a href="https://www.google.com/intl/en/policies/privacy/">Privacy Policy</a>
 </div>
 
 </div><!-- .container -->

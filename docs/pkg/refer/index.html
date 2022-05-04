@@ -14,7 +14,7 @@
 
 
 
-<script>var goVersion = "go1.13.15";</script>
+<script>var goVersion = "go1.18.1";</script>
 <script src="../../lib/godoc/godocs.js" defer></script>
 </head>
 <body>
@@ -120,28 +120,28 @@
 				
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#BuildReferencesDecorator.ClarifyLocator">func (c *BuildReferencesDecorator) ClarifyLocator(locator interface{}, factory build.IFactory) interface{}</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#BuildReferencesDecorator.ClarifyLocator">func (c *BuildReferencesDecorator) ClarifyLocator(locator any, factory build.IFactory) any</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#BuildReferencesDecorator.Create">func (c *BuildReferencesDecorator) Create(locator interface{}, factory build.IFactory) interface{}</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#BuildReferencesDecorator.Create">func (c *BuildReferencesDecorator) Create(locator any, factory build.IFactory) any</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#BuildReferencesDecorator.Find">func (c *BuildReferencesDecorator) Find(locator interface{}, required bool) ([]interface{}, error)</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#BuildReferencesDecorator.Find">func (c *BuildReferencesDecorator) Find(locator any, required bool) ([]any, error)</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#BuildReferencesDecorator.FindFactory">func (c *BuildReferencesDecorator) FindFactory(locator interface{}) build.IFactory</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#BuildReferencesDecorator.FindFactory">func (c *BuildReferencesDecorator) FindFactory(locator any) build.IFactory</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#BuildReferencesDecorator.GetOneOptional">func (c *BuildReferencesDecorator) GetOneOptional(locator interface{}) interface{}</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#BuildReferencesDecorator.GetOneOptional">func (c *BuildReferencesDecorator) GetOneOptional(locator any) any</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#BuildReferencesDecorator.GetOneRequired">func (c *BuildReferencesDecorator) GetOneRequired(locator interface{}) (interface{}, error)</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#BuildReferencesDecorator.GetOneRequired">func (c *BuildReferencesDecorator) GetOneRequired(locator any) (any, error)</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#BuildReferencesDecorator.GetOptional">func (c *BuildReferencesDecorator) GetOptional(locator interface{}) []interface{}</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#BuildReferencesDecorator.GetOptional">func (c *BuildReferencesDecorator) GetOptional(locator any) []any</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#BuildReferencesDecorator.GetRequired">func (c *BuildReferencesDecorator) GetRequired(locator interface{}) ([]interface{}, error)</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#BuildReferencesDecorator.GetRequired">func (c *BuildReferencesDecorator) GetRequired(locator any) ([]any, error)</a></dd>
 				
 			
 				
@@ -152,7 +152,7 @@
 				
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#ContainerReferences.PutFromConfig">func (c *ContainerReferences) PutFromConfig(config config.ContainerConfig) error</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#ContainerReferences.PutFromConfig">func (c *ContainerReferences) PutFromConfig(ctx context.Context, config config.ContainerConfig) error</a></dd>
 				
 			
 				
@@ -163,22 +163,22 @@
 				
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#LinkReferencesDecorator.Close">func (c *LinkReferencesDecorator) Close(correlationId string) error</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#LinkReferencesDecorator.Close">func (c *LinkReferencesDecorator) Close(ctx context.Context, correlationId string) error</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="index.html#LinkReferencesDecorator.IsOpen">func (c *LinkReferencesDecorator) IsOpen() bool</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#LinkReferencesDecorator.Open">func (c *LinkReferencesDecorator) Open(correlationId string) error</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#LinkReferencesDecorator.Open">func (c *LinkReferencesDecorator) Open(ctx context.Context, correlationId string) error</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#LinkReferencesDecorator.Put">func (c *LinkReferencesDecorator) Put(locator interface{}, component interface{})</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#LinkReferencesDecorator.Put">func (c *LinkReferencesDecorator) Put(ctx context.Context, locator any, component any)</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#LinkReferencesDecorator.Remove">func (c *LinkReferencesDecorator) Remove(locator interface{}) interface{}</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#LinkReferencesDecorator.Remove">func (c *LinkReferencesDecorator) Remove(ctx context.Context, locator any) any</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#LinkReferencesDecorator.RemoveAll">func (c *LinkReferencesDecorator) RemoveAll(locator interface{}) []interface{}</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#LinkReferencesDecorator.RemoveAll">func (c *LinkReferencesDecorator) RemoveAll(ctx context.Context, locator any) []any</a></dd>
 				
 			
 				
@@ -188,20 +188,20 @@
 					<dd>&nbsp; &nbsp; <a href="index.html#NewEmptyManagedReferences">func NewEmptyManagedReferences() *ManagedReferences</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#NewManagedReferences">func NewManagedReferences(tuples []interface{}) *ManagedReferences</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#NewManagedReferences">func NewManagedReferences(ctx context.Context, tuples []any) *ManagedReferences</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#NewManagedReferencesFromTuples">func NewManagedReferencesFromTuples(tuples ...interface{}) *ManagedReferences</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#NewManagedReferencesFromTuples">func NewManagedReferencesFromTuples(ctx context.Context, tuples ...any) *ManagedReferences</a></dd>
 				
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#ManagedReferences.Close">func (c *ManagedReferences) Close(correlationId string) error</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#ManagedReferences.Close">func (c *ManagedReferences) Close(ctx context.Context, correlationId string) error</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="index.html#ManagedReferences.IsOpen">func (c *ManagedReferences) IsOpen() bool</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#ManagedReferences.Open">func (c *ManagedReferences) Open(correlationId string) error</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#ManagedReferences.Open">func (c *ManagedReferences) Open(ctx context.Context, correlationId string) error</a></dd>
 				
 			
 				
@@ -212,34 +212,34 @@
 				
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#ReferencesDecorator.Find">func (c *ReferencesDecorator) Find(locator interface{}, required bool) ([]interface{}, error)</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#ReferencesDecorator.Find">func (c *ReferencesDecorator) Find(locator any, required bool) ([]any, error)</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#ReferencesDecorator.GetAll">func (c *ReferencesDecorator) GetAll() []interface{}</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#ReferencesDecorator.GetAll">func (c *ReferencesDecorator) GetAll() []any</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#ReferencesDecorator.GetAllLocators">func (c *ReferencesDecorator) GetAllLocators() []interface{}</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#ReferencesDecorator.GetAllLocators">func (c *ReferencesDecorator) GetAllLocators() []any</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#ReferencesDecorator.GetOneOptional">func (c *ReferencesDecorator) GetOneOptional(locator interface{}) interface{}</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#ReferencesDecorator.GetOneOptional">func (c *ReferencesDecorator) GetOneOptional(locator any) any</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#ReferencesDecorator.GetOneRequired">func (c *ReferencesDecorator) GetOneRequired(locator interface{}) (interface{}, error)</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#ReferencesDecorator.GetOneRequired">func (c *ReferencesDecorator) GetOneRequired(locator any) (any, error)</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#ReferencesDecorator.GetOptional">func (c *ReferencesDecorator) GetOptional(locator interface{}) []interface{}</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#ReferencesDecorator.GetOptional">func (c *ReferencesDecorator) GetOptional(locator any) []any</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#ReferencesDecorator.GetRequired">func (c *ReferencesDecorator) GetRequired(locator interface{}) ([]interface{}, error)</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#ReferencesDecorator.GetRequired">func (c *ReferencesDecorator) GetRequired(locator any) ([]any, error)</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#ReferencesDecorator.Put">func (c *ReferencesDecorator) Put(locator interface{}, component interface{})</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#ReferencesDecorator.Put">func (c *ReferencesDecorator) Put(ctx context.Context, locator any, component any)</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#ReferencesDecorator.Remove">func (c *ReferencesDecorator) Remove(locator interface{}) interface{}</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#ReferencesDecorator.Remove">func (c *ReferencesDecorator) Remove(ctx context.Context, locator any) any</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#ReferencesDecorator.RemoveAll">func (c *ReferencesDecorator) RemoveAll(locator interface{}) []interface{}</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#ReferencesDecorator.RemoveAll">func (c *ReferencesDecorator) RemoveAll(ctx context.Context, locator any) []any</a></dd>
 				
 			
 				
@@ -250,22 +250,22 @@
 				
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#RunReferencesDecorator.Close">func (c *RunReferencesDecorator) Close(correlationId string) error</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#RunReferencesDecorator.Close">func (c *RunReferencesDecorator) Close(ctx context.Context, correlationId string) error</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="index.html#RunReferencesDecorator.IsOpen">func (c *RunReferencesDecorator) IsOpen() bool</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#RunReferencesDecorator.Open">func (c *RunReferencesDecorator) Open(correlationId string) error</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#RunReferencesDecorator.Open">func (c *RunReferencesDecorator) Open(ctx context.Context, correlationId string) error</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#RunReferencesDecorator.Put">func (c *RunReferencesDecorator) Put(locator interface{}, component interface{})</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#RunReferencesDecorator.Put">func (c *RunReferencesDecorator) Put(ctx context.Context, locator any, component any)</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#RunReferencesDecorator.Remove">func (c *RunReferencesDecorator) Remove(locator interface{}) interface{}</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#RunReferencesDecorator.Remove">func (c *RunReferencesDecorator) Remove(ctx context.Context, locator any) any</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#RunReferencesDecorator.RemoveAll">func (c *RunReferencesDecorator) RemoveAll(locator interface{}) []interface{}</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#RunReferencesDecorator.RemoveAll">func (c *RunReferencesDecorator) RemoveAll(ctx context.Context, locator any) []any</a></dd>
 				
 			
 			
@@ -307,13 +307,13 @@
 		
 			
 			
-			<h2 id="BuildReferencesDecorator">type <a href="http://localhost:6060/src/refer/BuildReferencesDecorator.go?s=357:418#L3">BuildReferencesDecorator</a>
+			<h2 id="BuildReferencesDecorator">type <a href="http://localhost:6060/src/refer/BuildReferencesDecorator.go?s=399:460#L2">BuildReferencesDecorator</a>
 				<a class="permalink" href="index.html#BuildReferencesDecorator">&#xb6;</a>
 				
 				
 			</h2>
 			<p>
-References decorator that automatically creates missing components using available
+BuildReferencesDecorator references decorator that automatically creates missing components using available
 component factories upon component retrival.
 </p>
 
@@ -332,25 +332,21 @@ component factories upon component retrival.
 
 			
 				
-				<h3 id="NewBuildReferencesDecorator">func <a href="http://localhost:6060/src/refer/BuildReferencesDecorator.go?s=686:814#L14">NewBuildReferencesDecorator</a>
+				<h3 id="NewBuildReferencesDecorator">func <a href="http://localhost:6060/src/refer/BuildReferencesDecorator.go?s=745:873#L11">NewBuildReferencesDecorator</a>
 					<a class="permalink" href="index.html#NewBuildReferencesDecorator">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func NewBuildReferencesDecorator(nextReferences <a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/refer/">crefer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/refer/#IReferences">IReferences</a>,
-    topReferences <a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/refer/">crefer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/refer/#IReferences">IReferences</a>) *<a href="index.html#BuildReferencesDecorator">BuildReferencesDecorator</a></pre>
+				<pre>func NewBuildReferencesDecorator(nextReferences <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/">crefer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/#IReferences">IReferences</a>,
+    topReferences <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/">crefer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/#IReferences">IReferences</a>) *<a href="index.html#BuildReferencesDecorator">BuildReferencesDecorator</a></pre>
 				<p>
-Creates a new instance of the decorator.
-Parameters:
+NewBuildReferencesDecorator creates a new instance of the decorator.
 </p>
-<pre>- nextReferences crefer.IReferences
-the next references or decorator in the chain.
-- topReferences IReferences
-the decorator at the top of the chain.
+<pre>Parameters:
+	- nextReferences crefer.IReferences the next references or decorator in the chain.
+	- topReferences IReferences the decorator at the top of the chain.
+Returns: *BuildReferencesDecorator
 </pre>
-<p>
-Returns *BuildReferencesDecorator
-</p>
 
 				
 				
@@ -358,205 +354,166 @@ Returns *BuildReferencesDecorator
 
 			
 				
-				<h3 id="BuildReferencesDecorator.ClarifyLocator">func (*BuildReferencesDecorator) <a href="http://localhost:6060/src/refer/BuildReferencesDecorator.go?s=2535:2642#L80">ClarifyLocator</a>
+				<h3 id="BuildReferencesDecorator.ClarifyLocator">func (*BuildReferencesDecorator) <a href="http://localhost:6060/src/refer/BuildReferencesDecorator.go?s=2505:2596#L67">ClarifyLocator</a>
 					<a class="permalink" href="index.html#BuildReferencesDecorator.ClarifyLocator">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#BuildReferencesDecorator">BuildReferencesDecorator</a>) ClarifyLocator(locator interface{},
-    factory <a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-components-go/build/">build</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-components-go/build/#IFactory">IFactory</a>) interface{}</pre>
+				<pre>func (c *<a href="index.html#BuildReferencesDecorator">BuildReferencesDecorator</a>) ClarifyLocator(locator <a href="http://localhost:6060/pkg/builtin/#any">any</a>,
+    factory <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/build/">build</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/build/#IFactory">IFactory</a>) <a href="http://localhost:6060/pkg/builtin/#any">any</a></pre>
 				<p>
-Clarifies a component locator by merging two descriptors into one to replace missing fields.
+ClarifyLocator a component locator by merging two descriptors into one to replace missing fields.
 That allows to get a more complete descriptor that includes all possible fields.
-Parameters:
 </p>
-<pre>- locator intrface{}
-a component locator to clarify.
-- factory build.IFactory
-a factory that shall create the component.
+<pre>Parameters:
+	- locator any a component locator to clarify.
+	- factory build.IFactory a factory that shall create the component.
+Returns: any clarified component descriptor (locator)
 </pre>
-<p>
-Returns interface{}
-clarified component descriptor (locator)
-</p>
 
 				
 				
 				
 			
 				
-				<h3 id="BuildReferencesDecorator.Create">func (*BuildReferencesDecorator) <a href="http://localhost:6060/src/refer/BuildReferencesDecorator.go?s=1876:1975#L53">Create</a>
+				<h3 id="BuildReferencesDecorator.Create">func (*BuildReferencesDecorator) <a href="http://localhost:6060/src/refer/BuildReferencesDecorator.go?s=1894:1977#L43">Create</a>
 					<a class="permalink" href="index.html#BuildReferencesDecorator.Create">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#BuildReferencesDecorator">BuildReferencesDecorator</a>) Create(locator interface{},
-    factory <a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-components-go/build/">build</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-components-go/build/#IFactory">IFactory</a>) interface{}</pre>
+				<pre>func (c *<a href="index.html#BuildReferencesDecorator">BuildReferencesDecorator</a>) Create(locator <a href="http://localhost:6060/pkg/builtin/#any">any</a>,
+    factory <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/build/">build</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/build/#IFactory">IFactory</a>) <a href="http://localhost:6060/pkg/builtin/#any">any</a></pre>
 				<p>
-Creates a component identified by given locator.
-throws
-a CreateEerror if the factory is not able to create the component.
-see
-findFactory
+Create creates a component identified by given locator.
+</p>
+<pre>throws a CreateEerror if the factory is not able to create the component.
+see FindFactory
 Parameters:
-</p>
-<pre>- locator interface{}
-a locator to identify component to be created.
-- factory build.IFactory
-a factory that shall create the component.
+	- locator any a locator to identify component to be created.
+	- factory build.IFactory a factory that shall create the component.
+Returns: any the created component.
 </pre>
-<p>
-Returns interface{}
-the created component.
-</p>
 
 				
 				
 				
 			
 				
-				<h3 id="BuildReferencesDecorator.Find">func (*BuildReferencesDecorator) <a href="http://localhost:6060/src/refer/BuildReferencesDecorator.go?s=5661:5759#L186">Find</a>
+				<h3 id="BuildReferencesDecorator.Find">func (*BuildReferencesDecorator) <a href="http://localhost:6060/src/refer/BuildReferencesDecorator.go?s=5474:5556#L160">Find</a>
 					<a class="permalink" href="index.html#BuildReferencesDecorator.Find">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#BuildReferencesDecorator">BuildReferencesDecorator</a>) Find(locator interface{}, required <a href="http://localhost:6060/pkg/builtin/#bool">bool</a>) ([]interface{}, <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<pre>func (c *<a href="index.html#BuildReferencesDecorator">BuildReferencesDecorator</a>) Find(locator <a href="http://localhost:6060/pkg/builtin/#any">any</a>, required <a href="http://localhost:6060/pkg/builtin/#bool">bool</a>) ([]<a href="http://localhost:6060/pkg/builtin/#any">any</a>, <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
 				<p>
-Gets all component references that match specified locator.
-throws
-a ReferenceError when required is set to true but no references found.
+Find all component references that match specified locator.
+</p>
+<pre>throws a ReferenceError when required is set to true but no references found.
 Parameters:
-</p>
-<pre>- locator interface
-the locator to find a reference by.
-- required bool
-forces to raise an exception if no reference is found.
+	- locator interface the locator to find a reference by.
+	- required bool forces to raise an exception if no reference is found.
+Returns: []interface, error a list with matching component references and error.
 </pre>
-<p>
-Returns []interface, error
-a list with matching component references and error.
-</p>
 
 				
 				
 				
 			
 				
-				<h3 id="BuildReferencesDecorator.FindFactory">func (*BuildReferencesDecorator) <a href="http://localhost:6060/src/refer/BuildReferencesDecorator.go?s=1217:1299#L28">FindFactory</a>
+				<h3 id="BuildReferencesDecorator.FindFactory">func (*BuildReferencesDecorator) <a href="http://localhost:6060/src/refer/BuildReferencesDecorator.go?s=1273:1347#L24">FindFactory</a>
 					<a class="permalink" href="index.html#BuildReferencesDecorator.FindFactory">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#BuildReferencesDecorator">BuildReferencesDecorator</a>) FindFactory(locator interface{}) <a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-components-go/build/">build</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-components-go/build/#IFactory">IFactory</a></pre>
+				<pre>func (c *<a href="index.html#BuildReferencesDecorator">BuildReferencesDecorator</a>) FindFactory(locator <a href="http://localhost:6060/pkg/builtin/#any">any</a>) <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/build/">build</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/build/#IFactory">IFactory</a></pre>
 				<p>
-Finds a factory capable creating component by given descriptor from the components registered in the
-references.
-Parameters:
+FindFactory finds a factory capable creating component by given descriptor
+from the components registered in the references.
 </p>
-<pre>- locator interface{}
-a locator of component to be created.
+<pre>Parameters:
+	- locator any a locator of component to be created.
+Returns: build.IFactory found factory or nil if factory was not found.
 </pre>
-<p>
-Returns build.IFactory
-found factory or nil if factory was not found.
-</p>
 
 				
 				
 				
 			
 				
-				<h3 id="BuildReferencesDecorator.GetOneOptional">func (*BuildReferencesDecorator) <a href="http://localhost:6060/src/refer/BuildReferencesDecorator.go?s=3629:3711#L128">GetOneOptional</a>
+				<h3 id="BuildReferencesDecorator.GetOneOptional">func (*BuildReferencesDecorator) <a href="http://localhost:6060/src/refer/BuildReferencesDecorator.go?s=3572:3638#L113">GetOneOptional</a>
 					<a class="permalink" href="index.html#BuildReferencesDecorator.GetOneOptional">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#BuildReferencesDecorator">BuildReferencesDecorator</a>) GetOneOptional(locator interface{}) interface{}</pre>
+				<pre>func (c *<a href="index.html#BuildReferencesDecorator">BuildReferencesDecorator</a>) GetOneOptional(locator <a href="http://localhost:6060/pkg/builtin/#any">any</a>) <a href="http://localhost:6060/pkg/builtin/#any">any</a></pre>
 				<p>
-Gets an optional component reference that matches specified locator.
-Parameters:
+GetOneOptional gets an optional component reference that matches specified locator.
 </p>
-<pre>- locator interface{}
-the locator to find references by.
+<pre>Parameters:
+	- locator any the locator to find references by.
+Returns: any a matching component reference or nil if nothing was found.
 </pre>
-<p>
-Returns interface{}
-a matching component reference or nil if nothing was found.
-</p>
 
 				
 				
 				
 			
 				
-				<h3 id="BuildReferencesDecorator.GetOneRequired">func (*BuildReferencesDecorator) <a href="http://localhost:6060/src/refer/BuildReferencesDecorator.go?s=4128:4219#L144">GetOneRequired</a>
+				<h3 id="BuildReferencesDecorator.GetOneRequired">func (*BuildReferencesDecorator) <a href="http://localhost:6060/src/refer/BuildReferencesDecorator.go?s=4038:4113#L126">GetOneRequired</a>
 					<a class="permalink" href="index.html#BuildReferencesDecorator.GetOneRequired">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#BuildReferencesDecorator">BuildReferencesDecorator</a>) GetOneRequired(locator interface{}) (interface{}, <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<pre>func (c *<a href="index.html#BuildReferencesDecorator">BuildReferencesDecorator</a>) GetOneRequired(locator <a href="http://localhost:6060/pkg/builtin/#any">any</a>) (<a href="http://localhost:6060/pkg/builtin/#any">any</a>, <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
 				<p>
-Gets a required component reference that matches specified locator.
-throws
-a ReferenceException when no references found.
+GetOneRequired a required component reference that matches specified locator.
+</p>
+<pre>throws a ReferenceException when no references found.
 Parameters:
-</p>
-<pre>- locator interface{}
-the locator to find a reference by.
+	- locator any the locator to find a reference by.
+Returns: any, error a matching component reference and error.
 </pre>
-<p>
-Returns interface{}, error
-a matching component reference and error.
-</p>
 
 				
 				
 				
 			
 				
-				<h3 id="BuildReferencesDecorator.GetOptional">func (*BuildReferencesDecorator) <a href="http://localhost:6060/src/refer/BuildReferencesDecorator.go?s=4607:4688#L158">GetOptional</a>
+				<h3 id="BuildReferencesDecorator.GetOptional">func (*BuildReferencesDecorator) <a href="http://localhost:6060/src/refer/BuildReferencesDecorator.go?s=4484:4549#L138">GetOptional</a>
 					<a class="permalink" href="index.html#BuildReferencesDecorator.GetOptional">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#BuildReferencesDecorator">BuildReferencesDecorator</a>) GetOptional(locator interface{}) []interface{}</pre>
+				<pre>func (c *<a href="index.html#BuildReferencesDecorator">BuildReferencesDecorator</a>) GetOptional(locator <a href="http://localhost:6060/pkg/builtin/#any">any</a>) []<a href="http://localhost:6060/pkg/builtin/#any">any</a></pre>
 				<p>
-Gets all component references that match specified locator.
-Parameters:
+GetOptional all component references that match specified locator.
 </p>
-<pre>- locator interface{}
-the locator to find references by.
+<pre>Parameters:
+	- locator any the locator to find references by.
+Returns: []any a list with matching component references or empty list if nothing was found.
 </pre>
-<p>
-Returns []interface{}
-a list with matching component references or empty list if nothing was found.
-</p>
 
 				
 				
 				
 			
 				
-				<h3 id="BuildReferencesDecorator.GetRequired">func (*BuildReferencesDecorator) <a href="http://localhost:6060/src/refer/BuildReferencesDecorator.go?s=5140:5230#L172">GetRequired</a>
+				<h3 id="BuildReferencesDecorator.GetRequired">func (*BuildReferencesDecorator) <a href="http://localhost:6060/src/refer/BuildReferencesDecorator.go?s=4986:5060#L150">GetRequired</a>
 					<a class="permalink" href="index.html#BuildReferencesDecorator.GetRequired">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#BuildReferencesDecorator">BuildReferencesDecorator</a>) GetRequired(locator interface{}) ([]interface{}, <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<pre>func (c *<a href="index.html#BuildReferencesDecorator">BuildReferencesDecorator</a>) GetRequired(locator <a href="http://localhost:6060/pkg/builtin/#any">any</a>) ([]<a href="http://localhost:6060/pkg/builtin/#any">any</a>, <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
 				<p>
-Gets all component references that match specified locator. At least one component reference must be present.
+GetRequired all component references that match specified locator.
+At least one component reference must be present.
 If it doesn&#39;t the method throws an error.
-throws
-a ReferenceException when no references found.
+</p>
+<pre>throws a ReferenceException when no references found.
 Parameters:
-</p>
-<pre>- locator interface{}
-the locator to find references by.
+	- locator any the locator to find references by.
+Returns: []any, erorr a list with matching component references and error.
 </pre>
-<p>
-Returns []interface{}, erorr
-a list with matching component references and error.
-</p>
 
 				
 				
@@ -565,13 +522,14 @@ a list with matching component references and error.
 		
 			
 			
-			<h2 id="ContainerReferences">type <a href="http://localhost:6060/src/refer/ContainerReferences.go?s=447:501#L6">ContainerReferences</a>
+			<h2 id="ContainerReferences">type <a href="http://localhost:6060/src/refer/ContainerReferences.go?s=488:542#L6">ContainerReferences</a>
 				<a class="permalink" href="index.html#ContainerReferences">&#xb6;</a>
 				
 				
 			</h2>
 			<p>
-Container managed references that can be created from container configuration.
+ContainerReferences container managed references that can be
+created from container configuration.
 </p>
 
 			<pre>type ContainerReferences struct {
@@ -589,14 +547,14 @@ Container managed references that can be created from container configuration.
 
 			
 				
-				<h3 id="NewContainerReferences">func <a href="http://localhost:6060/src/refer/ContainerReferences.go?s=579:629#L12">NewContainerReferences</a>
+				<h3 id="NewContainerReferences">func <a href="http://localhost:6060/src/refer/ContainerReferences.go?s=643:693#L12">NewContainerReferences</a>
 					<a class="permalink" href="index.html#NewContainerReferences">&#xb6;</a>
 					
 					
 				</h3>
 				<pre>func NewContainerReferences() *<a href="index.html#ContainerReferences">ContainerReferences</a></pre>
 				<p>
-Creates a new instance of the references
+NewContainerReferences creates a new instance of the references
 Returns *ContainerReferences
 </p>
 
@@ -606,23 +564,21 @@ Returns *ContainerReferences
 
 			
 				
-				<h3 id="ContainerReferences.PutFromConfig">func (*ContainerReferences) <a href="http://localhost:6060/src/refer/ContainerReferences.go?s=986:1066#L24">PutFromConfig</a>
+				<h3 id="ContainerReferences.PutFromConfig">func (*ContainerReferences) <a href="http://localhost:6060/src/refer/ContainerReferences.go?s=1089:1190#L24">PutFromConfig</a>
 					<a class="permalink" href="index.html#ContainerReferences.PutFromConfig">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#ContainerReferences">ContainerReferences</a>) PutFromConfig(config <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-container-gox/config/">config</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-container-gox/config/#ContainerConfig">ContainerConfig</a>) <a href="http://localhost:6060/pkg/builtin/#error">error</a></pre>
+				<pre>func (c *<a href="index.html#ContainerReferences">ContainerReferences</a>) PutFromConfig(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, config <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-container-gox/config/">config</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-container-gox/config/#ContainerConfig">ContainerConfig</a>) <a href="http://localhost:6060/pkg/builtin/#error">error</a></pre>
 				<p>
-Puts components into the references from container configuration.
-Parameters:
+PutFromConfig puts components into the references from container configuration.
 </p>
-<pre>- config config.ContainerConfig
-a container configuration with information of components to be added.
+<pre>Parameters:
+	- ctx context.Context
+	- config config.ContainerConfig a container
+		configuration with information of components to be added.
+Returns: error CreateError when one of component cannot be created.
 </pre>
-<p>
-Returns error
-CreateError when one of component cannot be created.
-</p>
 
 				
 				
@@ -631,14 +587,16 @@ CreateError when one of component cannot be created.
 		
 			
 			
-			<h2 id="LinkReferencesDecorator">type <a href="http://localhost:6060/src/refer/LinkReferencesDecorator.go?s=313:386#L1">LinkReferencesDecorator</a>
+			<h2 id="LinkReferencesDecorator">type <a href="http://localhost:6060/src/refer/LinkReferencesDecorator.go?s=356:429#L2">LinkReferencesDecorator</a>
 				<a class="permalink" href="index.html#LinkReferencesDecorator">&#xb6;</a>
 				
 				
 			</h2>
 			<p>
-References decorator that automatically sets references to newly added components that implement IReferenceable
-interface and unsets references from removed components that implement IUnreferenceable interface.
+LinkReferencesDecorator references decorator that automatically sets references
+to newly added components that implement IReferenceable
+interface and unsets references from removed components
+that implement IUnreferenceable interface.
 </p>
 
 			<pre>type LinkReferencesDecorator struct {
@@ -657,25 +615,21 @@ interface and unsets references from removed components that implement IUnrefere
 
 			
 				
-				<h3 id="NewLinkReferencesDecorator">func <a href="http://localhost:6060/src/refer/LinkReferencesDecorator.go?s=660:786#L13">NewLinkReferencesDecorator</a>
+				<h3 id="NewLinkReferencesDecorator">func <a href="http://localhost:6060/src/refer/LinkReferencesDecorator.go?s=719:845#L12">NewLinkReferencesDecorator</a>
 					<a class="permalink" href="index.html#NewLinkReferencesDecorator">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func NewLinkReferencesDecorator(nextReferences <a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/refer/">crefer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/refer/#IReferences">IReferences</a>,
-    topReferences <a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/refer/">crefer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/refer/#IReferences">IReferences</a>) *<a href="index.html#LinkReferencesDecorator">LinkReferencesDecorator</a></pre>
+				<pre>func NewLinkReferencesDecorator(nextReferences <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/">crefer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/#IReferences">IReferences</a>,
+    topReferences <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/">crefer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/#IReferences">IReferences</a>) *<a href="index.html#LinkReferencesDecorator">LinkReferencesDecorator</a></pre>
 				<p>
-Creates a new instance of the decorator.
-Parameters:
+NewLinkReferencesDecorator creates a new instance of the decorator.
 </p>
-<pre>- nextReferences crefer.IReferences
-the next references or decorator in the chain.
-- topReferences crefer.IReferences
-the decorator at the top of the chain.
+<pre>Parameters:
+	- nextReferences crefer.IReferences the next references or decorator in the chain.
+	- topReferences crefer.IReferences the decorator at the top of the chain.
+Returns: *LinkReferencesDecorator
 </pre>
-<p>
-Returns *LinkReferencesDecorator
-</p>
 
 				
 				
@@ -683,81 +637,76 @@ Returns *LinkReferencesDecorator
 
 			
 				
-				<h3 id="LinkReferencesDecorator.Close">func (*LinkReferencesDecorator) <a href="http://localhost:6060/src/refer/LinkReferencesDecorator.go?s=1633:1700#L46">Close</a>
+				<h3 id="LinkReferencesDecorator.Close">func (*LinkReferencesDecorator) <a href="http://localhost:6060/src/refer/LinkReferencesDecorator.go?s=1770:1858#L44">Close</a>
 					<a class="permalink" href="index.html#LinkReferencesDecorator.Close">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#LinkReferencesDecorator">LinkReferencesDecorator</a>) Close(correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>) <a href="http://localhost:6060/pkg/builtin/#error">error</a></pre>
+				<pre>func (c *<a href="index.html#LinkReferencesDecorator">LinkReferencesDecorator</a>) Close(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>) <a href="http://localhost:6060/pkg/builtin/#error">error</a></pre>
 				<p>
-Closes component and frees used resources.
-Parameters:
+Close closes component and frees used resources.
 </p>
-<pre>- correlationId string
-transaction id to trace execution through call chain.
+<pre>Parameters:
+	- ctx context.Context
+	- correlationId string transaction id to trace execution through call chain.
+Returns: error
 </pre>
-<p>
-Returns error
-</p>
 
 				
 				
 				
 			
 				
-				<h3 id="LinkReferencesDecorator.IsOpen">func (*LinkReferencesDecorator) <a href="http://localhost:6060/src/refer/LinkReferencesDecorator.go?s=1024:1071#L23">IsOpen</a>
+				<h3 id="LinkReferencesDecorator.IsOpen">func (*LinkReferencesDecorator) <a href="http://localhost:6060/src/refer/LinkReferencesDecorator.go?s=1088:1135#L21">IsOpen</a>
 					<a class="permalink" href="index.html#LinkReferencesDecorator.IsOpen">&#xb6;</a>
 					
 					
 				</h3>
 				<pre>func (c *<a href="index.html#LinkReferencesDecorator">LinkReferencesDecorator</a>) IsOpen() <a href="http://localhost:6060/pkg/builtin/#bool">bool</a></pre>
 				<p>
-Checks if the component is opened.
-Returns bool
-true if the component has been opened and false otherwise.
+IsOpen checks if the component is opened.
 </p>
+<pre>Returns: bool true if the component has been opened and false otherwise.
+</pre>
 
 				
 				
 				
 			
 				
-				<h3 id="LinkReferencesDecorator.Open">func (*LinkReferencesDecorator) <a href="http://localhost:6060/src/refer/LinkReferencesDecorator.go?s=1237:1303#L32">Open</a>
+				<h3 id="LinkReferencesDecorator.Open">func (*LinkReferencesDecorator) <a href="http://localhost:6060/src/refer/LinkReferencesDecorator.go?s=1321:1408#L30">Open</a>
 					<a class="permalink" href="index.html#LinkReferencesDecorator.Open">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#LinkReferencesDecorator">LinkReferencesDecorator</a>) Open(correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>) <a href="http://localhost:6060/pkg/builtin/#error">error</a></pre>
+				<pre>func (c *<a href="index.html#LinkReferencesDecorator">LinkReferencesDecorator</a>) Open(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>) <a href="http://localhost:6060/pkg/builtin/#error">error</a></pre>
 				<p>
-Opens the component.
-Parameters:
+Open the component.
 </p>
-<pre>- correlationId string
-transaction id to trace execution through call chain.
+<pre>Parameters:
+	- ctx context.Context
+	- correlationId string transaction id to trace execution through call chain.
+Returns: error
 </pre>
-<p>
-Returns error
-</p>
 
 				
 				
 				
 			
 				
-				<h3 id="LinkReferencesDecorator.Put">func (*LinkReferencesDecorator) <a href="http://localhost:6060/src/refer/LinkReferencesDecorator.go?s=2030:2111#L61">Put</a>
+				<h3 id="LinkReferencesDecorator.Put">func (*LinkReferencesDecorator) <a href="http://localhost:6060/src/refer/LinkReferencesDecorator.go?s=2191:2277#L58">Put</a>
 					<a class="permalink" href="index.html#LinkReferencesDecorator.Put">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#LinkReferencesDecorator">LinkReferencesDecorator</a>) Put(locator interface{}, component interface{})</pre>
+				<pre>func (c *<a href="index.html#LinkReferencesDecorator">LinkReferencesDecorator</a>) Put(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, locator <a href="http://localhost:6060/pkg/builtin/#any">any</a>, component <a href="http://localhost:6060/pkg/builtin/#any">any</a>)</pre>
 				<p>
-Puts a new reference into this reference map.
-Parameters:
+Put a new reference into this reference map.
 </p>
-<pre>- locator intrface{}
-a locator to find the reference by.
-- component interface{}
-a component reference to be added.
+<pre>Parameters:
+	- ctx context.Context
+	- locator any a locator to find the reference by.
+	- component any a component reference to be added.
 </pre>
 
 				
@@ -765,49 +714,43 @@ a component reference to be added.
 				
 			
 				
-				<h3 id="LinkReferencesDecorator.Remove">func (*LinkReferencesDecorator) <a href="http://localhost:6060/src/refer/LinkReferencesDecorator.go?s=2637:2710#L78">Remove</a>
+				<h3 id="LinkReferencesDecorator.Remove">func (*LinkReferencesDecorator) <a href="http://localhost:6060/src/refer/LinkReferencesDecorator.go?s=2822:2900#L74">Remove</a>
 					<a class="permalink" href="index.html#LinkReferencesDecorator.Remove">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#LinkReferencesDecorator">LinkReferencesDecorator</a>) Remove(locator interface{}) interface{}</pre>
+				<pre>func (c *<a href="index.html#LinkReferencesDecorator">LinkReferencesDecorator</a>) Remove(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, locator <a href="http://localhost:6060/pkg/builtin/#any">any</a>) <a href="http://localhost:6060/pkg/builtin/#any">any</a></pre>
 				<p>
-Removes a previously added reference that matches specified locator. If many references match the locator, it removes only the first one.
+Remove a previously added reference that matches specified locator.
+If many references match the locator, it removes only the first one.
 When all references shall be removed, use removeAll method instead.
-see
-removeAll
+</p>
+<pre>see RemoveAll
 Parameters:
-</p>
-<pre>- locator interface
-a locator to remove reference
+	- ctx context.Context
+	- locator interface a locator to remove reference
+Returns: any the removed component reference.
 </pre>
-<p>
-Returns interface{}
-the removed component reference.
-</p>
 
 				
 				
 				
 			
 				
-				<h3 id="LinkReferencesDecorator.RemoveAll">func (*LinkReferencesDecorator) <a href="http://localhost:6060/src/refer/LinkReferencesDecorator.go?s=3084:3162#L94">RemoveAll</a>
+				<h3 id="LinkReferencesDecorator.RemoveAll">func (*LinkReferencesDecorator) <a href="http://localhost:6060/src/refer/LinkReferencesDecorator.go?s=3295:3378#L89">RemoveAll</a>
 					<a class="permalink" href="index.html#LinkReferencesDecorator.RemoveAll">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#LinkReferencesDecorator">LinkReferencesDecorator</a>) RemoveAll(locator interface{}) []interface{}</pre>
+				<pre>func (c *<a href="index.html#LinkReferencesDecorator">LinkReferencesDecorator</a>) RemoveAll(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, locator <a href="http://localhost:6060/pkg/builtin/#any">any</a>) []<a href="http://localhost:6060/pkg/builtin/#any">any</a></pre>
 				<p>
-Removes all component references that match the specified locator.
-Parameters:
+RemoveAll removes all component references that match the specified locator.
 </p>
-<pre>- locator interface{}
-the locator to remove references by.
+<pre>Parameters:
+	- ctx context.Context
+	- locator interface a locator to remove reference
+Returns: []any a list, containing all removed references.
 </pre>
-<p>
-Returns []interface{}
-a list, containing all removed references.
-</p>
 
 				
 				
@@ -816,24 +759,24 @@ a list, containing all removed references.
 		
 			
 			
-			<h2 id="ManagedReferences">type <a href="http://localhost:6060/src/refer/ManagedReferences.go?s=372:568#L5">ManagedReferences</a>
+			<h2 id="ManagedReferences">type <a href="http://localhost:6060/src/refer/ManagedReferences.go?s=414:610#L4">ManagedReferences</a>
 				<a class="permalink" href="index.html#ManagedReferences">&#xb6;</a>
 				
 				
 			</h2>
 			<p>
-Managed references that in addition to keeping and locating references can also manage their lifecycle:
+ManagedReferences managed references that in addition to keeping and locating
+references can also manage their lifecycle:
 </p>
-<p>
-Auto-creation of missing component using available factories
+<pre>Auto-creation of missing component using available factories
 Auto-linking newly added components
 Auto-opening newly added components
 Auto-closing removed components
-</p>
+</pre>
 
 			<pre>type ManagedReferences struct {
     <a href="index.html#ReferencesDecorator">ReferencesDecorator</a>
-<span id="ManagedReferences.References"></span>    References *<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/refer/">crefer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/refer/#References">References</a>
+<span id="ManagedReferences.References"></span>    References *<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/">crefer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/#References">References</a>
 <span id="ManagedReferences.Builder"></span>    Builder    *<a href="index.html#BuildReferencesDecorator">BuildReferencesDecorator</a>
 <span id="ManagedReferences.Linker"></span>    Linker     *<a href="index.html#LinkReferencesDecorator">LinkReferencesDecorator</a>
 <span id="ManagedReferences.Runner"></span>    Runner     *<a href="index.html#RunReferencesDecorator">RunReferencesDecorator</a>
@@ -850,59 +793,58 @@ Auto-closing removed components
 
 			
 				
-				<h3 id="NewEmptyManagedReferences">func <a href="http://localhost:6060/src/refer/ManagedReferences.go?s=1296:1347#L35">NewEmptyManagedReferences</a>
+				<h3 id="NewEmptyManagedReferences">func <a href="http://localhost:6060/src/refer/ManagedReferences.go?s=1422:1473#L35">NewEmptyManagedReferences</a>
 					<a class="permalink" href="index.html#NewEmptyManagedReferences">&#xb6;</a>
 					
 					
 				</h3>
 				<pre>func NewEmptyManagedReferences() *<a href="index.html#ManagedReferences">ManagedReferences</a></pre>
 				<p>
-Creates a new instance of the references
-Returns *ManagedReferences
+NewEmptyManagedReferences creates a new instance of the references
 </p>
+<pre>Returns: *ManagedReferences
+</pre>
 
 				
 				
 			
 				
-				<h3 id="NewManagedReferences">func <a href="http://localhost:6060/src/refer/ManagedReferences.go?s=794:860#L18">NewManagedReferences</a>
+				<h3 id="NewManagedReferences">func <a href="http://localhost:6060/src/refer/ManagedReferences.go?s=875:954#L18">NewManagedReferences</a>
 					<a class="permalink" href="index.html#NewManagedReferences">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func NewManagedReferences(tuples []interface{}) *<a href="index.html#ManagedReferences">ManagedReferences</a></pre>
+				<pre>func NewManagedReferences(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, tuples []<a href="http://localhost:6060/pkg/builtin/#any">any</a>) *<a href="index.html#ManagedReferences">ManagedReferences</a></pre>
 				<p>
-Creates a new instance of the references
-Parameters:
+NewManagedReferences creates a new instance of the references
 </p>
-<pre>- tuples []interface{}
-tuples where odd values are component locators (descriptors) and even values are component references
+<pre>Parameters:
+	- ctx context.Context
+	- tuples []any tuples where odd values are component locators
+		(descriptors) and even values are component references
+Returns: *ManagedReferences
 </pre>
-<p>
-Returns *ManagedReferences
-</p>
 
 				
 				
 			
 				
-				<h3 id="NewManagedReferencesFromTuples">func <a href="http://localhost:6060/src/refer/ManagedReferences.go?s=1753:1830#L45">NewManagedReferencesFromTuples</a>
+				<h3 id="NewManagedReferencesFromTuples">func <a href="http://localhost:6060/src/refer/ManagedReferences.go?s=1940:2030#L46">NewManagedReferencesFromTuples</a>
 					<a class="permalink" href="index.html#NewManagedReferencesFromTuples">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func NewManagedReferencesFromTuples(tuples ...interface{}) *<a href="index.html#ManagedReferences">ManagedReferences</a></pre>
+				<pre>func NewManagedReferencesFromTuples(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, tuples ...<a href="http://localhost:6060/pkg/builtin/#any">any</a>) *<a href="index.html#ManagedReferences">ManagedReferences</a></pre>
 				<p>
-Creates a new ManagedReferences object filled with provided key-value pairs called tuples. Tuples parameters contain a sequence of locator1, component1, locator2, component2, ... pairs.
-Parameters:
+NewManagedReferencesFromTuples creates a new ManagedReferences object
+filled with provided key-value pairs called tuples. Tuples parameters contain a
+sequence of locator1, component1, locator2, component2, ... pairs.
 </p>
-<pre>- tuples ...interface{}
-the tuples to fill a new ManagedReferences object.
+<pre>Parameters:
+	- ctx context.Context
+	- tuples ...any the tuples to fill a new ManagedReferences object.
+Returns: *ManagedReferences a new ManagedReferences object.
 </pre>
-<p>
-Returns *ManagedReferences
-a new ManagedReferences object.
-</p>
 
 				
 				
@@ -910,61 +852,57 @@ a new ManagedReferences object.
 
 			
 				
-				<h3 id="ManagedReferences.Close">func (*ManagedReferences) <a href="http://localhost:6060/src/refer/ManagedReferences.go?s=2563:2624#L74">Close</a>
+				<h3 id="ManagedReferences.Close">func (*ManagedReferences) <a href="http://localhost:6060/src/refer/ManagedReferences.go?s=2844:2926#L74">Close</a>
 					<a class="permalink" href="index.html#ManagedReferences.Close">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#ManagedReferences">ManagedReferences</a>) Close(correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>) <a href="http://localhost:6060/pkg/builtin/#error">error</a></pre>
+				<pre>func (c *<a href="index.html#ManagedReferences">ManagedReferences</a>) Close(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>) <a href="http://localhost:6060/pkg/builtin/#error">error</a></pre>
 				<p>
-Closes component and frees used resources.
-Parameters:
+Close component and frees used resources.
 </p>
-<pre>- correlationId string
-transaction id to trace execution through call chain.
+<pre>Parameters:
+	- ctx context.Context
+	- correlationId string transaction id to trace execution through call chain.
+Returns: error
 </pre>
-<p>
-Returns error
-</p>
 
 				
 				
 				
 			
 				
-				<h3 id="ManagedReferences.IsOpen">func (*ManagedReferences) <a href="http://localhost:6060/src/refer/ManagedReferences.go?s=1989:2030#L52">IsOpen</a>
+				<h3 id="ManagedReferences.IsOpen">func (*ManagedReferences) <a href="http://localhost:6060/src/refer/ManagedReferences.go?s=2199:2240#L52">IsOpen</a>
 					<a class="permalink" href="index.html#ManagedReferences.IsOpen">&#xb6;</a>
 					
 					
 				</h3>
 				<pre>func (c *<a href="index.html#ManagedReferences">ManagedReferences</a>) IsOpen() <a href="http://localhost:6060/pkg/builtin/#bool">bool</a></pre>
 				<p>
-Checks if the component is opened.
-Returns bool
-true if the component has been opened and false otherwise.
+IsOpen checks if the component is opened.
 </p>
+<pre>Returns: bool true if the component has been opened and false otherwise.
+</pre>
 
 				
 				
 				
 			
 				
-				<h3 id="ManagedReferences.Open">func (*ManagedReferences) <a href="http://localhost:6060/src/refer/ManagedReferences.go?s=2226:2286#L61">Open</a>
+				<h3 id="ManagedReferences.Open">func (*ManagedReferences) <a href="http://localhost:6060/src/refer/ManagedReferences.go?s=2456:2537#L61">Open</a>
 					<a class="permalink" href="index.html#ManagedReferences.Open">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#ManagedReferences">ManagedReferences</a>) Open(correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>) <a href="http://localhost:6060/pkg/builtin/#error">error</a></pre>
+				<pre>func (c *<a href="index.html#ManagedReferences">ManagedReferences</a>) Open(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>) <a href="http://localhost:6060/pkg/builtin/#error">error</a></pre>
 				<p>
-Opens the component.
-Parameters:
+Open the component.
 </p>
-<pre>- correlationId string
-transaction id to trace execution through call chain.
+<pre>Parameters:
+	- ctx context.Context
+	- correlationId string transaction id to trace execution through call chain.
+Returns: error
 </pre>
-<p>
-Returns error
-</p>
 
 				
 				
@@ -973,15 +911,20 @@ Returns error
 		
 			
 			
-			<h2 id="ReferencesDecorator">type <a href="http://localhost:6060/src/refer/ReferencesDecorator.go?s=254:359#L1">ReferencesDecorator</a>
+			<h2 id="ReferencesDecorator">type <a href="http://localhost:6060/src/refer/ReferencesDecorator.go?s=294:399#L1">ReferencesDecorator</a>
 				<a class="permalink" href="index.html#ReferencesDecorator">&#xb6;</a>
 				
 				
 			</h2>
-			
+			<p>
+ReferencesDecorator chainable decorator for IReferences that allows
+to inject additional capabilities such as
+automatic component creation, automatic registration and opening.
+</p>
+
 			<pre>type ReferencesDecorator struct {
-<span id="ReferencesDecorator.NextReferences"></span>    NextReferences <a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/refer/">crefer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/refer/#IReferences">IReferences</a>
-<span id="ReferencesDecorator.TopReferences"></span>    TopReferences  <a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/refer/">crefer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/refer/#IReferences">IReferences</a>
+<span id="ReferencesDecorator.NextReferences"></span>    NextReferences <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/">crefer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/#IReferences">IReferences</a>
+<span id="ReferencesDecorator.TopReferences"></span>    TopReferences  <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/">crefer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/#IReferences">IReferences</a>
 }
 </pre>
 
@@ -995,25 +938,21 @@ Returns error
 
 			
 				
-				<h3 id="NewReferencesDecorator">func <a href="http://localhost:6060/src/refer/ReferencesDecorator.go?s=629:747#L12">NewReferencesDecorator</a>
+				<h3 id="NewReferencesDecorator">func <a href="http://localhost:6060/src/refer/ReferencesDecorator.go?s=681:799#L11">NewReferencesDecorator</a>
 					<a class="permalink" href="index.html#NewReferencesDecorator">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func NewReferencesDecorator(nextReferences <a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/refer/">crefer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/refer/#IReferences">IReferences</a>,
-    topReferences <a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/refer/">crefer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/refer/#IReferences">IReferences</a>) *<a href="index.html#ReferencesDecorator">ReferencesDecorator</a></pre>
+				<pre>func NewReferencesDecorator(nextReferences <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/">crefer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/#IReferences">IReferences</a>,
+    topReferences <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/">crefer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/#IReferences">IReferences</a>) *<a href="index.html#ReferencesDecorator">ReferencesDecorator</a></pre>
 				<p>
-Creates a new instance of the decorator.
-Parameters:
+NewReferencesDecorator creates a new instance of the decorator.
 </p>
-<pre>- nextReferences crefer.IReferences
-the next references or decorator in the chain.
-- topReferences crefer.IReferences
-the decorator at the top of the chain.
+<pre>Parameters:
+	- nextReferences crefer.IReferences the next references or decorator in the chain.
+	- topReferences crefer.IReferences the decorator at the top of the chain.
+Returns: *ReferencesDecorator
 </pre>
-<p>
-Returns *ReferencesDecorator
-</p>
 
 				
 				
@@ -1021,171 +960,152 @@ Returns *ReferencesDecorator
 
 			
 				
-				<h3 id="ReferencesDecorator.Find">func (*ReferencesDecorator) <a href="http://localhost:6060/src/refer/ReferencesDecorator.go?s=4946:5039#L146">Find</a>
+				<h3 id="ReferencesDecorator.Find">func (*ReferencesDecorator) <a href="http://localhost:6060/src/refer/ReferencesDecorator.go?s=4831:4908#L134">Find</a>
 					<a class="permalink" href="index.html#ReferencesDecorator.Find">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#ReferencesDecorator">ReferencesDecorator</a>) Find(locator interface{}, required <a href="http://localhost:6060/pkg/builtin/#bool">bool</a>) ([]interface{}, <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<pre>func (c *<a href="index.html#ReferencesDecorator">ReferencesDecorator</a>) Find(locator <a href="http://localhost:6060/pkg/builtin/#any">any</a>, required <a href="http://localhost:6060/pkg/builtin/#bool">bool</a>) ([]<a href="http://localhost:6060/pkg/builtin/#any">any</a>, <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
 				<p>
-Gets all component references that match specified locator.
-Parameters:
+Find all component references that match specified locator.
 </p>
-<pre>- locator interface{}
-the locator to find a reference by.
-- required bool
-forces to raise an exception if no reference is found.
+<pre>Parameters:
+	- locator any the locator to find a reference by.
+	- required bool forces to raise an exception if no reference is found.
+Returns: []any, error a list with matching component references and
+	a ReferenceError when required is set to true but no references found
 </pre>
-<p>
-Returns []interface{}, error
-a list with matching component references and a ReferenceError when required is set to true but no references found
-</p>
 
 				
 				
 				
 			
 				
-				<h3 id="ReferencesDecorator.GetAll">func (*ReferencesDecorator) <a href="http://localhost:6060/src/refer/ReferencesDecorator.go?s=2532:2584#L71">GetAll</a>
+				<h3 id="ReferencesDecorator.GetAll">func (*ReferencesDecorator) <a href="http://localhost:6060/src/refer/ReferencesDecorator.go?s=2596:2640#L67">GetAll</a>
 					<a class="permalink" href="index.html#ReferencesDecorator.GetAll">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#ReferencesDecorator">ReferencesDecorator</a>) GetAll() []interface{}</pre>
+				<pre>func (c *<a href="index.html#ReferencesDecorator">ReferencesDecorator</a>) GetAll() []<a href="http://localhost:6060/pkg/builtin/#any">any</a></pre>
 				<p>
-Gets all component references registered in this reference map.
-Returns []interface{}
-a list with component references.
+GetAll all component references registered in this reference map.
 </p>
+<pre>Returns: []any a list with component references.
+</pre>
 
 				
 				
 				
 			
 				
-				<h3 id="ReferencesDecorator.GetAllLocators">func (*ReferencesDecorator) <a href="http://localhost:6060/src/refer/ReferencesDecorator.go?s=2295:2355#L64">GetAllLocators</a>
+				<h3 id="ReferencesDecorator.GetAllLocators">func (*ReferencesDecorator) <a href="http://localhost:6060/src/refer/ReferencesDecorator.go?s=2375:2427#L61">GetAllLocators</a>
 					<a class="permalink" href="index.html#ReferencesDecorator.GetAllLocators">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#ReferencesDecorator">ReferencesDecorator</a>) GetAllLocators() []interface{}</pre>
+				<pre>func (c *<a href="index.html#ReferencesDecorator">ReferencesDecorator</a>) GetAllLocators() []<a href="http://localhost:6060/pkg/builtin/#any">any</a></pre>
 				<p>
-Gets locators for all registered component references in this reference map.
-Returns []interface{}
-a list with component locators.
+GetAllLocators locators for all registered component references in this reference map.
 </p>
+<pre>Returns: []any a list with component locators.
+</pre>
 
 				
 				
 				
 			
 				
-				<h3 id="ReferencesDecorator.GetOneOptional">func (*ReferencesDecorator) <a href="http://localhost:6060/src/refer/ReferencesDecorator.go?s=2865:2942#L81">GetOneOptional</a>
+				<h3 id="ReferencesDecorator.GetOneOptional">func (*ReferencesDecorator) <a href="http://localhost:6060/src/refer/ReferencesDecorator.go?s=2907:2968#L75">GetOneOptional</a>
 					<a class="permalink" href="index.html#ReferencesDecorator.GetOneOptional">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#ReferencesDecorator">ReferencesDecorator</a>) GetOneOptional(locator interface{}) interface{}</pre>
+				<pre>func (c *<a href="index.html#ReferencesDecorator">ReferencesDecorator</a>) GetOneOptional(locator <a href="http://localhost:6060/pkg/builtin/#any">any</a>) <a href="http://localhost:6060/pkg/builtin/#any">any</a></pre>
 				<p>
-Gets an optional component reference that matches specified locator.
-Parameters:
+GetOneOptional gets an optional component reference that matches specified locator.
 </p>
-<pre>- locator interface{}
-the locator to find references by.
+<pre>Parameters:
+	- locator any a locator to remove reference
+Returns: any a matching component reference or null if nothing was found.
 </pre>
-<p>
-Returns interface{}
-a matching component reference or null if nothing was found.
-</p>
 
 				
 				
 				
 			
 				
-				<h3 id="ReferencesDecorator.GetOneRequired">func (*ReferencesDecorator) <a href="http://localhost:6060/src/refer/ReferencesDecorator.go?s=3405:3491#L102">GetOneRequired</a>
+				<h3 id="ReferencesDecorator.GetOneRequired">func (*ReferencesDecorator) <a href="http://localhost:6060/src/refer/ReferencesDecorator.go?s=3403:3473#L94">GetOneRequired</a>
 					<a class="permalink" href="index.html#ReferencesDecorator.GetOneRequired">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#ReferencesDecorator">ReferencesDecorator</a>) GetOneRequired(locator interface{}) (interface{}, <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<pre>func (c *<a href="index.html#ReferencesDecorator">ReferencesDecorator</a>) GetOneRequired(locator <a href="http://localhost:6060/pkg/builtin/#any">any</a>) (<a href="http://localhost:6060/pkg/builtin/#any">any</a>, <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
 				<p>
-Gets a required component reference that matches specified locator.
-Parameters:
+GetOneRequired a required component reference that matches specified locator.
 </p>
-<pre>- locator interface{}
-the locator to find a reference by.
+<pre>Parameters:
+	- locator any a locator to remove reference
+Returns: any, error a matching component reference, a ReferenceError when no references found.
 </pre>
-<p>
-Returns interface{}, error
-a matching component reference, a ReferenceError when no references found.
-</p>
 
 				
 				
 				
 			
 				
-				<h3 id="ReferencesDecorator.GetOptional">func (*ReferencesDecorator) <a href="http://localhost:6060/src/refer/ReferencesDecorator.go?s=3879:3955#L116">GetOptional</a>
+				<h3 id="ReferencesDecorator.GetOptional">func (*ReferencesDecorator) <a href="http://localhost:6060/src/refer/ReferencesDecorator.go?s=3839:3899#L106">GetOptional</a>
 					<a class="permalink" href="index.html#ReferencesDecorator.GetOptional">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#ReferencesDecorator">ReferencesDecorator</a>) GetOptional(locator interface{}) []interface{}</pre>
+				<pre>func (c *<a href="index.html#ReferencesDecorator">ReferencesDecorator</a>) GetOptional(locator <a href="http://localhost:6060/pkg/builtin/#any">any</a>) []<a href="http://localhost:6060/pkg/builtin/#any">any</a></pre>
 				<p>
-Gets all component references that match specified locator.
-Parameters:
+GetOptional all component references that match specified locator.
 </p>
-<pre>- locator interface{}
-the locator to find references by.
+<pre>Parameters:
+	- locator any a locator to remove reference
+Returns: []any a list with matching component references or empty list if nothing was found.
 </pre>
-<p>
-Returns []interface{}
-a list with matching component references or empty list if nothing was found.
-</p>
 
 				
 				
 				
 			
 				
-				<h3 id="ReferencesDecorator.GetRequired">func (*ReferencesDecorator) <a href="http://localhost:6060/src/refer/ReferencesDecorator.go?s=4447:4532#L134">GetRequired</a>
+				<h3 id="ReferencesDecorator.GetRequired">func (*ReferencesDecorator) <a href="http://localhost:6060/src/refer/ReferencesDecorator.go?s=4374:4443#L124">GetRequired</a>
 					<a class="permalink" href="index.html#ReferencesDecorator.GetRequired">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#ReferencesDecorator">ReferencesDecorator</a>) GetRequired(locator interface{}) ([]interface{}, <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
+				<pre>func (c *<a href="index.html#ReferencesDecorator">ReferencesDecorator</a>) GetRequired(locator <a href="http://localhost:6060/pkg/builtin/#any">any</a>) ([]<a href="http://localhost:6060/pkg/builtin/#any">any</a>, <a href="http://localhost:6060/pkg/builtin/#error">error</a>)</pre>
 				<p>
-Gets all component references that match specified locator. At least one component reference must be present. If it doesn&#39;t the method throws an error.
-Parameters:
+GetRequired all component references that match specified locator.
+At least one component reference must be present. If it doesn&#39;t the method throws an error.
 </p>
-<pre>- locator interface{}
-the locator to find references by.
+<pre>Parameters:
+	- locator any a locator to remove reference
+Returns []any a list with matching component references and
+	error a ReferenceError when no references found.
 </pre>
-<p>
-Returns []interface{}
-a list with matching component references and error a ReferenceError when no references found.
-</p>
 
 				
 				
 				
 			
 				
-				<h3 id="ReferencesDecorator.Put">func (*ReferencesDecorator) <a href="http://localhost:6060/src/refer/ReferencesDecorator.go?s=1199:1276#L35">Put</a>
+				<h3 id="ReferencesDecorator.Put">func (*ReferencesDecorator) <a href="http://localhost:6060/src/refer/ReferencesDecorator.go?s=1249:1331#L34">Put</a>
 					<a class="permalink" href="index.html#ReferencesDecorator.Put">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#ReferencesDecorator">ReferencesDecorator</a>) Put(locator interface{}, component interface{})</pre>
+				<pre>func (c *<a href="index.html#ReferencesDecorator">ReferencesDecorator</a>) Put(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, locator <a href="http://localhost:6060/pkg/builtin/#any">any</a>, component <a href="http://localhost:6060/pkg/builtin/#any">any</a>)</pre>
 				<p>
-Puts a new reference into this reference map.
-Parameters:
+Put a new reference into this reference map.
 </p>
-<pre>- locator interface{}
-a locator to find the reference by.
-- component interface{}
-a component reference to be added.
+<pre>Parameters:
+	- ctx context.Context
+	- locator any a locator to find the reference by.
+	- component any a component reference to be added.
 </pre>
 
 				
@@ -1193,48 +1113,43 @@ a component reference to be added.
 				
 			
 				
-				<h3 id="ReferencesDecorator.Remove">func (*ReferencesDecorator) <a href="http://localhost:6060/src/refer/ReferencesDecorator.go?s=1690:1759#L47">Remove</a>
+				<h3 id="ReferencesDecorator.Remove">func (*ReferencesDecorator) <a href="http://localhost:6060/src/refer/ReferencesDecorator.go?s=1753:1827#L46">Remove</a>
 					<a class="permalink" href="index.html#ReferencesDecorator.Remove">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#ReferencesDecorator">ReferencesDecorator</a>) Remove(locator interface{}) interface{}</pre>
+				<pre>func (c *<a href="index.html#ReferencesDecorator">ReferencesDecorator</a>) Remove(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, locator <a href="http://localhost:6060/pkg/builtin/#any">any</a>) <a href="http://localhost:6060/pkg/builtin/#any">any</a></pre>
 				<p>
-Removes a previously added reference that matches specified locator. If many references match the locator, it removes only the first one. When all references shall be removed, use removeAll method instead.
-see
-RemoveAll
-Parameters:
+Remove a previously added reference that matches specified locator.
+If many references match the locator, it removes only the first one.
+When all references shall be removed, use removeAll method instead.
+see RemoveAll
 </p>
-<pre>- locator  interface{}
-a locator to remove reference
+<pre>Parameters:
+	- ctx context.Context
+	- locator any a locator to remove reference
+Returns: any the removed component reference.
 </pre>
-<p>
-Returns interface{}
-the removed component reference.
-</p>
 
 				
 				
 				
 			
 				
-				<h3 id="ReferencesDecorator.RemoveAll">func (*ReferencesDecorator) <a href="http://localhost:6060/src/refer/ReferencesDecorator.go?s=2031:2105#L57">RemoveAll</a>
+				<h3 id="ReferencesDecorator.RemoveAll">func (*ReferencesDecorator) <a href="http://localhost:6060/src/refer/ReferencesDecorator.go?s=2101:2180#L55">RemoveAll</a>
 					<a class="permalink" href="index.html#ReferencesDecorator.RemoveAll">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#ReferencesDecorator">ReferencesDecorator</a>) RemoveAll(locator interface{}) []interface{}</pre>
+				<pre>func (c *<a href="index.html#ReferencesDecorator">ReferencesDecorator</a>) RemoveAll(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, locator <a href="http://localhost:6060/pkg/builtin/#any">any</a>) []<a href="http://localhost:6060/pkg/builtin/#any">any</a></pre>
 				<p>
-Removes all component references that match the specified locator.
-Parameters:
+RemoveAll all component references that match the specified locator.
 </p>
-<pre>- locator interface{}
-the locator to remove references by.
+<pre>Parameters:
+	- ctx context.Context
+	- locator any a locator to remove reference
+Returns: []any a list, containing all removed references.
 </pre>
-<p>
-Returns []interface{}
-a list, containing all removed references.
-</p>
 
 				
 				
@@ -1243,13 +1158,14 @@ a list, containing all removed references.
 		
 			
 			
-			<h2 id="RunReferencesDecorator">type <a href="http://localhost:6060/src/refer/RunReferencesDecorator.go?s=337:409#L3">RunReferencesDecorator</a>
+			<h2 id="RunReferencesDecorator">type <a href="http://localhost:6060/src/refer/RunReferencesDecorator.go?s=377:449#L2">RunReferencesDecorator</a>
 				<a class="permalink" href="index.html#RunReferencesDecorator">&#xb6;</a>
 				
 				
 			</h2>
 			<p>
-References decorator that automatically opens to newly added components that implement IOpenable interface and
+RunReferencesDecorator References decorator that automatically opens
+to newly added components that implement IOpenable interface and
 closes removed components that implement ICloseable interface.
 </p>
 
@@ -1269,25 +1185,21 @@ closes removed components that implement ICloseable interface.
 
 			
 				
-				<h3 id="NewRunReferencesDecorator">func <a href="http://localhost:6060/src/refer/RunReferencesDecorator.go?s=682:806#L15">NewRunReferencesDecorator</a>
+				<h3 id="NewRunReferencesDecorator">func <a href="http://localhost:6060/src/refer/RunReferencesDecorator.go?s=737:861#L12">NewRunReferencesDecorator</a>
 					<a class="permalink" href="index.html#NewRunReferencesDecorator">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func NewRunReferencesDecorator(nextReferences <a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/refer/">crefer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/refer/#IReferences">IReferences</a>,
-    topReferences <a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/refer/">crefer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/refer/#IReferences">IReferences</a>) *<a href="index.html#RunReferencesDecorator">RunReferencesDecorator</a></pre>
+				<pre>func NewRunReferencesDecorator(nextReferences <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/">crefer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/#IReferences">IReferences</a>,
+    topReferences <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/">crefer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/#IReferences">IReferences</a>) *<a href="index.html#RunReferencesDecorator">RunReferencesDecorator</a></pre>
 				<p>
-Creates a new instance of the decorator.
-Parameters:
+NewRunReferencesDecorator creates a new instance of the decorator.
 </p>
-<pre>- nextReferences crefer.IReferences
-the next references or decorator in the chain.
-- topReferences crefer.IReferences
-the decorator at the top of the chain.
+<pre>Parameters:
+	- nextReferences crefer.IReferences the next references or decorator in the chain.
+	- topReferences crefer.IReferences the decorator at the top of the chain.
+Returns: *RunReferencesDecorator
 </pre>
-<p>
-Returns *RunReferencesDecorator
-</p>
 
 				
 				
@@ -1295,81 +1207,76 @@ Returns *RunReferencesDecorator
 
 			
 				
-				<h3 id="RunReferencesDecorator.Close">func (*RunReferencesDecorator) <a href="http://localhost:6060/src/refer/RunReferencesDecorator.go?s=1638:1704#L49">Close</a>
+				<h3 id="RunReferencesDecorator.Close">func (*RunReferencesDecorator) <a href="http://localhost:6060/src/refer/RunReferencesDecorator.go?s=1765:1852#L46">Close</a>
 					<a class="permalink" href="index.html#RunReferencesDecorator.Close">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#RunReferencesDecorator">RunReferencesDecorator</a>) Close(correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>) <a href="http://localhost:6060/pkg/builtin/#error">error</a></pre>
+				<pre>func (c *<a href="index.html#RunReferencesDecorator">RunReferencesDecorator</a>) Close(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>) <a href="http://localhost:6060/pkg/builtin/#error">error</a></pre>
 				<p>
-Closes component and frees used resources.
-Parameters:
+Close component and frees used resources.
 </p>
-<pre>- correlationId string
-transaction id to trace execution through call chain.
+<pre>Parameters:
+	- ctx context.Context
+	- correlationId string transaction id to trace execution through call chain.
+Returns: error
 </pre>
-<p>
-Returns error
-</p>
 
 				
 				
 				
 			
 				
-				<h3 id="RunReferencesDecorator.IsOpen">func (*RunReferencesDecorator) <a href="http://localhost:6060/src/refer/RunReferencesDecorator.go?s=1043:1089#L25">IsOpen</a>
+				<h3 id="RunReferencesDecorator.IsOpen">func (*RunReferencesDecorator) <a href="http://localhost:6060/src/refer/RunReferencesDecorator.go?s=1104:1150#L22">IsOpen</a>
 					<a class="permalink" href="index.html#RunReferencesDecorator.IsOpen">&#xb6;</a>
 					
 					
 				</h3>
 				<pre>func (c *<a href="index.html#RunReferencesDecorator">RunReferencesDecorator</a>) IsOpen() <a href="http://localhost:6060/pkg/builtin/#bool">bool</a></pre>
 				<p>
-Checks if the component is opened.
-Returns bool
-true if the component has been opened and false otherwise.
+IsOpen checks if the component is opened.
 </p>
+<pre>Returns: bool true if the component has been opened and false otherwise.
+</pre>
 
 				
 				
 				
 			
 				
-				<h3 id="RunReferencesDecorator.Open">func (*RunReferencesDecorator) <a href="http://localhost:6060/src/refer/RunReferencesDecorator.go?s=1255:1320#L34">Open</a>
+				<h3 id="RunReferencesDecorator.Open">func (*RunReferencesDecorator) <a href="http://localhost:6060/src/refer/RunReferencesDecorator.go?s=1336:1422#L31">Open</a>
 					<a class="permalink" href="index.html#RunReferencesDecorator.Open">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#RunReferencesDecorator">RunReferencesDecorator</a>) Open(correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>) <a href="http://localhost:6060/pkg/builtin/#error">error</a></pre>
+				<pre>func (c *<a href="index.html#RunReferencesDecorator">RunReferencesDecorator</a>) Open(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>) <a href="http://localhost:6060/pkg/builtin/#error">error</a></pre>
 				<p>
-Opens the component.
-Parameters:
+Open the component.
 </p>
-<pre>- correlationId string
-transaction id to trace execution through call chain.
+<pre>Parameters:
+	- ctx context.Context
+	- correlationId string transaction id to trace execution through call chain.
+Returns: error
 </pre>
-<p>
-Returns error
-</p>
 
 				
 				
 				
 			
 				
-				<h3 id="RunReferencesDecorator.Put">func (*RunReferencesDecorator) <a href="http://localhost:6060/src/refer/RunReferencesDecorator.go?s=2053:2133#L65">Put</a>
+				<h3 id="RunReferencesDecorator.Put">func (*RunReferencesDecorator) <a href="http://localhost:6060/src/refer/RunReferencesDecorator.go?s=2203:2288#L61">Put</a>
 					<a class="permalink" href="index.html#RunReferencesDecorator.Put">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#RunReferencesDecorator">RunReferencesDecorator</a>) Put(locator interface{}, component interface{})</pre>
+				<pre>func (c *<a href="index.html#RunReferencesDecorator">RunReferencesDecorator</a>) Put(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, locator <a href="http://localhost:6060/pkg/builtin/#any">any</a>, component <a href="http://localhost:6060/pkg/builtin/#any">any</a>)</pre>
 				<p>
-Puts a new reference into this reference map.
-Parameters:
+Put a new reference into this reference map.
 </p>
-<pre>- locator interface{}
-a locator to find the reference by.
-- component interface{}
-a component reference to be added.
+<pre>Parameters:
+	- ctx context.Context
+	- locator any a locator to find the reference by.
+	- component any a component reference to be added.
 </pre>
 
 				
@@ -1377,48 +1284,43 @@ a component reference to be added.
 				
 			
 				
-				<h3 id="RunReferencesDecorator.Remove">func (*RunReferencesDecorator) <a href="http://localhost:6060/src/refer/RunReferencesDecorator.go?s=2605:2677#L81">Remove</a>
+				<h3 id="RunReferencesDecorator.Remove">func (*RunReferencesDecorator) <a href="http://localhost:6060/src/refer/RunReferencesDecorator.go?s=2786:2863#L77">Remove</a>
 					<a class="permalink" href="index.html#RunReferencesDecorator.Remove">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#RunReferencesDecorator">RunReferencesDecorator</a>) Remove(locator interface{}) interface{}</pre>
+				<pre>func (c *<a href="index.html#RunReferencesDecorator">RunReferencesDecorator</a>) Remove(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, locator <a href="http://localhost:6060/pkg/builtin/#any">any</a>) <a href="http://localhost:6060/pkg/builtin/#any">any</a></pre>
 				<p>
-Removes a previously added reference that matches specified locator. If many references match the locator, it removes only the first one. When all references shall be removed, use removeAll method instead.
-see
-removeAll
+Remove a previously added reference that matches specified locator.
+If many references match the locator, it removes only the first one.
+When all references shall be removed, use removeAll method instead.
+</p>
+<pre>see RemoveAll
 Parameters:
-</p>
-<pre>- locator interface{}
-a locator to remove reference
+	- ctx context.Context
+	- locator any the locator to remove references by.
+Returns: any the removed component reference.
 </pre>
-<p>
-Returns interfce{}
-the removed component reference.
-</p>
 
 				
 				
 				
 			
 				
-				<h3 id="RunReferencesDecorator.RemoveAll">func (*RunReferencesDecorator) <a href="http://localhost:6060/src/refer/RunReferencesDecorator.go?s=3035:3112#L97">RemoveAll</a>
+				<h3 id="RunReferencesDecorator.RemoveAll">func (*RunReferencesDecorator) <a href="http://localhost:6060/src/refer/RunReferencesDecorator.go?s=3239:3321#L92">RemoveAll</a>
 					<a class="permalink" href="index.html#RunReferencesDecorator.RemoveAll">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#RunReferencesDecorator">RunReferencesDecorator</a>) RemoveAll(locator interface{}) []interface{}</pre>
+				<pre>func (c *<a href="index.html#RunReferencesDecorator">RunReferencesDecorator</a>) RemoveAll(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, locator <a href="http://localhost:6060/pkg/builtin/#any">any</a>) []<a href="http://localhost:6060/pkg/builtin/#any">any</a></pre>
 				<p>
-Removes all component references that match the specified locator.
-Parameters:
+RemoveAll all component references that match the specified locator.
 </p>
-<pre>- locator interface{}
-the locator to remove references by.
+<pre>Parameters:
+	- ctx context.Context
+	- locator any the locator to remove references by.
+Returns: []any a list, containing all removed references.
 </pre>
-<p>
-Returns []interface{}
-a list, containing all removed references.
-</p>
 
 				
 				
@@ -1436,13 +1338,13 @@ a list, containing all removed references.
 
 
 <div id="footer">
-Build version go1.13.15.<br>
+Build version go1.18.1.<br>
 Except as <a href="https://developers.google.com/site-policies#restrictions">noted</a>,
 the content of this page is licensed under the
 Creative Commons Attribution 3.0 License,
 and code is licensed under a <a href="http://localhost:6060/LICENSE">BSD license</a>.<br>
-<a href="http://localhost:6060/doc/tos.html">Terms of Service</a> |
-<a href="http://www.google.com/intl/en/policies/privacy/">Privacy Policy</a>
+<a href="https://golang.org/doc/tos.html">Terms of Service</a> |
+<a href="https://www.google.com/intl/en/policies/privacy/">Privacy Policy</a>
 </div>
 
 </div><!-- .container -->

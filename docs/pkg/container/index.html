@@ -14,7 +14,7 @@
 
 
 
-<script>var goVersion = "go1.13.15";</script>
+<script>var goVersion = "go1.18.1";</script>
 <script src="../../lib/godoc/godocs.js" defer></script>
 </head>
 <body>
@@ -129,10 +129,10 @@
 					<dd>&nbsp; &nbsp; <a href="index.html#Container.AddFactory">func (c *Container) AddFactory(factory cbuild.IFactory)</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#Container.Close">func (c *Container) Close(correlationId string) error</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#Container.Close">func (c *Container) Close(ctx context.Context, correlationId string) error</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#Container.Configure">func (c *Container) Configure(conf *cconfig.ConfigParams)</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#Container.Configure">func (c *Container) Configure(ctx context.Context, conf *cconfig.ConfigParams)</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="index.html#Container.Info">func (c *Container) Info() *info.ContextInfo</a></dd>
@@ -144,10 +144,10 @@
 					<dd>&nbsp; &nbsp; <a href="index.html#Container.Logger">func (c *Container) Logger() log.ILogger</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#Container.Open">func (c *Container) Open(correlationId string) error</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#Container.Open">func (c *Container) Open(ctx context.Context, correlationId string) error</a></dd>
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#Container.ReadConfigFromFile">func (c *Container) ReadConfigFromFile(correlationId string, path string, parameters *cconfig.ConfigParams) error</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#Container.ReadConfigFromFile">func (c *Container) ReadConfigFromFile(ctx context.Context, correlationId string, path string, parameters *cconfig.ConfigParams) error</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="index.html#Container.SetLogger">func (c *Container) SetLogger(logger log.ILogger)</a></dd>
@@ -167,7 +167,7 @@
 				
 				
 					
-					<dd>&nbsp; &nbsp; <a href="index.html#ProcessContainer.Run">func (c *ProcessContainer) Run(args []string)</a></dd>
+					<dd>&nbsp; &nbsp; <a href="index.html#ProcessContainer.Run">func (c *ProcessContainer) Run(ctx context.Context, args []string)</a></dd>
 				
 					
 					<dd>&nbsp; &nbsp; <a href="index.html#ProcessContainer.SetConfigPath">func (c *ProcessContainer) SetConfigPath(configPath string)</a></dd>
@@ -204,24 +204,23 @@
 		
 			
 			
-			<h2 id="Container">type <a href="http://localhost:6060/src/container/Container.go?s=2943:3238#L64">Container</a>
+			<h2 id="Container">type <a href="http://localhost:6060/src/container/Container.go?s=3141:3436#L61">Container</a>
 				<a class="permalink" href="index.html#Container">&#xb6;</a>
 				
 				
 			</h2>
 			<p>
-Inversion of control (IoC) container that creates components and manages their lifecycle.
-</p>
-<p>
-The container is driven by configuration, that usually stored in JSON or YAML file. The configuration contains a list of components identified by type or locator, followed by component configuration.
-</p>
-<p>
+Container Inversion of control (IoC) container that creates components and manages their lifecycle.
+The container is driven by configuration, that usually stored in JSON or YAML file.
+The configuration contains a list of components identified by type or locator,
+followed by component configuration.
 On container start it performs the following actions:
 </p>
 <p>
 Creates components using their types or calls registered factories to create components using their locators
 Configures components that implement IConfigurable interface and passes them their configuration parameters
-Sets references to components that implement IReferenceable interface and passes them references of all components in the container
+Sets references to components that implement IReferenceable interface and passes
+them references of all components in the container
 Opens components that implement IOpenable interface
 On container stop actions are performed in reversed order:
 </p>
@@ -229,57 +228,45 @@ On container stop actions are performed in reversed order:
 Closes components that implement ICloseable interface
 Unsets references in components that implement IUnreferenceable interface
 Destroys components in the container.
-The component configuration can be parameterized by dynamic values. That allows specialized containers to inject parameters from command line or from environment variables.
+The component configuration can be parameterized by dynamic values.
+That allows specialized containers to inject parameters from command line or from environment variables.
 </p>
 <p>
-The container automatically creates a ContextInfo component that carries detail information about the container and makes it available for other components.
+The container automatically creates a ContextInfo component that carries detail information about
+the container and makes it available for other components.
 </p>
-<p>
-see
-IConfigurable (in the PipServices &#34;Commons&#34; package)
-</p>
-<p>
-see
-IReferenceable (in the PipServices &#34;Commons&#34; package)
-</p>
-<p>
-see
-IOpenable (in the PipServices &#34;Commons&#34; package)
-</p>
-<p>
-Configuration parameters
-name: the context (container or process) name
-description: human-readable description of the context
-properties: entire section of additional descriptive properties
-</p>
-<pre>- ...
-</pre>
-<p>
-Example
-</p>
-<pre>======= config.yml ========
-- descriptor: mygroup:mycomponent1:default:default:1.0
-  param1: 123
-  param2: ABC
+<pre>see IConfigurable (in the PipServices &#34;Commons&#34; package)
+see IReferenceable (in the PipServices &#34;Commons&#34; package)
+see IOpenable (in the PipServices &#34;Commons&#34; package)
 
-- type: mycomponent2,mypackage
-  param1: 321
-  param2: XYZ
-============================
+Configuration parameters:
+	name: the context (container or process) name
+	description: human-readable description of the context
+	properties: entire section of additional descriptive properties
+	- ...
+Example:
+	======= config.yml ========
+	- descriptor: mygroup:mycomponent1:default:default:1.0
+		param1: 123
+		param2: ABC
+	- type: mycomponent2,mypackage
+		param1: 321
+		param2: XYZ
+	============================
 
-container := NewEmptyContainer();
-container.AddFactory(newMyComponentFactory());
+	container := NewEmptyContainer();
+	container.AddFactory(newMyComponentFactory());
 
-parameters := NewConfigParamsFromValue(process.env);
-container.ReadConfigFromFile(&#34;123&#34;, &#34;./config/config.yml&#34;, parameters);
+	parameters := NewConfigParamsFromValue(process.env);
+	container.ReadConfigFromFile(&#34;123&#34;, &#34;./config/config.yml&#34;, parameters);
 
-container.Open(&#34;123&#34;, (err) =&gt; {
-    console.Log(&#34;Container is opened&#34;);
-    ...
-    container.Close(&#34;123&#34;, (err) =&gt; {
-        console.Log(&#34;Container is closed&#34;);
-    });
-});
+	container.Open(context.Background(), &#34;123&#34;, (err) =&gt; {
+		console.Log(&#34;Container is opened&#34;);
+		...
+		container.Close(context.Background(), &#34;123&#34;, (err) =&gt; {
+			console.Log(&#34;Container is closed&#34;);
+		});
+	});
 </pre>
 
 			<pre>type Container struct {
@@ -297,65 +284,58 @@ container.Open(&#34;123&#34;, (err) =&gt; {
 
 			
 				
-				<h3 id="InheritContainer">func <a href="http://localhost:6060/src/container/Container.go?s=4225:4328#L109">InheritContainer</a>
+				<h3 id="InheritContainer">func <a href="http://localhost:6060/src/container/Container.go?s=4451:4554#L102">InheritContainer</a>
 					<a class="permalink" href="index.html#InheritContainer">&#xb6;</a>
 					
 					
 				</h3>
 				<pre>func InheritContainer(name <a href="http://localhost:6060/pkg/builtin/#string">string</a>, description <a href="http://localhost:6060/pkg/builtin/#string">string</a>,
-    referenceable <a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/refer/">crefer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/refer/#IReferenceable">IReferenceable</a>) *<a href="index.html#Container">Container</a></pre>
+    referenceable <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/">crefer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/#IReferenceable">IReferenceable</a>) *<a href="index.html#Container">Container</a></pre>
 				<p>
-Creates a new instance of the container inherit from reference.
-Parameters:
+InheritContainer creates a new instance of the container inherit from reference.
 </p>
-<pre>- name string
-a container name (accessible via ContextInfo)
-- description string
-a container description (accessible via ContextInfo)
-- referenceable crefer.IReferenceable
-- referenceble object for inherit
+<pre>Parameters:
+	- name string a container name (accessible via ContextInfo)
+	- description string a container description (accessible via ContextInfo)
+	- referenceable crefer.IReferenceable
+	- referenceble object for inherit
+Returns: *Container
 </pre>
-<p>
-Returns *Container
-</p>
 
 				
 				
 			
 				
-				<h3 id="NewContainer">func <a href="http://localhost:6060/src/container/Container.go?s=3726:3787#L91">NewContainer</a>
+				<h3 id="NewContainer">func <a href="http://localhost:6060/src/container/Container.go?s=3948:4009#L86">NewContainer</a>
 					<a class="permalink" href="index.html#NewContainer">&#xb6;</a>
 					
 					
 				</h3>
 				<pre>func NewContainer(name <a href="http://localhost:6060/pkg/builtin/#string">string</a>, description <a href="http://localhost:6060/pkg/builtin/#string">string</a>) *<a href="index.html#Container">Container</a></pre>
 				<p>
-Creates a new instance of the container.
-Parameters:
+NewContainer creates a new instance of the container.
 </p>
-<pre>- name string
-a container name (accessible via ContextInfo)
-- description string
-a container description (accessible via ContextInfo)
+<pre>Parameters:
+	- name string a container name (accessible via ContextInfo)
+	- description string a container description (accessible via ContextInfo)
+Returns: *Container
 </pre>
-<p>
-Returns *Container
-</p>
 
 				
 				
 			
 				
-				<h3 id="NewEmptyContainer">func <a href="http://localhost:6060/src/container/Container.go?s=3312:3347#L76">NewEmptyContainer</a>
+				<h3 id="NewEmptyContainer">func <a href="http://localhost:6060/src/container/Container.go?s=3528:3563#L73">NewEmptyContainer</a>
 					<a class="permalink" href="index.html#NewEmptyContainer">&#xb6;</a>
 					
 					
 				</h3>
 				<pre>func NewEmptyContainer() *<a href="index.html#Container">Container</a></pre>
 				<p>
-Creates a new empty instance of the container.
-Returns *Container
+NewEmptyContainer creates a new empty instance of the container.
 </p>
+<pre>Returns *Container
+</pre>
 
 				
 				
@@ -363,18 +343,18 @@ Returns *Container
 
 			
 				
-				<h3 id="Container.AddFactory">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=6364:6419#L181">AddFactory</a>
+				<h3 id="Container.AddFactory">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=6767:6822#L187">AddFactory</a>
 					<a class="permalink" href="index.html#Container.AddFactory">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#Container">Container</a>) AddFactory(factory <a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-components-go/build/">cbuild</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-components-go/build/#IFactory">IFactory</a>)</pre>
+				<pre>func (c *<a href="index.html#Container">Container</a>) AddFactory(factory <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/build/">cbuild</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/build/#IFactory">IFactory</a>)</pre>
 				<p>
-Adds a factory to the container. The factory is used to create components added to the container by their locators (descriptors).
-Parameters:
+AddFactory a factory to the container.
+The factory is used to create components added to the container by their locators (descriptors).
 </p>
-<pre>- factory IFactory
-a component factory to be added.
+<pre>Parameters:
+	- factory IFactory a component factory to be added.
 </pre>
 
 				
@@ -382,40 +362,38 @@ a component factory to be added.
 				
 			
 				
-				<h3 id="Container.Close">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=8206:8259#L252">Close</a>
+				<h3 id="Container.Close">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=8864:8938#L265">Close</a>
 					<a class="permalink" href="index.html#Container.Close">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#Container">Container</a>) Close(correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>) <a href="http://localhost:6060/pkg/builtin/#error">error</a></pre>
+				<pre>func (c *<a href="index.html#Container">Container</a>) Close(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>) <a href="http://localhost:6060/pkg/builtin/#error">error</a></pre>
 				<p>
-Closes component and frees used resources.
-Parameters:
+Close component and frees used resources.
 </p>
-<pre>- correlationId string
-transaction id to trace execution through call chain.
+<pre>Parameters:
+	- ctx context.Context
+	- correlationId string transaction id to trace execution through call chain.
+Returns: error
 </pre>
-<p>
-Returns error
-</p>
 
 				
 				
 				
 			
 				
-				<h3 id="Container.Configure">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=4677:4734#L125">Configure</a>
+				<h3 id="Container.Configure">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=4922:5000#L119">Configure</a>
 					<a class="permalink" href="index.html#Container.Configure">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#Container">Container</a>) Configure(conf *<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/config/">cconfig</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/config/#ConfigParams">ConfigParams</a>)</pre>
+				<pre>func (c *<a href="index.html#Container">Container</a>) Configure(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, conf *<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/config/">cconfig</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/config/#ConfigParams">ConfigParams</a>)</pre>
 				<p>
-Configures component by passing configuration parameters.
-Parameters:
+Configure component by passing configuration parameters.
 </p>
-<pre>- config  *cconfig.ConfigParams
-configuration parameters to be set.
+<pre>Parameters:
+	- ctx context.Context
+	- config *cconfig.ConfigParams configuration parameters to be set.
 </pre>
 
 				
@@ -423,101 +401,95 @@ configuration parameters to be set.
 				
 			
 				
-				<h3 id="Container.Info">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=6091:6135#L173">Info</a>
+				<h3 id="Container.Info">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=6489:6533#L179">Info</a>
 					<a class="permalink" href="index.html#Container.Info">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#Container">Container</a>) Info() *<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-components-go/info/">info</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-components-go/info/#ContextInfo">ContextInfo</a></pre>
+				<pre>func (c *<a href="index.html#Container">Container</a>) Info() *<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/info/">info</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/info/#ContextInfo">ContextInfo</a></pre>
 				
 				
 				
 				
 			
 				
-				<h3 id="Container.IsOpen">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=6567:6600#L188">IsOpen</a>
+				<h3 id="Container.IsOpen">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=6974:7007#L193">IsOpen</a>
 					<a class="permalink" href="index.html#Container.IsOpen">&#xb6;</a>
 					
 					
 				</h3>
 				<pre>func (c *<a href="index.html#Container">Container</a>) IsOpen() <a href="http://localhost:6060/pkg/builtin/#bool">bool</a></pre>
 				<p>
-Checks if the component is opened.
-Returns bool
-true if the component has been opened and false otherwise.
+IsOpen checks if the component is opened.
 </p>
+<pre>Returns bool true if the component has been opened and false otherwise.
+</pre>
 
 				
 				
 				
 			
 				
-				<h3 id="Container.Logger">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=5954:5994#L165">Logger</a>
+				<h3 id="Container.Logger">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=6352:6392#L171">Logger</a>
 					<a class="permalink" href="index.html#Container.Logger">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#Container">Container</a>) Logger() <a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-components-go/log/">log</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-components-go/log/#ILogger">ILogger</a></pre>
+				<pre>func (c *<a href="index.html#Container">Container</a>) Logger() <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/log/">log</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/log/#ILogger">ILogger</a></pre>
 				
 				
 				
 				
 			
 				
-				<h3 id="Container.Open">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=6777:6829#L197">Open</a>
+				<h3 id="Container.Open">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=7204:7277#L202">Open</a>
 					<a class="permalink" href="index.html#Container.Open">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#Container">Container</a>) Open(correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>) <a href="http://localhost:6060/pkg/builtin/#error">error</a></pre>
+				<pre>func (c *<a href="index.html#Container">Container</a>) Open(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>) <a href="http://localhost:6060/pkg/builtin/#error">error</a></pre>
 				<p>
-Opens the component.
-Parameters:
+Open the component.
 </p>
-<pre>- correlationId string
-transaction id to trace execution through call chain.
+<pre>Parameters:
+	- ctx context.Context
+	- correlationId string transaction id to trace execution through call chain.
+Returns: error
 </pre>
-<p>
-Returns error
-</p>
 
 				
 				
 				
 			
 				
-				<h3 id="Container.ReadConfigFromFile">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=5165:5279#L137">ReadConfigFromFile</a>
+				<h3 id="Container.ReadConfigFromFile">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=5454:5589#L129">ReadConfigFromFile</a>
 					<a class="permalink" href="index.html#Container.ReadConfigFromFile">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#Container">Container</a>) ReadConfigFromFile(correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>,
-    path <a href="http://localhost:6060/pkg/builtin/#string">string</a>, parameters *<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/config/">cconfig</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/config/#ConfigParams">ConfigParams</a>) <a href="http://localhost:6060/pkg/builtin/#error">error</a></pre>
+				<pre>func (c *<a href="index.html#Container">Container</a>) ReadConfigFromFile(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, correlationId <a href="http://localhost:6060/pkg/builtin/#string">string</a>,
+    path <a href="http://localhost:6060/pkg/builtin/#string">string</a>, parameters *<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/config/">cconfig</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/config/#ConfigParams">ConfigParams</a>) <a href="http://localhost:6060/pkg/builtin/#error">error</a></pre>
 				<p>
-Reads container configuration from JSON or YAML file and parameterizes it with given values.
-Parameters:
+ReadConfigFromFile container configuration from JSON or YAML file and parameterizes it with given values.
 </p>
-<pre>- correlationId string
-transaction id to trace execution through call chain.
-- path string
-a path to configuration file
-- parameters *cconfig.ConfigParams
+<pre>Parameters:
+	- ctx context.Context
+	- correlationId string transaction id to trace execution through call chain.
+	- path string a path to configuration file
+	- parameters *cconfig.ConfigParams values to parameters the configuration or null to skip parameterization.
 </pre>
-<p>
-values to parameters the configuration or null to skip parameterization.
-</p>
 
 				
 				
 				
 			
 				
-				<h3 id="Container.SetLogger">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=6017:6066#L169">SetLogger</a>
+				<h3 id="Container.SetLogger">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=6415:6464#L175">SetLogger</a>
 					<a class="permalink" href="index.html#Container.SetLogger">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#Container">Container</a>) SetLogger(logger <a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-components-go/log/">log</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-components-go/log/#ILogger">ILogger</a>)</pre>
+				<pre>func (c *<a href="index.html#Container">Container</a>) SetLogger(logger <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/log/">log</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-components-gox/log/#ILogger">ILogger</a>)</pre>
 				
 				
 				
@@ -526,32 +498,26 @@ values to parameters the configuration or null to skip parameterization.
 		
 			
 			
-			<h2 id="ProcessContainer">type <a href="http://localhost:6060/src/container/ProcessContainer.go?s=890:952#L21">ProcessContainer</a>
+			<h2 id="ProcessContainer">type <a href="http://localhost:6060/src/container/ProcessContainer.go?s=1124:1302#L22">ProcessContainer</a>
 				<a class="permalink" href="index.html#ProcessContainer">&#xb6;</a>
 				
 				
 			</h2>
 			<p>
-Inversion of control (IoC) container that runs as a system process. It processes command line arguments and handles unhandled exceptions and Ctrl-C signal to gracefully shutdown the container.
+ProcessContainer inversion of control (IoC) container that runs as a system process.
+It processes command line arguments and handles unhandled exceptions and Ctrl-C signal
+to gracefully shutdown the container.
 </p>
-<p>
-Command line arguments
-</p>
-<pre>--config / -c path to JSON or YAML file with container configuration (default: &#34;./config/config.yml&#34;)
---param / --params / -p value(s) to parameterize the container configuration
---help / -h prints the container usage help
-</pre>
-<p>
-see
-Container
-</p>
-<p>
-Example
-</p>
-<pre>container = NewEmptyProcessContainer();
-container.Container.AddFactory(NewMyComponentFactory());
+<pre>Command line arguments:
+	--config / -c path to JSON or YAML file with container configuration (default: &#34;./config/config.yml&#34;)
+	--param / --params / -p value(s) to parameterize the container configuration
+	--help / -h prints the container usage help
+see Container
 
-container.Run(process.args);
+Example:
+	container = NewEmptyProcessContainer();
+	container.Container.AddFactory(NewMyComponentFactory());
+	container.Run(context.Background(), process.args);
 </pre>
 
 			<pre>type ProcessContainer struct {
@@ -570,65 +536,58 @@ container.Run(process.args);
 
 			
 				
-				<h3 id="InheritProcessContainer">func <a href="http://localhost:6060/src/container/ProcessContainer.go?s=2057:2174#L62">InheritProcessContainer</a>
+				<h3 id="InheritProcessContainer">func <a href="http://localhost:6060/src/container/ProcessContainer.go?s=2743:2860#L65">InheritProcessContainer</a>
 					<a class="permalink" href="index.html#InheritProcessContainer">&#xb6;</a>
 					
 					
 				</h3>
 				<pre>func InheritProcessContainer(name <a href="http://localhost:6060/pkg/builtin/#string">string</a>, description <a href="http://localhost:6060/pkg/builtin/#string">string</a>,
-    referenceable <a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/refer/">crefer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-go/pip-services3-commons-go/refer/#IReferenceable">IReferenceable</a>) *<a href="index.html#ProcessContainer">ProcessContainer</a></pre>
+    referenceable <a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/">crefer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-commons-gox/refer/#IReferenceable">IReferenceable</a>) *<a href="index.html#ProcessContainer">ProcessContainer</a></pre>
 				<p>
-Creates a new instance of the container inherit from reference.
-Parameters:
+InheritProcessContainer creates a new instance of the container inherit from reference.
 </p>
-<pre>- name string
-a container name (accessible via ContextInfo)
-- description string
-a container description (accessible via ContextInfo)
-- referenceable crefer.IReferenceable
-- referenceble object for inherit
+<pre>Parameters:
+	- name string a container name (accessible via ContextInfo)
+	- description string a container description (accessible via ContextInfo)
+	- referenceable crefer.IReferenceable
+	- referenceble object for inherit
+Returns: *Container
 </pre>
-<p>
-Returns *Container
-</p>
 
 				
 				
 			
 				
-				<h3 id="NewEmptyProcessContainer">func <a href="http://localhost:6060/src/container/ProcessContainer.go?s=1032:1081#L28">NewEmptyProcessContainer</a>
+				<h3 id="NewEmptyProcessContainer">func <a href="http://localhost:6060/src/container/ProcessContainer.go?s=1408:1457#L31">NewEmptyProcessContainer</a>
 					<a class="permalink" href="index.html#NewEmptyProcessContainer">&#xb6;</a>
 					
 					
 				</h3>
 				<pre>func NewEmptyProcessContainer() *<a href="index.html#ProcessContainer">ProcessContainer</a></pre>
 				<p>
-Creates a new empty instance of the container.
-Returns ProcessContainer
+NewEmptyProcessContainer creates a new empty instance of the container.
 </p>
+<pre>Returns: ProcessContainer
+</pre>
 
 				
 				
 			
 				
-				<h3 id="NewProcessContainer">func <a href="http://localhost:6060/src/container/ProcessContainer.go?s=1476:1551#L44">NewProcessContainer</a>
+				<h3 id="NewProcessContainer">func <a href="http://localhost:6060/src/container/ProcessContainer.go?s=2006:2081#L47">NewProcessContainer</a>
 					<a class="permalink" href="index.html#NewProcessContainer">&#xb6;</a>
 					
 					
 				</h3>
 				<pre>func NewProcessContainer(name <a href="http://localhost:6060/pkg/builtin/#string">string</a>, description <a href="http://localhost:6060/pkg/builtin/#string">string</a>) *<a href="index.html#ProcessContainer">ProcessContainer</a></pre>
 				<p>
-Creates a new instance of the container.
-Parameters:
+NewProcessContainer creates a new instance of the container.
 </p>
-<pre>- name string
-a container name (accessible via ContextInfo)
-- description string
-a container description (accessible via ContextInfo)
+<pre>Parameters:
+	- name string a container name (accessible via ContextInfo)
+	- description string a container description (accessible via ContextInfo)
+Returns: ProcessContainer
 </pre>
-<p>
-Returns ProcessContainer
-</p>
 
 				
 				
@@ -636,19 +595,21 @@ Returns ProcessContainer
 
 			
 				
-				<h3 id="ProcessContainer.Run">func (*ProcessContainer) <a href="http://localhost:6060/src/container/ProcessContainer.go?s=4719:4764#L172">Run</a>
+				<h3 id="ProcessContainer.Run">func (*ProcessContainer) <a href="http://localhost:6060/src/container/ProcessContainer.go?s=5049:5115#L156">Run</a>
 					<a class="permalink" href="index.html#ProcessContainer.Run">&#xb6;</a>
 					
 					
 				</h3>
-				<pre>func (c *<a href="index.html#ProcessContainer">ProcessContainer</a>) Run(args []<a href="http://localhost:6060/pkg/builtin/#string">string</a>)</pre>
+				<pre>func (c *<a href="index.html#ProcessContainer">ProcessContainer</a>) Run(ctx <a href="http://localhost:6060/pkg/context/">context</a>.<a href="http://localhost:6060/pkg/context/#Context">Context</a>, args []<a href="http://localhost:6060/pkg/builtin/#string">string</a>)</pre>
 				<p>
-Runs the container by instantiating and running components inside the container.
-It reads the container configuration, creates, configures, references and opens components. On process exit it closes, unreferences and destroys components to gracefully shutdown.
-Parameters:
+Run the container by instantiating and running components inside the container.
+It reads the container configuration, creates, configures, references
+and opens components. On process exit it closes, unreferences and destroys
+components to gracefully shutdown.
 </p>
-<pre>- args []string
-command line arguments
+<pre>Parameters:
+	- ctx context.Context
+	- args []string command line arguments
 </pre>
 
 				
@@ -656,14 +617,14 @@ command line arguments
 				
 			
 				
-				<h3 id="ProcessContainer.SetConfigPath">func (*ProcessContainer) <a href="http://localhost:6060/src/container/ProcessContainer.go?s=2394:2453#L73">SetConfigPath</a>
+				<h3 id="ProcessContainer.SetConfigPath">func (*ProcessContainer) <a href="http://localhost:6060/src/container/ProcessContainer.go?s=3240:3299#L79">SetConfigPath</a>
 					<a class="permalink" href="index.html#ProcessContainer.SetConfigPath">&#xb6;</a>
 					
 					
 				</h3>
 				<pre>func (c *<a href="index.html#ProcessContainer">ProcessContainer</a>) SetConfigPath(configPath <a href="http://localhost:6060/pkg/builtin/#string">string</a>)</pre>
 				<p>
-Set path for configuration file
+SetConfigPath set path for configuration file
 </p>
 
 				
@@ -682,13 +643,13 @@ Set path for configuration file
 
 
 <div id="footer">
-Build version go1.13.15.<br>
+Build version go1.18.1.<br>
 Except as <a href="https://developers.google.com/site-policies#restrictions">noted</a>,
 the content of this page is licensed under the
 Creative Commons Attribution 3.0 License,
 and code is licensed under a <a href="http://localhost:6060/LICENSE">BSD license</a>.<br>
-<a href="http://localhost:6060/doc/tos.html">Terms of Service</a> |
-<a href="http://www.google.com/intl/en/policies/privacy/">Privacy Policy</a>
+<a href="https://golang.org/doc/tos.html">Terms of Service</a> |
+<a href="https://www.google.com/intl/en/policies/privacy/">Privacy Policy</a>
 </div>
 
 </div><!-- .container -->
