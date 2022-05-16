@@ -5,10 +5,10 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/kr/pretty v0.2.1 h1:Fmg33tUaq4/8ym9TJN1x7sLJnHVwhP33CNkpYV/7rwI=
 github.com/kr/text v0.1.0 h1:45sCR5RtlFHMR4UwH9sdQ5TC8v0qDQCHnXt+kaKSTVE=
-github.com/pip-services3-gox/pip-services3-commons-gox v1.0.2 h1:1T7rzTdIQS1wx2c8RvXCEqvUE244Gu6ahjxjPODjaLk=
-github.com/pip-services3-gox/pip-services3-commons-gox v1.0.2/go.mod h1:UFzSsEaLhuBmSUZuFEpzuAO0RP8a5L9yJKy4T6n+hlc=
-github.com/pip-services3-gox/pip-services3-components-gox v1.0.1 h1:TAWpYyk22fsLRQ72I1CTVuLQrbY/MpEZeWUA35H70Ao=
-github.com/pip-services3-gox/pip-services3-components-gox v1.0.1/go.mod h1:VWQrUhkt6R0Cz/3pWzF1cbwAoQ4lrenx3UxSieJY48M=
+github.com/pip-services3-gox/pip-services3-commons-gox v1.0.3 h1:ofaKHY68OwETT2FknXQtNSH4wbZobNfkzHZnBzUONRs=
+github.com/pip-services3-gox/pip-services3-commons-gox v1.0.3/go.mod h1:UFzSsEaLhuBmSUZuFEpzuAO0RP8a5L9yJKy4T6n+hlc=
+github.com/pip-services3-gox/pip-services3-components-gox v1.0.3 h1:0EfnlaBVjiDxlsKslxsuNLCtuXdq5RkkdL4Mb7qRTzY=
+github.com/pip-services3-gox/pip-services3-components-gox v1.0.3/go.mod h1:eJwgz81uE5prWXtm+L+afx/AHaEuhFUBLb4GrNucpSE=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/satori/go.uuid v1.2.0 h1:0uYX9dsZ2yD7q2RtLRtPSdGDWzjeM3TbMJP9utgA0ww=
