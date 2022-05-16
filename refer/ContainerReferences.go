@@ -1,23 +1,23 @@
 package refer
 
 import (
+	"context"
 	"fmt"
 
-	cconfig "github.com/pip-services3-go/pip-services3-commons-go/config"
-	"github.com/pip-services3-go/pip-services3-commons-go/refer"
-	"github.com/pip-services3-go/pip-services3-commons-go/reflect"
-	"github.com/pip-services3-go/pip-services3-components-go/build"
+	cconfig "github.com/pip-services3-gox/pip-services3-commons-gox/config"
+	"github.com/pip-services3-gox/pip-services3-commons-gox/refer"
+	"github.com/pip-services3-gox/pip-services3-commons-gox/reflect"
+	"github.com/pip-services3-gox/pip-services3-components-gox/build"
 	"github.com/pip-services3-gox/pip-services3-container-gox/config"
 )
 
-/*
-Container managed references that can be created from container configuration.
-*/
+// ContainerReferences container managed references that can be
+// created from container configuration.
 type ContainerReferences struct {
 	ManagedReferences
 }
 
-// Creates a new instance of the references
+// NewContainerReferences creates a new instance of the references
 // Returns *ContainerReferences
 func NewContainerReferences() *ContainerReferences {
 	return &ContainerReferences{
@@ -25,16 +25,16 @@ func NewContainerReferences() *ContainerReferences {
 	}
 }
 
-// Puts components into the references from container configuration.
-// Parameters:
-//  - config config.ContainerConfig
-//  a container configuration with information of components to be added.
-// Returns error
-// CreateError when one of component cannot be created.
-func (c *ContainerReferences) PutFromConfig(config config.ContainerConfig) error {
+// PutFromConfig puts components into the references from container configuration.
+//	Parameters:
+//		- ctx context.Context
+//		- config config.ContainerConfig a container
+//			configuration with information of components to be added.
+//	Returns: error CreateError when one of component cannot be created.
+func (c *ContainerReferences) PutFromConfig(ctx context.Context, config config.ContainerConfig) error {
 	var err error
-	var locator interface{}
-	var component interface{}
+	var locator any
+	var component any
 
 	defer func() {
 		if r := recover(); r != nil {
@@ -69,20 +69,17 @@ func (c *ContainerReferences) PutFromConfig(config config.ContainerConfig) error
 		fmt.Printf("Created component %v\n", locator)
 
 		// Add component to the list
-		c.ManagedReferences.References.Put(locator, component)
+		c.ManagedReferences.References.Put(ctx, locator, component)
 
 		// Configure component
-		configurable, ok := component.(cconfig.IConfigurable)
-		if ok {
-			configurable.Configure(componentConfig.Config)
+		if configurable, ok := component.(cconfig.IConfigurable); ok {
+			configurable.Configure(ctx, componentConfig.Config)
 		}
 
 		// Set references to factories
-		_, ok = component.(build.IFactory)
-		if ok {
-			referenceable, ok := component.(refer.IReferenceable)
-			if ok {
-				referenceable.SetReferences(c)
+		if _, ok := component.(build.IFactory); ok {
+			if referenceable, ok := component.(refer.IReferenceable); ok {
+				referenceable.SetReferences(ctx, c)
 			}
 		}
 	}

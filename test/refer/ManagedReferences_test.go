@@ -1,12 +1,13 @@
 package test_refer
 
 import (
+	"context"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/pip-services3-go/pip-services3-commons-go/refer"
-	"github.com/pip-services3-go/pip-services3-components-go/log"
+	"github.com/pip-services3-gox/pip-services3-commons-gox/refer"
+	"github.com/pip-services3-gox/pip-services3-components-gox/log"
 	crefer "github.com/pip-services3-gox/pip-services3-container-gox/refer"
 )
 
@@ -14,7 +15,7 @@ func TestAutoCreateComponent(t *testing.T) {
 	refs := crefer.NewEmptyManagedReferences()
 
 	factory := log.NewDefaultLoggerFactory()
-	refs.Put(nil, factory)
+	refs.Put(context.Background(), nil, factory)
 
 	logger, err := refs.GetOneRequired(
 		refer.NewDescriptor("*", "logger", "*", "*", "*"),
@@ -28,7 +29,7 @@ func TestStringLocator(t *testing.T) {
 	refs := crefer.NewEmptyManagedReferences()
 
 	factory := log.NewDefaultLoggerFactory()
-	refs.Put(nil, factory)
+	refs.Put(context.Background(), nil, factory)
 
 	logger := refs.GetOneOptional("ABC")
 
@@ -39,7 +40,7 @@ func TestNilLocator(t *testing.T) {
 	refs := crefer.NewEmptyManagedReferences()
 
 	factory := log.NewDefaultLoggerFactory()
-	refs.Put(nil, factory)
+	refs.Put(context.Background(), nil, factory)
 
 	logger := refs.GetOneOptional(nil)
 

@@ -1,17 +1,16 @@
 package refer
 
 import (
-	crefer "github.com/pip-services3-go/pip-services3-commons-go/refer"
+	"context"
+	crefer "github.com/pip-services3-gox/pip-services3-commons-gox/refer"
 )
 
-/*
-Managed references that in addition to keeping and locating references can also manage their lifecycle:
-
-Auto-creation of missing component using available factories
-Auto-linking newly added components
-Auto-opening newly added components
-Auto-closing removed components
-*/
+// ManagedReferences managed references that in addition to keeping and locating
+// references can also manage their lifecycle:
+//	Auto-creation of missing component using available factories
+//	Auto-linking newly added components
+//	Auto-opening newly added components
+//	Auto-closing removed components
 type ManagedReferences struct {
 	ReferencesDecorator
 	References *crefer.References
@@ -20,17 +19,18 @@ type ManagedReferences struct {
 	Runner     *RunReferencesDecorator
 }
 
-// Creates a new instance of the references
-// Parameters:
-//   - tuples []interface{}
-//   tuples where odd values are component locators (descriptors) and even values are component references
-// Returns *ManagedReferences
-func NewManagedReferences(tuples []interface{}) *ManagedReferences {
+// NewManagedReferences creates a new instance of the references
+//	Parameters:
+//		- ctx context.Context
+//		- tuples []any tuples where odd values are component locators
+//			(descriptors) and even values are component references
+//	Returns: *ManagedReferences
+func NewManagedReferences(ctx context.Context, tuples []any) *ManagedReferences {
 	c := &ManagedReferences{
 		ReferencesDecorator: *NewReferencesDecorator(nil, nil),
 	}
 
-	c.References = crefer.NewReferences(tuples)
+	c.References = crefer.NewReferences(ctx, tuples)
 	c.Builder = NewBuildReferencesDecorator(c.References, c)
 	c.Linker = NewLinkReferencesDecorator(c.Builder, c)
 	c.Runner = NewRunReferencesDecorator(c.Linker, c)
@@ -40,51 +40,51 @@ func NewManagedReferences(tuples []interface{}) *ManagedReferences {
 	return c
 }
 
-// Creates a new instance of the references
-// Returns *ManagedReferences
+// NewEmptyManagedReferences creates a new instance of the references
+//	Returns: *ManagedReferences
 func NewEmptyManagedReferences() *ManagedReferences {
-	return NewManagedReferences([]interface{}{})
+	return NewManagedReferences(context.Background(), []any{})
 }
 
-// Creates a new ManagedReferences object filled with provided key-value pairs called tuples. Tuples parameters contain a sequence of locator1, component1, locator2, component2, ... pairs.
-// Parameters:
-//   - tuples ...interface{}
-//   the tuples to fill a new ManagedReferences object.
-// Returns *ManagedReferences
-// a new ManagedReferences object.
-func NewManagedReferencesFromTuples(tuples ...interface{}) *ManagedReferences {
-	return NewManagedReferences(tuples)
+// NewManagedReferencesFromTuples creates a new ManagedReferences object
+// filled with provided key-value pairs called tuples. Tuples parameters contain a
+// sequence of locator1, component1, locator2, component2, ... pairs.
+//	Parameters:
+//		- ctx context.Context
+//		- tuples ...any the tuples to fill a new ManagedReferences object.
+//	Returns: *ManagedReferences a new ManagedReferences object.
+func NewManagedReferencesFromTuples(ctx context.Context, tuples ...any) *ManagedReferences {
+	return NewManagedReferences(ctx, tuples)
 }
 
-// Checks if the component is opened.
-// Returns bool
-// true if the component has been opened and false otherwise.
+// IsOpen checks if the component is opened.
+//	Returns: bool true if the component has been opened and false otherwise.
 func (c *ManagedReferences) IsOpen() bool {
 	return c.Linker.IsOpen() && c.Runner.IsOpen()
 }
 
-// Opens the component.
-// Parameters:
-//   - correlationId string
-//   transaction id to trace execution through call chain.
-// Returns error
-func (c *ManagedReferences) Open(correlationId string) error {
-	err := c.Linker.Open(correlationId)
+// Open the component.
+//	Parameters:
+//		- ctx context.Context
+//		- correlationId string transaction id to trace execution through call chain.
+//	Returns: error
+func (c *ManagedReferences) Open(ctx context.Context, correlationId string) error {
+	err := c.Linker.Open(ctx, correlationId)
 	if err == nil {
-		err = c.Runner.Open(correlationId)
+		err = c.Runner.Open(ctx, correlationId)
 	}
 	return err
 }
 
-// Closes component and frees used resources.
-// Parameters:
-//   - correlationId string
-//   transaction id to trace execution through call chain.
-// Returns error
-func (c *ManagedReferences) Close(correlationId string) error {
-	err := c.Runner.Close(correlationId)
+// Close component and frees used resources.
+//	Parameters:
+//		- ctx context.Context
+//		- correlationId string transaction id to trace execution through call chain.
+//	Returns: error
+func (c *ManagedReferences) Close(ctx context.Context, correlationId string) error {
+	err := c.Runner.Close(ctx, correlationId)
 	if err == nil {
-		err = c.Linker.Close(correlationId)
+		err = c.Linker.Close(ctx, correlationId)
 	}
 	return err
 }
