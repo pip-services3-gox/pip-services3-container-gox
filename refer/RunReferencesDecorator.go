@@ -54,13 +54,10 @@ func (c *RunReferencesDecorator) Open(ctx context.Context, correlationId string)
 //		- correlationId string transaction id to trace execution through call chain.
 //	Returns: error
 func (c *RunReferencesDecorator) Close(ctx context.Context, correlationId string) error {
-	if c.opened {
-		components := c.GetAll()
-		err := run.Closer.Close(ctx, correlationId, components)
-		c.opened = false
-		return err
-	}
-	return nil
+	components := c.GetAll()
+	err := run.Closer.Close(ctx, correlationId, components)
+	c.opened = false
+	return err
 }
 
 // Put a new reference into this reference map.

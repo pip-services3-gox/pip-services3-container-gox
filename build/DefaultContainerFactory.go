@@ -11,6 +11,7 @@ import (
 	"github.com/pip-services3-gox/pip-services3-components-gox/info"
 	"github.com/pip-services3-gox/pip-services3-components-gox/log"
 	"github.com/pip-services3-gox/pip-services3-components-gox/test"
+	"github.com/pip-services3-gox/pip-services3-components-gox/trace"
 )
 
 // NewDefaultContainerFactory create a new instance of the factory and sets nested factories.
@@ -25,6 +26,7 @@ func NewDefaultContainerFactory() *cbuild.CompositeFactory {
 	c.Add(cache.NewDefaultCacheFactory())
 	c.Add(auth.NewDefaultCredentialStoreFactory())
 	c.Add(connect.NewDefaultDiscoveryFactory())
+	c.Add(trace.NewDefaultTracerFactory())
 	c.Add(log.NewDefaultLoggerFactory())
 	c.Add(test.NewDefaultTestFactory())
 

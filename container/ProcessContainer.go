@@ -135,8 +135,11 @@ func (c *ProcessContainer) getParameters(args []string) *cconfig.ConfigParams {
 	parameters := cconfig.NewConfigParamsFromString(line)
 
 	for _, e := range os.Environ() {
-		env := strings.Split(e, "=")
-		parameters.SetAsObject(env[0], env[1])
+		if env := strings.Split(e, "="); len(env) == 2 {
+			parameters.SetAsObject(env[0], env[1])
+		} else {
+			parameters.SetAsObject(env[0], strings.Join(env[1:], "="))
+		}
 	}
 
 	return parameters

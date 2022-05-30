@@ -2,6 +2,7 @@ package config
 
 import (
 	"github.com/pip-services3-gox/pip-services3-commons-gox/config"
+	"sort"
 )
 
 // ContainerConfig Container configuration defined as a list of component configurations.
@@ -36,6 +37,8 @@ func ReadContainerConfigFromConfig(config *config.ConfigParams) (ContainerConfig
 	}
 
 	names := config.GetSectionNames()
+	// Sort so components should come in a right order
+	sort.Strings(names)
 	result := make([]*ComponentConfig, len(names))
 	for i, v := range names {
 		c := config.GetSection(v)

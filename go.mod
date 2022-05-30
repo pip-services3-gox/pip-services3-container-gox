@@ -3,14 +3,14 @@ module github.com/pip-services3-gox/pip-services3-container-gox
 go 1.18
 
 require (
-	github.com/pip-services3-gox/pip-services3-commons-gox v1.0.3
-	github.com/pip-services3-gox/pip-services3-components-gox v1.0.3
+	github.com/pip-services3-gox/pip-services3-commons-gox v1.0.4
+	github.com/pip-services3-gox/pip-services3-components-gox v1.0.4
 	github.com/stretchr/testify v1.7.0
 )
 
 require (
-	github.com/aymerick/raymond v2.0.2+incompatible // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
+	github.com/pip-services3-gox/pip-services3-expressions-gox v1.0.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/satori/go.uuid v1.2.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect

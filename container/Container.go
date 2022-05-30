@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	cconfig "github.com/pip-services3-gox/pip-services3-commons-gox/config"
+	cconv "github.com/pip-services3-gox/pip-services3-commons-gox/convert"
 	cerr "github.com/pip-services3-gox/pip-services3-commons-gox/errors"
 	crefer "github.com/pip-services3-gox/pip-services3-commons-gox/refer"
 	cbuild "github.com/pip-services3-gox/pip-services3-components-gox/build"
@@ -222,7 +223,7 @@ func (c *Container) Open(ctx context.Context, correlationId string) error {
 		if r := recover(); r != nil {
 			recoverErr, ok := r.(error)
 			if !ok {
-				msg, _ := r.(string)
+				msg := cconv.StringConverter.ToString(r)
 				recoverErr = errors.New(msg)
 			}
 			err = recoverErr
@@ -284,7 +285,7 @@ func (c *Container) Close(ctx context.Context, correlationId string) error {
 		if r := recover(); r != nil {
 			recoverErr, ok := r.(error)
 			if !ok {
-				msg, _ := r.(string)
+				msg := cconv.StringConverter.ToString(r)
 				recoverErr = errors.New(msg)
 			}
 			err = recoverErr
