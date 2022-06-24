@@ -14,4 +14,3 @@ Initial public release
 * **info** Container information block
 * **refer** Container references
 * **container** Container system process
-  Release 1.0.5 
