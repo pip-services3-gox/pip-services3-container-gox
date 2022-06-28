@@ -36,12 +36,14 @@ type ProcessContainer struct {
 	feedbackWithErrorChan crun.ContextShutdownWithErrorChan
 }
 
+const DefaultConfigFilePath = "./config/config.yml"
+
 // NewEmptyProcessContainer creates a new empty instance of the container.
 //	Returns: ProcessContainer
 func NewEmptyProcessContainer() *ProcessContainer {
 	c := &ProcessContainer{
 		Container:             *NewEmptyContainer(),
-		configPath:            "./config/config.yml",
+		configPath:            DefaultConfigFilePath,
 		feedbackChan:          make(crun.ContextShutdownChan),
 		feedbackWithErrorChan: make(crun.ContextShutdownWithErrorChan),
 	}
@@ -57,7 +59,7 @@ func NewEmptyProcessContainer() *ProcessContainer {
 func NewProcessContainer(name string, description string) *ProcessContainer {
 	c := &ProcessContainer{
 		Container:             *NewContainer(name, description),
-		configPath:            "./config/config.yml",
+		configPath:            DefaultConfigFilePath,
 		feedbackChan:          make(crun.ContextShutdownChan),
 		feedbackWithErrorChan: make(crun.ContextShutdownWithErrorChan),
 	}
@@ -77,7 +79,7 @@ func InheritProcessContainer(name string, description string,
 
 	c := &ProcessContainer{
 		Container:             *InheritContainer(name, description, referenceable),
-		configPath:            "./config/config.yml",
+		configPath:            DefaultConfigFilePath,
 		feedbackChan:          make(crun.ContextShutdownChan),
 		feedbackWithErrorChan: make(crun.ContextShutdownWithErrorChan),
 	}

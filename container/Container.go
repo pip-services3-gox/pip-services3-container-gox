@@ -147,13 +147,12 @@ func (c *Container) ReadConfigFromFile(ctx context.Context, correlationId string
 }
 
 func (c *Container) initReferences(ctx context.Context, references crefer.IReferences) {
-	if existingInfo, ok := references.GetOneOptional(
-		crefer.NewDescriptor(
-			"pip-services",
-			"context-info",
+	contextInfoRef := references.GetOneOptional(
+		crefer.NewDescriptor("pip-services", "context-info",
 			"*", "*", "1.0",
 		),
-	).(*info.ContextInfo); !ok {
+	)
+	if existingInfo, ok := contextInfoRef.(*info.ContextInfo); !ok {
 		references.Put(
 			ctx,
 			crefer.NewDescriptor(
@@ -161,7 +160,6 @@ func (c *Container) initReferences(ctx context.Context, references crefer.IRefer
 				"context-info",
 				"default", "default", "1.0",
 			),
-
 			c.info,
 		)
 	} else {
