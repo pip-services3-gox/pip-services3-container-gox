@@ -3,6 +3,7 @@ package container
 import (
 	"context"
 	"errors"
+
 	cconfig "github.com/pip-services3-gox/pip-services3-commons-gox/config"
 	cconv "github.com/pip-services3-gox/pip-services3-commons-gox/convert"
 	cerr "github.com/pip-services3-gox/pip-services3-commons-gox/errors"
@@ -74,7 +75,7 @@ type Container struct {
 	factories       *cbuild.CompositeFactory
 	info            *info.ContextInfo
 	config          config.ContainerConfig
-	references      *refer.ContainerReferences
+	References      *refer.ContainerReferences
 	referenceable   crefer.IReferenceable
 	unreferenceable crefer.IUnreferenceable
 }
@@ -200,7 +201,7 @@ func (c *Container) AddFactory(factory cbuild.IFactory) {
 // IsOpen checks if the component is opened.
 //	Returns bool true if the component has been opened and false otherwise.
 func (c *Container) IsOpen() bool {
-	return c.references != nil
+	return c.References != nil
 }
 
 // Open the component.
@@ -211,7 +212,7 @@ func (c *Container) IsOpen() bool {
 func (c *Container) Open(ctx context.Context, correlationId string) error {
 	var err error
 
-	if c.references != nil {
+	if c.References != nil {
 		return cerr.NewInvalidStateError(
 			correlationId, "ALREADY_OPENED", "Container was already opened",
 		)
@@ -233,29 +234,29 @@ func (c *Container) Open(ctx context.Context, correlationId string) error {
 	c.logger.Trace(ctx, correlationId, "Starting container.")
 
 	// Create references with configured components
-	c.references = refer.NewContainerReferences()
-	c.initReferences(ctx, c.references)
-	err = c.references.PutFromConfig(ctx, c.config)
+	c.References = refer.NewContainerReferences()
+	c.initReferences(ctx, c.References)
+	err = c.References.PutFromConfig(ctx, c.config)
 	if err != nil {
 		return err
 	}
 
 	if c.referenceable != nil {
-		c.referenceable.SetReferences(ctx, c.references)
+		c.referenceable.SetReferences(ctx, c.References)
 	}
 
 	// Get custom description if available
 	infoDescriptor := crefer.NewDescriptor("*", "context-info", "*", "*", "*")
-	info, ok := c.references.GetOneOptional(infoDescriptor).(*info.ContextInfo)
+	info, ok := c.References.GetOneOptional(infoDescriptor).(*info.ContextInfo)
 	if ok {
 		c.info = info
 	}
 
 	// Get reference to logger
-	c.logger = log.NewCompositeLoggerFromReferences(ctx, c.references)
+	c.logger = log.NewCompositeLoggerFromReferences(ctx, c.References)
 
 	// Open references
-	err = c.references.Open(ctx, correlationId)
+	err = c.References.Open(ctx, correlationId)
 	if err == nil {
 		c.logger.Info(ctx, correlationId, "Container %s started", c.info.Name)
 	} else {
@@ -273,7 +274,7 @@ func (c *Container) Open(ctx context.Context, correlationId string) error {
 //	Returns: error
 func (c *Container) Close(ctx context.Context, correlationId string) error {
 	// Skip if container wasn't opened
-	if c.references == nil {
+	if c.References == nil {
 		return nil
 	}
 
@@ -300,9 +301,9 @@ func (c *Container) Close(ctx context.Context, correlationId string) error {
 	}
 
 	// Close and dereference components
-	err = c.references.Close(ctx, correlationId)
+	err = c.References.Close(ctx, correlationId)
 
-	c.references = nil
+	c.References = nil
 
 	if err == nil {
 		c.logger.Info(ctx, correlationId, "Container %s stopped", c.info.Name)
