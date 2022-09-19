@@ -2,7 +2,7 @@ package refer
 
 import (
 	"context"
-	"github.com/pip-services3-gox/pip-services3-commons-gox/refer"
+
 	crefer "github.com/pip-services3-gox/pip-services3-commons-gox/refer"
 	"github.com/pip-services3-gox/pip-services3-components-gox/build"
 )
@@ -10,7 +10,7 @@ import (
 // BuildReferencesDecorator references decorator that automatically creates missing components using available
 // component factories upon component retrival.
 type BuildReferencesDecorator struct {
-	ReferencesDecorator
+	*ReferencesDecorator
 }
 
 // NewBuildReferencesDecorator creates a new instance of the decorator.
@@ -22,7 +22,7 @@ func NewBuildReferencesDecorator(nextReferences crefer.IReferences,
 	topReferences crefer.IReferences) *BuildReferencesDecorator {
 
 	return &BuildReferencesDecorator{
-		ReferencesDecorator: *NewReferencesDecorator(nextReferences, topReferences),
+		ReferencesDecorator: NewReferencesDecorator(nextReferences, topReferences),
 	}
 }
 
@@ -81,13 +81,13 @@ func (c *BuildReferencesDecorator) ClarifyLocator(locator any,
 		return nil
 	}
 
-	descriptor, ok := locator.(*refer.Descriptor)
+	descriptor, ok := locator.(*crefer.Descriptor)
 	if !ok {
 		return locator
 	}
 
 	anotherLocator := factory.CanCreate(locator)
-	anotherDescriptor, ok := anotherLocator.(*refer.Descriptor)
+	anotherDescriptor, ok := anotherLocator.(*crefer.Descriptor)
 	if !ok {
 		return locator
 	}
@@ -113,7 +113,7 @@ func (c *BuildReferencesDecorator) ClarifyLocator(locator any,
 		version = anotherDescriptor.Version()
 	}
 
-	return refer.NewDescriptor(group, typ, kind, name, version)
+	return crefer.NewDescriptor(group, typ, kind, name, version)
 }
 
 // GetOneOptional gets an optional component reference that matches specified locator.
@@ -182,7 +182,7 @@ func (c *BuildReferencesDecorator) Find(locator any, required bool) ([]any, erro
 	}
 
 	if required && len(components) == 0 {
-		err := refer.NewReferenceError("", locator)
+		err := crefer.NewReferenceError("", locator)
 		return nil, err
 	}
 

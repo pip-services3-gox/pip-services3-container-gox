@@ -14,14 +14,14 @@ import (
 // ContainerReferences container managed references that can be
 // created from container configuration.
 type ContainerReferences struct {
-	ManagedReferences
+	*ManagedReferences
 }
 
 // NewContainerReferences creates a new instance of the references
 // Returns *ContainerReferences
 func NewContainerReferences() *ContainerReferences {
 	return &ContainerReferences{
-		ManagedReferences: *NewEmptyManagedReferences(),
+		ManagedReferences: NewEmptyManagedReferences(),
 	}
 }
 

@@ -2,6 +2,7 @@ package refer
 
 import (
 	"context"
+
 	crefer "github.com/pip-services3-gox/pip-services3-commons-gox/refer"
 )
 
@@ -10,7 +11,7 @@ import (
 // interface and unsets references from removed components
 // that implement IUnreferenceable interface.
 type LinkReferencesDecorator struct {
-	ReferencesDecorator
+	*ReferencesDecorator
 	opened bool
 }
 
@@ -22,7 +23,7 @@ type LinkReferencesDecorator struct {
 func NewLinkReferencesDecorator(nextReferences crefer.IReferences,
 	topReferences crefer.IReferences) *LinkReferencesDecorator {
 	return &LinkReferencesDecorator{
-		ReferencesDecorator: *NewReferencesDecorator(nextReferences, topReferences),
+		ReferencesDecorator: NewReferencesDecorator(nextReferences, topReferences),
 	}
 }
 

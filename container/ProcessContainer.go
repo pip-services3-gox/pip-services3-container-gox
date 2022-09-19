@@ -4,15 +4,16 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"os"
+	"os/signal"
+	"strings"
+	"syscall"
+
 	cconfig "github.com/pip-services3-gox/pip-services3-commons-gox/config"
 	cconv "github.com/pip-services3-gox/pip-services3-commons-gox/convert"
 	crefer "github.com/pip-services3-gox/pip-services3-commons-gox/refer"
 	crun "github.com/pip-services3-gox/pip-services3-commons-gox/run"
 	"github.com/pip-services3-gox/pip-services3-components-gox/log"
-	"os"
-	"os/signal"
-	"strings"
-	"syscall"
 )
 
 // ProcessContainer inversion of control (IoC) container that runs as a system process.
@@ -30,7 +31,7 @@ import (
 //		container.Container.AddFactory(NewMyComponentFactory());
 //		container.Run(context.Background(), process.args);
 type ProcessContainer struct {
-	Container
+	*Container
 	configPath            string
 	feedbackChan          crun.ContextShutdownChan
 	feedbackWithErrorChan crun.ContextShutdownWithErrorChan
@@ -42,7 +43,7 @@ const DefaultConfigFilePath = "./config/config.yml"
 //	Returns: ProcessContainer
 func NewEmptyProcessContainer() *ProcessContainer {
 	c := &ProcessContainer{
-		Container:             *NewEmptyContainer(),
+		Container:             NewEmptyContainer(),
 		configPath:            DefaultConfigFilePath,
 		feedbackChan:          make(crun.ContextShutdownChan),
 		feedbackWithErrorChan: make(crun.ContextShutdownWithErrorChan),
@@ -58,7 +59,7 @@ func NewEmptyProcessContainer() *ProcessContainer {
 //	Returns: ProcessContainer
 func NewProcessContainer(name string, description string) *ProcessContainer {
 	c := &ProcessContainer{
-		Container:             *NewContainer(name, description),
+		Container:             NewContainer(name, description),
 		configPath:            DefaultConfigFilePath,
 		feedbackChan:          make(crun.ContextShutdownChan),
 		feedbackWithErrorChan: make(crun.ContextShutdownWithErrorChan),
@@ -78,7 +79,7 @@ func InheritProcessContainer(name string, description string,
 	referenceable crefer.IReferenceable) *ProcessContainer {
 
 	c := &ProcessContainer{
-		Container:             *InheritContainer(name, description, referenceable),
+		Container:             InheritContainer(name, description, referenceable),
 		configPath:            DefaultConfigFilePath,
 		feedbackChan:          make(crun.ContextShutdownChan),
 		feedbackWithErrorChan: make(crun.ContextShutdownWithErrorChan),
@@ -216,7 +217,7 @@ func (c *ProcessContainer) Run(ctx context.Context, args []string) {
 		return
 	}
 
-	ch := make(chan os.Signal)
+	ch := make(chan os.Signal, 1)
 	signal.Notify(ch, os.Interrupt, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT, syscall.SIGHUP, syscall.SIGABRT)
 
 	select {

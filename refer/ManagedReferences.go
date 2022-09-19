@@ -2,6 +2,7 @@ package refer
 
 import (
 	"context"
+
 	crefer "github.com/pip-services3-gox/pip-services3-commons-gox/refer"
 )
 
@@ -12,7 +13,7 @@ import (
 //	Auto-opening newly added components
 //	Auto-closing removed components
 type ManagedReferences struct {
-	ReferencesDecorator
+	*ReferencesDecorator
 	References *crefer.References
 	Builder    *BuildReferencesDecorator
 	Linker     *LinkReferencesDecorator
@@ -27,7 +28,7 @@ type ManagedReferences struct {
 //	Returns: *ManagedReferences
 func NewManagedReferences(ctx context.Context, tuples []any) *ManagedReferences {
 	c := &ManagedReferences{
-		ReferencesDecorator: *NewReferencesDecorator(nil, nil),
+		ReferencesDecorator: NewReferencesDecorator(nil, nil),
 	}
 
 	c.References = crefer.NewReferences(ctx, tuples)

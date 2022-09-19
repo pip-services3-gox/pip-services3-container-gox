@@ -2,6 +2,7 @@ package refer
 
 import (
 	"context"
+
 	crefer "github.com/pip-services3-gox/pip-services3-commons-gox/refer"
 	"github.com/pip-services3-gox/pip-services3-commons-gox/run"
 )
@@ -10,7 +11,7 @@ import (
 // to newly added components that implement IOpenable interface and
 // closes removed components that implement ICloseable interface.
 type RunReferencesDecorator struct {
-	ReferencesDecorator
+	*ReferencesDecorator
 	opened bool
 }
 
@@ -23,7 +24,7 @@ func NewRunReferencesDecorator(nextReferences crefer.IReferences,
 	topReferences crefer.IReferences) *RunReferencesDecorator {
 
 	return &RunReferencesDecorator{
-		ReferencesDecorator: *NewReferencesDecorator(nextReferences, topReferences),
+		ReferencesDecorator: NewReferencesDecorator(nextReferences, topReferences),
 	}
 }
 
