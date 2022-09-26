@@ -14,7 +14,7 @@
 
 
 
-<script>var goVersion = "go1.18.3";</script>
+<script>var goVersion = "go1.18.6";</script>
 <script src="../../lib/godoc/godocs.js" defer></script>
 </head>
 <body>
@@ -212,7 +212,7 @@
 		
 			
 			
-			<h2 id="Container">type <a href="http://localhost:6060/src/container/Container.go?s=3213:3508#L62">Container</a>
+			<h2 id="Container">type <a href="http://localhost:6060/src/container/Container.go?s=3274:3577#L61">Container</a>
 				<a class="permalink" href="index.html#Container">&#xb6;</a>
 				
 				
@@ -266,18 +266,17 @@ Example:
 	container.AddFactory(newMyComponentFactory());
 
 	parameters := NewConfigParamsFromValue(process.env);
-	container.ReadConfigFromFile(&#34;123&#34;, &#34;./config/config.yml&#34;, parameters);
+	container.ReadConfigFromFile(context.Background(), &#34;123&#34;, &#34;./config/config.yml&#34;, parameters);
 
-	container.Open(context.Background(), &#34;123&#34;, (err) =&gt; {
-		console.Log(&#34;Container is opened&#34;);
-		...
-		container.Close(context.Background(), &#34;123&#34;, (err) =&gt; {
-			console.Log(&#34;Container is closed&#34;);
-		});
-	});
+	err := container.Open(context.Background(), &#34;123&#34;)
+	fmt.Println(&#34;Container is opened&#34;))
+	...
+	err = container.Close(context.Background(), &#34;123&#34;)
+	fmt.Println(&#34;Container is closed&#34;)
 </pre>
 
 			<pre>type Container struct {
+<span id="Container.References"></span>    References *<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-container-gox/refer/">refer</a>.<a href="http://localhost:6060/pkg/github.com/pip-services3-gox/pip-services3-container-gox/refer/#ContainerReferences">ContainerReferences</a>
     <span class="comment">// contains filtered or unexported fields</span>
 }
 </pre>
@@ -292,7 +291,7 @@ Example:
 
 			
 				
-				<h3 id="InheritContainer">func <a href="http://localhost:6060/src/container/Container.go?s=4523:4626#L103">InheritContainer</a>
+				<h3 id="InheritContainer">func <a href="http://localhost:6060/src/container/Container.go?s=4625:4729#L102">InheritContainer</a>
 					<a class="permalink" href="index.html#InheritContainer">&#xb6;</a>
 					
 					
@@ -314,7 +313,7 @@ Returns: *Container
 				
 			
 				
-				<h3 id="NewContainer">func <a href="http://localhost:6060/src/container/Container.go?s=4020:4081#L87">NewContainer</a>
+				<h3 id="NewContainer">func <a href="http://localhost:6060/src/container/Container.go?s=4106:4167#L86">NewContainer</a>
 					<a class="permalink" href="index.html#NewContainer">&#xb6;</a>
 					
 					
@@ -333,7 +332,7 @@ Returns: *Container
 				
 			
 				
-				<h3 id="NewEmptyContainer">func <a href="http://localhost:6060/src/container/Container.go?s=3600:3635#L74">NewEmptyContainer</a>
+				<h3 id="NewEmptyContainer">func <a href="http://localhost:6060/src/container/Container.go?s=3673:3708#L73">NewEmptyContainer</a>
 					<a class="permalink" href="index.html#NewEmptyContainer">&#xb6;</a>
 					
 					
@@ -351,7 +350,7 @@ NewEmptyContainer creates a new empty instance of the container.
 
 			
 				
-				<h3 id="Container.AddFactory">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=6865:6920#L186">AddFactory</a>
+				<h3 id="Container.AddFactory">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=7050:7105#L185">AddFactory</a>
 					<a class="permalink" href="index.html#Container.AddFactory">&#xb6;</a>
 					
 					
@@ -370,7 +369,7 @@ The factory is used to create components added to the container by their locator
 				
 			
 				
-				<h3 id="Container.Close">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=8982:9056#L264">Close</a>
+				<h3 id="Container.Close">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=9245:9319#L263">Close</a>
 					<a class="permalink" href="index.html#Container.Close">&#xb6;</a>
 					
 					
@@ -390,7 +389,7 @@ Returns: error
 				
 			
 				
-				<h3 id="Container.Configure">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=4994:5072#L120">Configure</a>
+				<h3 id="Container.Configure">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=5113:5191#L119">Configure</a>
 					<a class="permalink" href="index.html#Container.Configure">&#xb6;</a>
 					
 					
@@ -409,7 +408,7 @@ Configure component by passing configuration parameters.
 				
 			
 				
-				<h3 id="Container.Info">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=6587:6631#L178">Info</a>
+				<h3 id="Container.Info">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=6764:6808#L177">Info</a>
 					<a class="permalink" href="index.html#Container.Info">&#xb6;</a>
 					
 					
@@ -421,7 +420,7 @@ Configure component by passing configuration parameters.
 				
 			
 				
-				<h3 id="Container.IsOpen">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=7072:7105#L192">IsOpen</a>
+				<h3 id="Container.IsOpen">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=7263:7296#L191">IsOpen</a>
 					<a class="permalink" href="index.html#Container.IsOpen">&#xb6;</a>
 					
 					
@@ -438,7 +437,7 @@ IsOpen checks if the component is opened.
 				
 			
 				
-				<h3 id="Container.Logger">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=6450:6490#L170">Logger</a>
+				<h3 id="Container.Logger">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=6619:6659#L169">Logger</a>
 					<a class="permalink" href="index.html#Container.Logger">&#xb6;</a>
 					
 					
@@ -450,7 +449,7 @@ IsOpen checks if the component is opened.
 				
 			
 				
-				<h3 id="Container.Open">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=7302:7375#L201">Open</a>
+				<h3 id="Container.Open">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=7502:7575#L200">Open</a>
 					<a class="permalink" href="index.html#Container.Open">&#xb6;</a>
 					
 					
@@ -470,7 +469,7 @@ Returns: error
 				
 			
 				
-				<h3 id="Container.ReadConfigFromFile">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=5526:5661#L130">ReadConfigFromFile</a>
+				<h3 id="Container.ReadConfigFromFile">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=5655:5791#L129">ReadConfigFromFile</a>
 					<a class="permalink" href="index.html#Container.ReadConfigFromFile">&#xb6;</a>
 					
 					
@@ -492,7 +491,7 @@ ReadConfigFromFile container configuration from JSON or YAML file and parameteri
 				
 			
 				
-				<h3 id="Container.SetLogger">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=6513:6562#L174">SetLogger</a>
+				<h3 id="Container.SetLogger">func (*Container) <a href="http://localhost:6060/src/container/Container.go?s=6686:6735#L173">SetLogger</a>
 					<a class="permalink" href="index.html#Container.SetLogger">&#xb6;</a>
 					
 					
@@ -506,7 +505,7 @@ ReadConfigFromFile container configuration from JSON or YAML file and parameteri
 		
 			
 			
-			<h2 id="ProcessContainer">type <a href="http://localhost:6060/src/container/ProcessContainer.go?s=1124:1302#L22">ProcessContainer</a>
+			<h2 id="ProcessContainer">type <a href="http://localhost:6060/src/container/ProcessContainer.go?s=1157:1341#L23">ProcessContainer</a>
 				<a class="permalink" href="index.html#ProcessContainer">&#xb6;</a>
 				
 				
@@ -529,7 +528,7 @@ Example:
 </pre>
 
 			<pre>type ProcessContainer struct {
-    <a href="index.html#Container">Container</a>
+    *<a href="index.html#Container">Container</a>
     <span class="comment">// contains filtered or unexported fields</span>
 }
 </pre>
@@ -544,7 +543,7 @@ Example:
 
 			
 				
-				<h3 id="InheritProcessContainer">func <a href="http://localhost:6060/src/container/ProcessContainer.go?s=2796:2913#L67">InheritProcessContainer</a>
+				<h3 id="InheritProcessContainer">func <a href="http://localhost:6060/src/container/ProcessContainer.go?s=2873:2991#L68">InheritProcessContainer</a>
 					<a class="permalink" href="index.html#InheritProcessContainer">&#xb6;</a>
 					
 					
@@ -566,7 +565,7 @@ Returns: *Container
 				
 			
 				
-				<h3 id="NewEmptyProcessContainer">func <a href="http://localhost:6060/src/container/ProcessContainer.go?s=1461:1510#L33">NewEmptyProcessContainer</a>
+				<h3 id="NewEmptyProcessContainer">func <a href="http://localhost:6060/src/container/ProcessContainer.go?s=1506:1555#L34">NewEmptyProcessContainer</a>
 					<a class="permalink" href="index.html#NewEmptyProcessContainer">&#xb6;</a>
 					
 					
@@ -582,7 +581,7 @@ NewEmptyProcessContainer creates a new empty instance of the container.
 				
 			
 				
-				<h3 id="NewProcessContainer">func <a href="http://localhost:6060/src/container/ProcessContainer.go?s=2059:2134#L49">NewProcessContainer</a>
+				<h3 id="NewProcessContainer">func <a href="http://localhost:6060/src/container/ProcessContainer.go?s=2119:2194#L50">NewProcessContainer</a>
 					<a class="permalink" href="index.html#NewProcessContainer">&#xb6;</a>
 					
 					
@@ -603,7 +602,7 @@ Returns: ProcessContainer
 
 			
 				
-				<h3 id="ProcessContainer.Run">func (*ProcessContainer) <a href="http://localhost:6060/src/container/ProcessContainer.go?s=5200:5266#L161">Run</a>
+				<h3 id="ProcessContainer.Run">func (*ProcessContainer) <a href="http://localhost:6060/src/container/ProcessContainer.go?s=5370:5436#L162">Run</a>
 					<a class="permalink" href="index.html#ProcessContainer.Run">&#xb6;</a>
 					
 					
@@ -625,7 +624,7 @@ components to gracefully shutdown.
 				
 			
 				
-				<h3 id="ProcessContainer.SetConfigPath">func (*ProcessContainer) <a href="http://localhost:6060/src/container/ProcessContainer.go?s=3293:3352#L81">SetConfigPath</a>
+				<h3 id="ProcessContainer.SetConfigPath">func (*ProcessContainer) <a href="http://localhost:6060/src/container/ProcessContainer.go?s=3383:3442#L82">SetConfigPath</a>
 					<a class="permalink" href="index.html#ProcessContainer.SetConfigPath">&#xb6;</a>
 					
 					
@@ -651,7 +650,7 @@ SetConfigPath set path for configuration file
 
 
 <div id="footer">
-Build version go1.18.3.<br>
+Build version go1.18.6.<br>
 Except as <a href="https://developers.google.com/site-policies#restrictions">noted</a>,
 the content of this page is licensed under the
 Creative Commons Attribution 3.0 License,

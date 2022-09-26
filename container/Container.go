@@ -61,15 +61,13 @@ import (
 //		container.AddFactory(newMyComponentFactory());
 //
 //		parameters := NewConfigParamsFromValue(process.env);
-//		container.ReadConfigFromFile("123", "./config/config.yml", parameters);
+//		container.ReadConfigFromFile(context.Background(), "123", "./config/config.yml", parameters);
 //
-//		container.Open(context.Background(), "123", (err) => {
-//			console.Log("Container is opened");
-//			...
-//			container.Close(context.Background(), "123", (err) => {
-//				console.Log("Container is closed");
-//			});
-//		});
+//		err := container.Open(context.Background(), "123")
+//		fmt.Println("Container is opened"))
+//		...
+//		err = container.Close(context.Background(), "123")
+//		fmt.Println("Container is closed")
 type Container struct {
 	logger          log.ILogger
 	factories       *cbuild.CompositeFactory
