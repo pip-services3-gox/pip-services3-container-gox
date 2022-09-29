@@ -60,7 +60,7 @@ import (
 //		container := NewEmptyContainer();
 //		container.AddFactory(newMyComponentFactory());
 //
-//		parameters := NewConfigParamsFromValue(process.env);
+//		parameters := NewConfigParamsFromValue(os.Environ());
 //		container.ReadConfigFromFile(context.Background(), "123", "./config/config.yml", parameters);
 //
 //		err := container.Open(context.Background(), "123")

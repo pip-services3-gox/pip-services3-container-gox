@@ -27,9 +27,9 @@ import (
 //	see Container
 //
 //	Example:
-//		container = NewEmptyProcessContainer();
-//		container.Container.AddFactory(NewMyComponentFactory());
-//		container.Run(context.Background(), process.args);
+//		container = NewEmptyProcessContainer()
+//		container.Container.AddFactory(NewMyComponentFactory())
+//		container.Run(context.Background(), os.Environ())
 type ProcessContainer struct {
 	*Container
 	configPath            string
