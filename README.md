@@ -12,10 +12,10 @@ The factories shall be registered in containers or dynamically in the container 
 
 The module contains the following packages:
 
-- [**Container**](https://godoc.org/github.com/pip-services3-gox/pip-services3-container-gox/container) - Component container and container as a system process
-- [**Build**](https://godoc.org/github.com/pip-services3-gox/pip-services3-container-gox/build) - Container default factory
-- [**Config**](https://godoc.org/github.com/pip-services3-gox/pip-services3-container-gox/config) - Container configuration
-- [**Refer**](https://godoc.org/github.com/pip-services3-gox/pip-services3-container-gox/refer) - Container references
+- **Container** - Component container and container as a system process
+- **Build** - Container default factory
+- **Config** - Container configuration
+- **Refer** - Container references
 
 <a name="links"></a> Quick links:
 
